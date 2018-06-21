@@ -102,6 +102,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.3-x64-mingw32)
       mini_portile2 (~> 2.3.0)
+    pg (0.20.0-x64-mingw32)
     public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
@@ -192,6 +193,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   duktape
   jbuilder (~> 2.5)
+  pg (= 0.20.0)
   puma (~> 3.11)
   rails (~> 5.2.0)
   sass-rails (~> 5.0)
