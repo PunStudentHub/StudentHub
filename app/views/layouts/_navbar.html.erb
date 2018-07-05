@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+  <%= link_to "Punahou Student Hub", "#", class: 'navbar-brand', style: "color: yellow" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <% pages =  %w{Home Help Contact} %>
+    <ul class="navbar-nav">
+      <% pages.each do |name| %>
+        <%= link_to name, href="/" + name.downcase, class: navbar_current?(name, yield(:title)) %>
+      <% end %>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <!--%= link_to 'Sign Up', href="/signup", class: navbar_current?('Sign Up', yield(:title)) + " mr-auto" % -->
+    </ul>
+  </div>
+  </div>
+</nav>
