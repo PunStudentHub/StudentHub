@@ -12,11 +12,13 @@
   <body>
     <%= render 'layouts/navbar' %>
     <main role="main" class="container">
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
       <%= yield %>
 
-      
+      <pre><code><%= debug(params) if Rails.env.development? %></code></pre>
     </main>
     <%= render 'layouts/footer' %>
   </body>
 </html>
-<!--pre><code><%= debug(params) if Rails.env.development? %></code></pre-->
