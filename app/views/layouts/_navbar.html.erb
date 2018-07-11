@@ -8,11 +8,28 @@
     <% pages =  %w{Home Help Contact} %>
     <ul class="navbar-nav">
       <% pages.each do |name| %>
-        <%= link_to name, href="/" + name.downcase, class: navbar_current?(name, yield(:title)) %>
+        <% unless name == "Home" %>
+          <%= link_to name, href="/" + name.downcase, class: navbar_current?(name, yield(:title)) %>
+        <% else %>
+          <%= link_to name, href="/", class: navbar_current?(name, yield(:title)) %>
+        <% end %>
       <% end %>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <!--%= link_to 'Sign Up', href="/signup", class: navbar_current?('Sign Up', yield(:title)) + " mr-auto" % -->
+      <% if logged_in? %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle active" href='#' id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+        <div class="dropdown-menu" aria-labelledby="user-dropdown">
+          <%= link_to "Settings", '#', class: 'dropdown-item' %>
+          <%= link_to "Profile", current_user, class: 'dropdown-item' %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "Log Out", logout_path, method: :delete, class: 'dropdown-item' %>
+
+        </div>
+      </li>
+      <% else %>
+        <%= link_to "Log In", login_path, class: navbar_current?("Log In", yield(:title)) %>
+      <% end %>
     </ul>
   </div>
   </div>
