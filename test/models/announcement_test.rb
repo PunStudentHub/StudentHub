@@ -3,7 +3,7 @@ require 'test_helper'
 class AnnouncementTest < ActiveSupport::TestCase
   def setup
     @user = users(:one)
-    @announcement = @user.microposts.build(title: "Sample Title", content: "Lorem Ipsum")
+    @announcement = @user.announcements.build(title: "Sample Title", content: "Lorem Ipsum")
   end
 
   test "should be valid" do 

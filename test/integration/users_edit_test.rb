@@ -16,9 +16,9 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
 
   test "successful edit" do
-    get edit_user_path(@user)
     log_in_as(@user)
-    assert_redirected_to edit_user_url(@user)
+    get edit_user_path(@user)
+    #assert_redirected_to edit_user_path(@user)
     name = "User Name"
     email = "example19@punahou.edu"
     patch user_path(@user), params: { user:{ name: name,
