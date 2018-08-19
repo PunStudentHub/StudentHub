@@ -1,0 +1,14 @@
+<% provide(:title, "Announcements") %>
+
+
+
+<div class="card">
+  <div class="card-body">
+    <h2 style="margin-bottom: 0px">Announcements</h2>
+  </div>
+  <% will_paginate %>
+  <ul class="list-group list-group-flush">
+    <%= render @announcements %>
+  </ul>
+  <% will_paginate %>
+</div>

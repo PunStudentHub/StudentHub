@@ -1,0 +1,5 @@
+<% provide(:title, @announcement.title) %>
+<h2><%= @announcement.title %></h2>
+<em><small>Created <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago, Last Updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago</small></em>
+<br><br>
+<p><%= @announcement.content %></p>
