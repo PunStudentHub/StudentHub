@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-  before_action :admin_user, only: [:new, :edit, :create, :destroy]
+  before_action :admin_user, only: [:new, :edit, :update, :create, :destroy]
 
   def show
     @announcement = Announcement.find(params[:id])
@@ -16,7 +16,17 @@ class AnnouncementsController < ApplicationController
   end
 
   def edit
+    @announcement = Announcement.find(params[:id])
+  end
 
+  def update
+    @announcement = Announcement.find(params[:id])
+    if (@announcement.update_attributes(announcement_params))
+      flash[:success] = "Announcement updated"
+      redirect_to @announcement
+    else
+      render 'edit'
+    end
   end
 
   def create
