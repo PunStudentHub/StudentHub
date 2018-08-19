@@ -6,7 +6,7 @@
         <h2 style="margin-bottom: 0px">Announcements</h2>
       </div>
       <ul class="list-group list-group-flush">
-        <%= render get_first_n 3, @announcements %>
+        <%= render @announcements.take(3) %>
       </ul>
     </div>
 

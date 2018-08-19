@@ -6,4 +6,5 @@ class AnnouncementsController < ApplicationController
   def index
     @announcements = Announcement.all.paginate(page: params[:page])
   end
+
 end
