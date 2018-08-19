@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @announcements = Announcement.all
   end
 
   def help

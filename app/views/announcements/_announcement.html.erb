@@ -1,0 +1,5 @@
+<li class="list-group-item">
+  <h5><%= link_to announcement.title, announcement %></h5>
+  <small>Posted by <%= link_to User.find(announcement.user_id).name, User.find(announcement.user_id) %> 
+    <%= distance_of_time_in_words(announcement.created_at.to_time, Time.now) + " ago" %></small>
+</li>
