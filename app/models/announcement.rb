@@ -1,6 +1,6 @@
 class Announcement < ApplicationRecord
   belongs_to :user, dependent: :destroy
-  has_and_belongs_to_many :class_years
+  has_and_belongs_to_many :class_years, dependent: :destroy
   validates :user_id, presence: true
   default_scope -> { order(created_at: :desc) }
   validates :content, presence: true, length: {maximum: 10000}

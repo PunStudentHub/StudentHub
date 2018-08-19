@@ -14,6 +14,6 @@ class ActiveSupport::TestCase
 
   def log_in_as(user)
     post login_url, params: { session: { name: user.name, email: user.email, 
-      password: user.password, password_confirmation: user.password_confirmation}}
+      password: 'password', password_confirmation: 'password'}}
   end
 end

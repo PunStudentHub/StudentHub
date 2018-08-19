@@ -1,7 +1,7 @@
 
 <!-- parameters: "url", "submit_text" -->
 <%= form_for(@user, url: url) do |f| %>
-  <%= render 'shared/error_messages' %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control" %>

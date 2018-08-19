@@ -7,6 +7,6 @@ one:
 
 two:
   name: Robert J. Dole
-  email: rjdole@senate.gov
-  password_digest: <%= User.digest('password_two') %>
+  email: rjdole@punahou.edu
+  password_digest: <%= User.digest('password') %>
   admin: false
