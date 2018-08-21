@@ -45,7 +45,7 @@ class AnnouncementsController < ApplicationController
 
   private
     def announcement_params
-      params.require(:announcement).permit(:content, :title)
+      params.require(:announcement).permit(:content, :title, {:class_year_ids => []})
     end
 
 
