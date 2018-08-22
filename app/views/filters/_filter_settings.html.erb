@@ -1,8 +1,9 @@
-<%= form_with url: "" do |f| %>
+<%= form_with url: update_filter_url do |f| %>
   <div class="form-group">
     <% ClassYear.all.each do |c| %>
       <div class="form-check">
-        <%= check_box_tag 'class_year_ids[]', c.id, class: "form-check-input" %>
+        <%= check_box_tag 'class_year_ids[]', c.id, get_class_year_ids.include?(c.id), 
+          class: "form-check-input"%>
         <%= f.label c.id, class: "form-check-label" %>
       </div>
     <% end %>
