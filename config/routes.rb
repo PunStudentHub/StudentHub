@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  get '/filter/get', to: 'filters#get', as: 'get_filter'
+  post '/filter/update', to: 'filters#update', as: 'update_filter'
   resources :users
   resources :announcements
   resources :account_activations, only: [:edit]

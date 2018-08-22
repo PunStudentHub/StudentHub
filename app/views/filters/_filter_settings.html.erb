@@ -1,0 +1,13 @@
+<%= form_with url: "" do |f| %>
+  <div class="form-group">
+    <% ClassYear.all.each do |c| %>
+      <div class="form-check">
+        <%= check_box_tag 'class_year_ids[]', c.id, class: "form-check-input" %>
+        <%= f.label c.id, class: "form-check-label" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= f.submit "Update", class: "btn btn-primary" %>
+
+<% end %>
