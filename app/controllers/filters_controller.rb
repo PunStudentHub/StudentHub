@@ -6,7 +6,7 @@ class FiltersController < ApplicationController
 
 
   def update
-    session[:class_year_ids] = params[:class_year_ids]
+    session[:class_year_ids] = params[:class_year_ids].map(&:to_s)
   end
 
 end
