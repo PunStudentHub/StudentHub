@@ -2,8 +2,14 @@
   <div class="row">
      <div class="col-sm-11">
     <h5><%= link_to announcement.title, announcement %></h5>
-    <small>Posted by <%= link_to User.find(announcement.user_id).name, User.find(announcement.user_id), class: "text-secondary" %> 
-      <%= distance_of_time_in_words(announcement.created_at.to_time, Time.now) + " ago" %></small>
+    <small>
+      Posted by 
+      <%= link_to User.find(announcement.user_id).name, User.find(announcement.user_id), class: "text-secondary" %> 
+      <%= distance_of_time_in_words(announcement.created_at.to_time, Time.now) + " ago" %> 
+        
+    </small>
+    <%= render 'shared/class_year_tags', object: announcement %>
+
   </div>
   <% if logged_in? %>
     <% if current_user.admin? %>

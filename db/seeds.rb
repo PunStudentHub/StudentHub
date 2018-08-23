@@ -20,7 +20,15 @@
 #  User.create!(name: name, email: email, password: password, password_confirmation: password)
 #end
 
-4.times do |n|
-  year = 2019 + n
-  ClassYear.create!(id: year)
+#4.times do |n|
+#  year = 2019 + n
+#  ClassYear.create!(id: year)
+#end
+
+50.times do |n|
+  class_years = ClassYear.all.sample((1..4).to_a.sample)
+  a = Announcement.new(title: Faker::Lorem.sentence, content: Faker::Lorem.paragraph, user_id: User.all.sample.id)
+  a.class_years << class_years
+  a.save
 end
+

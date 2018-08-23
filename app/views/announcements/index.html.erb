@@ -7,9 +7,9 @@
       <%= link_to "New", new_announcement_path, class: "float-right btn btn-primary" %>
     <% end %>
   </div>
-  <% will_paginate %>
+  <% will_paginate @announcements %>
   <ul class="list-group list-group-flush">
     <%= render @announcements %>
   </ul>
-  <% will_paginate %>
+  <% will_paginate @announcements %>
 </div>
