@@ -1,4 +1,5 @@
 class AnnouncementsController < ApplicationController
+
   before_action :admin_user, only: [:new, :edit, :update, :create, :destroy]
 
   def show
@@ -6,7 +7,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def index
-    @announcements = Announcement.all.paginate(page: params[:page], per_page: 20)
+    @announcements = helpers.filter_announcements_class_years.paginate(page: params[:page], per_page: 25)
   end
 
   def destroy

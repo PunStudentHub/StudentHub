@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @announcements = Announcement.all
+    @announcements = helpers.filter_announcements_class_years
   end
 
   def help

@@ -6,8 +6,10 @@ module ApplicationHelper
     else
       page_name + " | " + default_title
     end
-
   end  
+
+
+  
 
   def navbar_current?(button, page_title = '')
     if button == page_title

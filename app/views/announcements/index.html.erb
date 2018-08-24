@@ -1,5 +1,5 @@
 <% provide(:title, "Announcements") %>
-
+<%= will_paginate @announcements %>
 <div class="card">
   <div class="card-body">
     <h2 style="margin-bottom: 0px" class="float-left">Announcements</h2>
@@ -7,9 +7,10 @@
       <%= link_to "New", new_announcement_path, class: "float-right btn btn-primary" %>
     <% end %>
   </div>
-  <% will_paginate @announcements %>
   <ul class="list-group list-group-flush">
     <%= render @announcements %>
   </ul>
-  <% will_paginate @announcements %>
+  
 </div>
+
+<%= will_paginate @announcements %>
