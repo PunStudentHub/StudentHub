@@ -4,9 +4,14 @@ one:
   email: dchotzen-hartzell19@punahou.edu
   password_digest: <%= User.digest('password') %>
   admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
+
 
 two:
   name: Robert J. Dole
   email: rjdole@punahou.edu
   password_digest: <%= User.digest('password') %>
   admin: false
+  activated: true
+  activated_at: <%= Time.zone.now %>
