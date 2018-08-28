@@ -65,8 +65,7 @@ class UsersController < ApplicationController
         flash[:danger] = "You aren't allowed to do that!"
       end
     end
-
-
+    
 end
 
 
