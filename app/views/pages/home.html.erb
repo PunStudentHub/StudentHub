@@ -10,11 +10,16 @@
       <ul class="list-group list-group-flush">
         <%= render @announcements.take(3) %>
       </ul>
+      <div class="card-footer">
+        <%= link_to 'See more...', announcements_path, class: 'text-secondary' %>
+      </div>
+
+
     </div>
 
     <div class="card bg-light text-secondary">
       <div class="card-body">
-        <h2 style="margin-bottom: 0px">Events</h2>
+        <h2 style="margin-bottom: 0px">Clubs</h2>
         <em>Coming Soon</em>
       </div>
     </div>
@@ -29,18 +34,18 @@
   <div class="col-md-5">
     <div class="card">
       <div class="card-body">
-        <h2>Settings</h2>
-        <%= render 'filters/filter_settings' %>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
         <h2>Information</h2>
         <p>
           Welcome to the Punahou Student Hub. We're glad you could join us.
           <br><br>
           We only have a few features launched right now, but soon we'll have more. Feel free to explore, and shoot us an email if you have any ideas or find any bugs- we're still building this website, and would love your help.
         </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2>Settings</h2>
+        <%= render 'filters/filter_settings' %>
       </div>
     </div>
   </div>
