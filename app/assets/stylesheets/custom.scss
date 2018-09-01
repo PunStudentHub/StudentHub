@@ -74,3 +74,21 @@ h5, h6 {
 .card {
   margin-bottom: 15px;
 }
+
+.no-padding {
+  padding-top: 13px;
+  padding-bottom: 5px;
+  margin-bottom: 0px;
+}
+
+.no-link-padding > a {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: -4px;
+  margin-bottom: 0px;
+}
+
+.see-more-section {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
