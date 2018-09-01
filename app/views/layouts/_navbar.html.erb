@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <% pages =  %w{Home Announcements Help Contact} %>
+    <% pages =  %w{Home Announcements Contact} %>
     <% pages << 'Users' if logged_in? %>
     <ul class="navbar-nav">
       <% pages.each do |name| %>
