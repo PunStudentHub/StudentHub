@@ -8,13 +8,11 @@
         </h2>
       </div>
       <ul class="list-group list-group-flush">
-        <%= render @announcements.take(3) %>
+        <%= render @announcements.take(5) %>
       </ul>
       <div class="card-footer">
         <%= link_to 'See more...', announcements_path, class: 'text-secondary' %>
       </div>
-
-
     </div>
 
     <div class="card bg-light text-secondary">
