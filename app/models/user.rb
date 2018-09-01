@@ -33,6 +33,14 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
   private
 
     def downcase_email
