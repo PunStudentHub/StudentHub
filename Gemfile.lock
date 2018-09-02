@@ -87,6 +87,8 @@ GEM
       i18n (~> 0.5)
     ffi (1.9.25)
     ffi (1.9.25-x64-mingw32)
+    friendly_id (5.2.4)
+      activerecord (>= 4.0.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     i18n (0.9.5)
@@ -222,6 +224,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   faker (= 1.7.3)
+  friendly_id (~> 5.2.0)
   jbuilder (~> 2.5)
   jquery-rails
   pg (= 1.0)

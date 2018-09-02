@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_19_071536) do
+ActiveRecord::Schema.define(version: 2018_09_02_074415) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2018_08_19_071536) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hash_id"
     t.index ["user_id", "created_at"], name: "index_announcements_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_announcements_on_user_id"
   end
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 2018_08_19_071536) do
     t.boolean "activated", default: false
     t.datetime "activated_at"
     t.boolean "admin", default: false
+    t.string "hash_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

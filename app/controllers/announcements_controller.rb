@@ -3,7 +3,7 @@ class AnnouncementsController < ApplicationController
   before_action :admin_user, only: [:new, :edit, :update, :create, :destroy]
 
   def show
-    @announcement = Announcement.find(params[:id])
+    @announcement = Announcement.friendly.find(params[:id])
   end
 
   def index
@@ -11,17 +11,17 @@ class AnnouncementsController < ApplicationController
   end
 
   def destroy
-    Announcement.find(params[:id]).delete
+    Announcement.friendly.find(params[:id]).delete
     flash[:success] = "Announcement deleted!"
     redirect_to announcements_url
   end
 
   def edit
-    @announcement = Announcement.find(params[:id])
+    @announcement = Announcement.friendly.find(params[:id])
   end
 
   def update
-    @announcement = Announcement.find(params[:id])
+    @announcement = Announcement.friendly.find(params[:id])
     if (@announcement.update_attributes(announcement_params))
       flash[:success] = "Announcement updated"
       redirect_to @announcement
