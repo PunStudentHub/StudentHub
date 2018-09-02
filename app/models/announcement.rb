@@ -6,6 +6,4 @@ class Announcement < ApplicationRecord
   default_scope -> { order(:updated_at) }
   validates :content, presence: true, length: {maximum: 10000}
   validates :title, presence: true, length: {maximum: 140}
-
-
 end
