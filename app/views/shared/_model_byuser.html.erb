@@ -1,0 +1,25 @@
+<!-- 
+  Parameters:
+  - display_name
+  - path
+  - variable // from controller
+  - user
+  - param_name
+ -->
+<div class="card">
+  <div class="card-body">
+    <div class="float-left">
+      <h2 style="margin-bottom: 0px">
+      <%= link_to display_name, path, class: 'text-dark' %>
+      </h2>
+    </div>
+    <div class="float-right">
+      <%= will_paginate variable, param_name: param_name %>
+    </div>
+    
+
+  </div>
+  <ul class="list-group list-group-flush">
+    <%= render variable %>
+  </ul>
+</div>

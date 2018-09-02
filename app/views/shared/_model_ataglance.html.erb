@@ -1,0 +1,20 @@
+<!-- 
+  Parameters:
+  - display_name
+  - path
+  - count
+  - variable
+ -->
+<div class="card">
+  <div class="card-body">
+    <h2 style="margin-bottom: 0px">
+      <%= link_to display_name, path, class: 'text-dark' %>
+    </h2>
+  </div>
+  <ul class="list-group list-group-flush">
+    <%= render variable.take(5) %>
+  </ul>
+  <div class="card-body see-more-section">
+    <%= link_to 'See more...', path, class: 'text-secondary' %>
+  </div>
+</div>
