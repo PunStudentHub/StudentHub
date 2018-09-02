@@ -1,19 +1,10 @@
 <% provide(:title, "Home") %>
 <div class="row">
   <div class="col-md-7">
-    <div class="card">
-      <div class="card-body">
-        <h2 style="margin-bottom: 0px">
-          <%= link_to 'Announcements', announcements_path, class: 'text-dark' %>
-        </h2>
-      </div>
-      <ul class="list-group list-group-flush">
-        <%= render @announcements.take(5) %>
-      </ul>
-      <div class="card-body see-more-section">
-        <%= link_to 'See more...', announcements_path, class: 'text-secondary' %>
-      </div>
-    </div>
+    <%= render 'shared/model_ataglance',  path: announcements_path, 
+                                          display_name: 'Announcements', 
+                                          count: 5, 
+                                          variable: @announcements %>
 
     <div class="card bg-light text-secondary">
       <div class="card-body">
@@ -33,10 +24,12 @@
     <div class="card">
       <div class="card-body">
         <h2>Information</h2>
+        <p class="lead">
+          Welcome to the Punahou Student Hub.
+          <br>We're glad you're here.
+        </p>
         <p>
-          Welcome to the Punahou Student Hub. We're glad you could join us.
-          <br><br>
-          We only have a few features launched right now, but soon we'll have more. Feel free to explore, and shoot us an email if you have any ideas or find any bugs- we're still building this website, and would love your help.
+          We only have a few features right now, but soon we'll have more. Feel free to explore, and shoot us an email if you have any ideas or find any bugs- this is a work in progress, and we appreciate your help.
         </p>
       </div>
     </div>

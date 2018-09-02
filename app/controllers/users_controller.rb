@@ -10,8 +10,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.friendly.find(params[:id])
+    id = User.friendly.find(params[:id])
+    @user = id
     redirect_to root_url and return unless @user.activated?
+    @announcements = Announcement.where(user_id: id).paginate(page: params[:announcement_page], per_page: 1)
   end
 
   def index

@@ -6,9 +6,14 @@
       <div class="float-left">
         <h2><%= @announcement.title %></h2>
 
-
-        <em><small>Created <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago, Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago</small></em>
-        <p><%= render 'shared/class_year_tags', object: @announcement %></p>
+        
+        <div class="float-left">
+          <em><small>
+            Created <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago, 
+            Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
+          </small></em>
+          <%= render 'shared/class_year_tags', object: @announcement %>
+        </div>
       </div>
 
       <% if logged_in? %>

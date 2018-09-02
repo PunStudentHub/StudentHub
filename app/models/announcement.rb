@@ -3,7 +3,7 @@ class Announcement < ApplicationRecord
   belongs_to :user, dependent: :destroy
   has_and_belongs_to_many :class_years, dependent: :destroy
   validates :user_id, presence: true
-  default_scope -> { order(updated_at: :desc) }
+  default_scope -> { order(:updated_at) }
   validates :content, presence: true, length: {maximum: 10000}
   validates :title, presence: true, length: {maximum: 140}
 
