@@ -16,9 +16,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'bcrypt', '~> 3.1.7'
-
-
-
+gem 'friendly_id', '~> 5.2.0'
 gem 'faker', '1.7.3'
 
 # Use ActiveStorage variant
@@ -35,7 +33,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3'
-  gem 'friendly_id', '~> 5.2.0'
 end
 
 group :development do
@@ -45,7 +42,6 @@ end
 
 group :production do
   gem 'pg', '1.0'
-  gem 'friendly_id', '~> 5.2.0'
 end
 
 group :test do
