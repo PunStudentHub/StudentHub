@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_many :announcements, dependent: :destroy
   attr_accessor :remember_token, :activation_token
-  before_save :downcase_email 
+  before_save :downcase_email
   before_create :create_activation_digest
 
   validates :name, presence: true,
@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        length: {minimum: 8},
                        allow_nil: true
-                       
+
   has_secure_password
 
   def self.get_color rank
@@ -45,6 +45,11 @@ class User < ApplicationRecord
 
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
 
   private
