@@ -3,8 +3,8 @@
     <div class="col-sm-11">
       <h6><%= link_to announcement.title, announcement %></h6>
       <small>
-        Posted by 
-        <%= link_to User.find(announcement.user_id).name, User.find(announcement.user_id), class: "text-secondary" %> 
+        Posted by
+        <%= render 'users/colored_name_link', user: User.find(announcement.user_id) %> 
         <%= distance_of_time_in_words(announcement.created_at.to_time, Time.now) + " ago" %> 
           
       </small>

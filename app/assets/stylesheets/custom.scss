@@ -7,6 +7,14 @@
   box-sizing:         border-box;
 }
 
+/* User role colors */
+.admin-rank {
+  color: #ff3333;
+  &:hover {
+    color: #ff3333;
+  }
+}
+
 main.container {
   padding-top: 15px;
 }

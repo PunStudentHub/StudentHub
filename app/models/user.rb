@@ -20,6 +20,10 @@ class User < ApplicationRecord
                        
   has_secure_password
 
+  def self.get_color rank
+    colors[rank]
+  end
+
   def authenticated?(attribute, token)
     digest = self.send("#{attribute}_digest")
     return false if digest.nil?
