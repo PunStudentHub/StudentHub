@@ -15,6 +15,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
+#test
+gem 'guard',                    '2.13.0'
+gem 'guard-minitest',           '2.4.4'
+
 gem 'bcrypt', '~> 3.1.7'
 gem 'friendly_id', '~> 5.2.0'
 gem 'faker', '1.7.3'

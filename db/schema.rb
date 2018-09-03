@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_02_074415) do
+ActiveRecord::Schema.define(version: 2018_09_03_052032) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_074415) do
     t.datetime "activated_at"
     t.boolean "admin", default: false
     t.string "hash_id"
+    t.string "remember_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
