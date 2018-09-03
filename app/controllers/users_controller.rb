@@ -12,12 +12,15 @@ class UsersController < ApplicationController
   def show
     id = User.friendly.find(params[:id])
     @user = id
-    redirect_to root_url and return unless @user.activated?
+    unless @user.activated?
+      flash[:warning] = "That account is not activated!"
+      redirect_to root_url and return
+    end
     @announcements = Announcement.where(user_id: id).paginate(page: params[:announcement_page], per_page: 1)
   end
 
   def index
-    @users = User.where(activated: true).paginate(page: params[:page])
+    @users = User.paginate(page: params[:page])
   end
 
   def create
