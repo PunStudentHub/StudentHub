@@ -29,7 +29,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@other_user)
     get edit_user_path(@user)
     #assert flash.empty?
-    assert_redirected_to root_url
+    assert_redirected_to edit_user_path(@user)
   end
 
   test "should redirect update when logged in as wrong user" do
@@ -40,29 +40,29 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal @user.name, 'New Name'
     assert_not_equal @user.email, 'asdf1234@punahou.edu'
     #assert flash.empty?
-    assert_redirected_to root_url
+    assert_redirected_to edit_user_path(@user)
   end
 
   test "should redirect index when not logged in" do
-    get users_path 
+    get users_path
     assert_redirected_to login_url
   end
 
   test "should not allow the admin attribute to be edited from outside" do
     log_in_as(@other_user)
     assert_not @other_user.admin?
-    patch user_path(@other_user), params: { user: {password: "password_two", 
+    patch user_path(@other_user), params: { user: {password: "password_two",
       password_confirmation: "password_two", admin: true}}
-    assert_not @other_user.reload.admin?    
+    assert_not @other_user.reload.admin?
   end
 
-  test "doesn't destroy when not logged in" do 
+  test "doesn't destroy when not logged in" do
     assert_no_difference 'User.count' do
       delete user_path(@user)
     end
     assert_redirected_to login_url
   end
-  
+
   test "redirects home if logged in as non-admin" do
     log_in_as(@other_user)
     assert_no_difference 'User.count' do
