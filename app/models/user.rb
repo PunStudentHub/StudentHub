@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include Friendlyable
 
   has_many :announcements, dependent: :destroy
+  has_many :events, dependent: :destroy
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
   before_create :create_activation_digest
