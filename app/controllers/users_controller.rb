@@ -62,16 +62,14 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.friendly.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      redirect_to(edit_user_path(@user)) unless current_user?(@user)
     end
 
     def not_logged_in
       if logged_in?
-        redirect_to(root_url) 
+        redirect_to(root_url)
         flash[:danger] = "You aren't allowed to do that!"
       end
     end
-    
+
 end
-
-
