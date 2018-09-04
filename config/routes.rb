@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/filter/get', to: 'filters#get', as: 'get_filter'
   post '/filter/update', to: 'filters#update', as: 'update_filter'
+  #google
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+
   resources :users
   resources :announcements
   resources :account_activations, only: [:edit]
