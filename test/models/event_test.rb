@@ -18,6 +18,11 @@ class EventTest < ActiveSupport::TestCase
     assert_not @event.valid?
   end
 
+  test "event location should be present" do
+    @event.location = ""
+    assert_not @event.valid?
+  end
+
   test "event title should not be too long" do
     @event.title = "a" * 144
     assert_not @event.valid?
