@@ -9,7 +9,9 @@ class SessionsController < ApplicationController
       log_in @user
       redirect_to user_path(@user)
     else
-      @user.save
+      if @user.valid?
+        @user.save
+      end
     end
   end
 

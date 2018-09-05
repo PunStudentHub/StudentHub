@@ -3,16 +3,16 @@ class User < ApplicationRecord
 
   has_many :announcements, dependent: :destroy
   attr_accessor :remember_token, :activation_token
-#  before_save :downcase_email
-  before_create :create_activation_digest
+  before_save :downcase_email
+#  before_create :create_activation_digest
 
   validates :name, presence: true,
                    length: {maximum: 50}
 
-#  validates :email, presence: true,
-#                    length: {maximum: 255},
-#                    format: { with: /\A[\w+\-.]+@punahou\.edu/i },
-#                    uniqueness: { case_sensitive: false }
+  validates :email, presence: true,
+                    length: {maximum: 255},
+                    format: { with: /\A[\w+\-.]+@punahou\.edu/i },
+                    uniqueness: { case_sensitive: false }
 
 #  validates :password, presence: true,
 #                       length: {minimum: 8},
@@ -24,11 +24,11 @@ class User < ApplicationRecord
     colors[rank]
   end
 
-#  def authenticated?(attribute, token)
-#    digest = send("#{attribute}_digest")
-#    return false if digest.nil?
-#    BCrypt::Password.new(digest).is_password?(token)
-#  end
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
 
   def remember
     self.remember_token = User.new_token
@@ -59,6 +59,10 @@ class User < ApplicationRecord
       update_attribute(:remember_digest, nil)
   end
 
+  def redirect_stuff
+    redirect_to root_url
+  end
+
 
   private
 
@@ -79,7 +83,11 @@ class User < ApplicationRecord
         user.email = auth.info.email
         user.oauth_token = auth.credentials.token
         user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-        user.save!
-    end
+        if user.valid?
+          user.save!
+        else
+          
+        end
+      end
   end
 end
