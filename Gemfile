@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.4.4'
 
 #google stuff
-gem "omniauth-google-oauth2", "~> 0.2.1"
+gem 'omniauth-google-oauth2', '~> 0.2.1'
 
 gem 'rails', '~> 5.2.0'
 gem 'bootstrap', '~> 4.1', '>= 4.1.1'
