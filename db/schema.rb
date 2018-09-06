@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_09_04_075114) do
-=======
+
 ActiveRecord::Schema.define(version: 2018_09_04_164452) do
->>>>>>> origin/master
+
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
