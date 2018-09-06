@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2018_09_04_164452) do
-
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -62,6 +60,6 @@ ActiveRecord::Schema.define(version: 2018_09_04_164452) do
     t.string "uid"
     t.datetime "oauth_expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-end
+  end
 
 end
