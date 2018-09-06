@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
+  include Friendlyable
   belongs_to :user, dependent: :destroy
-    default_scope -> { order(:start, :desc) }
+  default_scope -> { order(start_time: :desc) }
   validates :title, presence: true, length: {maximum: 140}
   validates :user_id, presence: true
   validates :location, presence: true, length: {maximum: 140}
