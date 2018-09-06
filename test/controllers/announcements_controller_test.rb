@@ -9,15 +9,15 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Announcement.count' do
       post announcements_path, params: { announcement: { title: "Hello, world!", content: "Lorem Ipsum"}}
     end
-    assert_redirected_to login_url
+    assert_redirected_to root_url
   end
 
   test "should redirect destroy when not logged in" do
     assert_no_difference 'Announcement.count' do
       delete announcement_path(@announcement)
     end
-    assert_redirected_to login_url
+    assert_redirected_to root_url
   end
 
-  
+
 end

@@ -21,7 +21,6 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle active" href='#' id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
         <div class="dropdown-menu" aria-labelledby="user-dropdown">
-          <%= link_to "Settings", edit_user_path(current_user), class: 'dropdown-item' %>
           <%= link_to "Profile", current_user, class: 'dropdown-item' %>
           <div class="dropdown-divider"></div>
           <%= link_to "Log Out", logout_path, method: :delete, class: 'dropdown-item' %>
@@ -29,7 +28,7 @@
         </div>
       </li>
       <% else %>
-        <%= link_to "Log In", login_path, class: navbar_current?("Log In", yield(:title)) %>
+        <%= link_to "Log In", "/auth/google_oauth2", id: "sign_in", class: navbar_current?("Log In", yield(:title)) %>
       <% end %>
     </ul>
   </div>
