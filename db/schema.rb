@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_04_164452) do
+ActiveRecord::Schema.define(version: 2018_09_06_060825) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2018_09_04_164452) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "end_time"
+    t.string "hash_id"
+    t.boolean "approved", default: false
     t.index ["start_time", "user_id", "created_at"], name: "index_events_on_start_time_and_user_id_and_created_at"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
