@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
-  before_create :create_activation_digest
+#  before_create :create_activation_digest
 
   validates :name, presence: true,
                    length: {maximum: 50}
@@ -15,11 +15,11 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@punahou\.edu/i },
                     uniqueness: { case_sensitive: false }
 
-  validates :password, presence: true,
-                       length: {minimum: 8},
-                       allow_nil: true
+#  validates :password, presence: true,
+#                       length: {minimum: 8},
+#                       allow_nil: true
 
-  has_secure_password
+#  has_secure_password
 
   def self.get_color rank
     colors[rank]
@@ -47,9 +47,9 @@ class User < ApplicationRecord
     end
   end
 
-  def send_activation_email
-    UserMailer.account_activation(self).deliver_now
-  end
+#  def send_activation_email
+#    UserMailer.account_activation(self).deliver_now
+#  end
 
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
@@ -58,6 +58,10 @@ class User < ApplicationRecord
 
   def forget
       update_attribute(:remember_digest, nil)
+  end
+
+  def redirect_stuff
+    redirect_to root_url
   end
 
 
@@ -72,5 +76,17 @@ class User < ApplicationRecord
       self.activation_digest = User.digest(activation_token)
     end
 
-
+    def self.from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.email = auth.info.email
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        if user.valid?
+          user.save!
+        end
+      end
+  end
 end

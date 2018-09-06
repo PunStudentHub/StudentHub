@@ -7,20 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create!(name: "Admin User",
-            email: "example@punahou.edu", 
-            password: "password",
-            password_confirmation: "password", 
+            email: "example@punahou.edu",
             admin: true,
-            activated: true,
-            activated_at: Time.zone.now)
+            )
 
 
 50.times do |n|
  name = Faker::Name.name
  email = "example-#{n+1}@punahou.edu"
- password = "password"
- User.create!(name: name, email: email, password: password, password_confirmation: password,
-              activated: true, activated_at: Time.zone.now)
+ User.create!(name: name, email: email)
 end
 
 4.times do |n|
