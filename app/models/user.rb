@@ -85,8 +85,6 @@ class User < ApplicationRecord
         user.oauth_expires_at = Time.at(auth.credentials.expires_at)
         if user.valid?
           user.save!
-        else
-          
         end
       end
   end

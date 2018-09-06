@@ -1,12 +1,12 @@
 
-  <% if !user.activated? && current_user.admin? %>
+  <% if current_user.admin? %>
     <li>
     <%= link_to user.name, user, class: "text-secondary" %>
     <% if current_user.admin? && !current_user?(user) %>
      | <%= link_to "delete", user, method: :delete, class: "text-danger",
                                     data: {confirm: "Are you sure you want to do this?"} %>
     <% end %>
-  <% elsif user.activated? %>
+  <% else%>
     <li>
     <%= render "users/colored_name_link", user: user %>
     <% if current_user.admin? && !current_user?(user) %>
