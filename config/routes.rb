@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/help', to: 'pages#help'
   get '/contact', to: 'pages#contact'
   get '/home', to: 'pages#home'
+  get '/plc', to: 'plc#index'
 #  get '/signup', to: 'users#new', as: 'signup'
 #  post '/signup',  to: 'users#create'
 #  get '/login', to: 'sessions#new'
