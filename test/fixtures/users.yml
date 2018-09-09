@@ -3,13 +3,8 @@ one:
   name: Devin Example
   email: dchotzen-hartzell19@punahou.edu
   admin: true
-  activated: true
-  activated_at: <%= Time.zone.now %>
-
 
 two:
   name: Robert J. Dole
   email: rjdole@punahou.edu
   admin: false
-  activated: true
-  activated_at: <%= Time.zone.now %>
