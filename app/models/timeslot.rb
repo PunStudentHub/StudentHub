@@ -1,5 +1,7 @@
 class Timeslot < ApplicationRecord
   has_and_belongs_to_many :subjects, dependent: :destroy
+  scope :by_day, -> (day) {where(day: day)}
+  scope :by_time, -> (time) {where(time: time)}
   validates :day, presence: true,
                     numericality: {
                                     only_integer: true,

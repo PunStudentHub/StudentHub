@@ -16,8 +16,13 @@
         <td class="plc-cell narrow"><%= human_time row %></td>
 
           <% 6.times do |col| %>
-            <td class="plc-cell timeslot <% if row == 7%>last<%end%>">
-              <%= "#{row}, #{col}" %>
+            <td class="plc-cell timeslot 
+              <% if row == 7%>last<%end%>
+              <% if @timeslots %>
+                <% if @timeslots.by_day(col).by_time(row).any? %>
+                  highlighted
+                <% end %>
+              <% end %>">
             </td>
           <% end %>
 
@@ -37,7 +42,7 @@
 
 <script>
   $('#list').html("")
-  $('#list').append($('<h4></h4>').attr('class', 'list-group-item no-margin').html("Subject"))
+  $('#list').append($('<h4></h4>').attr('class', 'list-group-item no-margin').html('Subject <small class="text-muted">Click one</small>'))
 
   <% @subjects.each do |sub| %>
       $('#list').append($('<a></a>').attr('class', 'list-group-item list-group-item-action plc-subject')
