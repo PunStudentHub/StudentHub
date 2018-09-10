@@ -5,13 +5,17 @@
                                           display_name: 'Announcements', 
                                           count: 5, 
                                           variable: @announcements %>
-
-    <div class="card bg-light text-secondary">
+    
+    <div class="card">
       <div class="card-body">
-        <h2 style="margin-bottom: 0px">Clubs</h2>
-        <em>Coming Soon</em>
+        <h2 class="no-margin">Peer Learning Center</h2>
+        <p style="margin-bottom: 1px">Need help with school? No stress! Come get help from your friends in</p>
+        <% @subjects.each do |subject| %>
+          <%= link_to subject.name, plc_path(subject: subject.hash_id) %>,
+        <% end %>and many more!
       </div>
     </div>
+
 
     <div class="card bg-light text-secondary">
       <div class="card-body">
@@ -19,7 +23,9 @@
         <em>Coming Soon</em>
       </div>
     </div>
+
   </div>
+
   <div class="col-md-5">
     <div class="card">
       <div class="card-body">

@@ -1,0 +1,60 @@
+<% provide :title, "PLC" %>
+<% letters = %w{A B C D E F} %>
+<h2>Peer Learning Center
+  <% if @selected_subject %>
+    <small class="text-muted"><%= @selected_subject.name %></small>
+  <% end %>
+</h2>
+<div class="row">
+  <div class="col-sm-8">
+    <table class="plc-table">
+      <tr class="plc-row">
+        <td class="plc-cell narrow plc-header"></td>
+        <% 6.times do |col| %>
+          <td class="plc-cell plc-header"><%= letters[col] %></td>
+        <% end %>
+      </tr>
+      <% 8.times do |row| %>
+        <tr class="plc-row <% if row.odd? %> odd <% end %>">    
+        
+        <td class="plc-cell narrow"><%= human_time row %></td>
+
+          <% 6.times do |col| %>
+            <td class="plc-cell timeslot 
+              <% if row == 7%>last<%end%>
+              <% if @timeslots %>
+                <% if @timeslots.by_day(col).by_time(row).any? %>
+                  highlighted
+                <% end %>
+              <% end %>">
+            </td>
+          <% end %>
+
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="plc-list">
+      <div class="list-group" id="list">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#list').html("")
+  $('#list').append($('<h4></h4>').attr('class', 'list-group-item plc-list-item no-margin').html('Subject <small class="text-muted">Click one</small>'))
+
+  <% @subjects.each do |sub| %>
+      $('#list').append($('<a></a>').attr('class', 'list-group-item plc-list-item list-group-item-action plc-subject')
+                                    .attr('href', "<%= "?subject=#{sub.hash_id}" %>")
+                                    .html("<%= sub.name %>")
+                                    <% if sub == @selected_subject %>
+                                      .addClass("active")
+                                    <% end %> )
+  <% end %> 
+</script>
+
