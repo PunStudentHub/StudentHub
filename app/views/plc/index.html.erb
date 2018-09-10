@@ -1,6 +1,10 @@
 <% provide :title, "PLC" %>
 <% letters = %w{A B C D E F} %>
-<h2>Peer Learning Center</h2>
+<h2>Peer Learning Center
+  <% if @selected_subject %>
+    <small class="text-muted"><%= @selected_subject.name %></small>
+  <% end %>
+</h2>
 <div class="row">
   <div class="col-sm-8">
     <table class="plc-table">
@@ -32,7 +36,7 @@
   </div>
 
   <div class="col-sm-4">
-    <div class="fixed">
+    <div class="plc-list">
       <div class="list-group" id="list">
 
       </div>
