@@ -46,10 +46,10 @@
 
 <script>
   $('#list').html("")
-  $('#list').append($('<h4></h4>').attr('class', 'list-group-item no-margin').html('Subject <small class="text-muted">Click one</small>'))
+  $('#list').append($('<h4></h4>').attr('class', 'list-group-item plc-list-item no-margin').html('Subject <small class="text-muted">Click one</small>'))
 
   <% @subjects.each do |sub| %>
-      $('#list').append($('<a></a>').attr('class', 'list-group-item list-group-item-action plc-subject')
+      $('#list').append($('<a></a>').attr('class', 'list-group-item plc-list-item list-group-item-action plc-subject')
                                     .attr('href', "<%= "?subject=#{sub.hash_id}" %>")
                                     .html("<%= sub.name %>")
                                     <% if sub == @selected_subject %>
