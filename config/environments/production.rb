@@ -106,4 +106,6 @@ Rails.application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
+
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 end

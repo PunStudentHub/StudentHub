@@ -8,11 +8,11 @@
     
     <div class="card">
       <div class="card-body">
-        <h2 class="no-margin">Peer Learning Center</h2>
+        <h2 class="no-margin"><%= link_to "Peer Learning Center", plc_path, class: "text-dark" %></h2>
         <p style="margin-bottom: 1px">Need help with school? No stress! Come get help from your friends in</p>
         <% @subjects.each do |subject| %>
           <%= link_to subject.name, plc_path(subject: subject.hash_id) %>,
-        <% end %>and many more!
+        <% end %>and <%= link_to "many more!", plc_path %>
       </div>
     </div>
 
