@@ -1,7 +1,7 @@
 <li class="list-group-item no-padding">
   <div class="row">
     <div class="col-sm-11">
-      <h6><%= link_to announcement.title, announcement %></h6>
+      <h6 class="no-margin"><%= link_to announcement.title, announcement %></h6>
       <small>
         Posted by
         <%= render 'users/colored_name_link', user: User.find(announcement.user_id) %> 

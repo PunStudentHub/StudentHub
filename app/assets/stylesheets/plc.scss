@@ -1,0 +1,60 @@
+// Place all the styles related to the PLC controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.plc-table {
+  display: table;
+  table-layout: fixed;
+  border: 2px solid black;
+}
+
+.plc-cell {
+  display: table-cell;
+  width: 2%;
+  height: 4em;
+}
+
+.timeslot {
+  padding-left: 10px;
+  border-left: 2px solid #bbb;
+}
+
+.plc-header {
+  height: 1em;
+  text-align: center;
+  background-color: #333;
+  color: white;
+}
+
+.narrow {
+  width: 0.5%;
+  text-align: center;
+}
+
+.odd {
+  background-color: #eee;
+}
+
+.last {
+  border-bottom: 2px solid black;
+}
+
+.plc-list-item {
+  padding: 12px;
+}
+
+.plc-subject {
+  font-size: 10pt;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.plc-list {
+  overflow: scroll;
+  height: 500px;
+}
+
+
+.highlighted {
+  background-color: yellow;
+}
