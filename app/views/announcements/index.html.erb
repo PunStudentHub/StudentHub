@@ -1,8 +1,8 @@
 <% provide(:title, "Announcements") %>
 <%= will_paginate @announcements %>
 <div class="card">
-  <div class="card-body">
-    <h2 style="margin-bottom: 0px" class="float-left">Announcements</h2>
+  <div class="card-header bg-white">
+    <h2 class="float-left">Announcements</h2>
     <% if logged_in? && current_user.admin? %>
       <%= link_to "New", new_announcement_path, class: "float-right btn btn-primary" %>
     <% end %>

@@ -7,12 +7,18 @@
                                           variable: @announcements %>
     
     <div class="card">
-      <div class="card-body">
-        <h2 class="no-margin"><%= link_to "Peer Learning Center", plc_path, class: "text-dark" %></h2>
-        <p style="margin-bottom: 1px">Need help with school? No stress! Come get help from your friends in</p>
+      <h2 class="card-header bg-white">
+        <%= link_to "Peer Learning Center", plc_path, class: "text-dark" %>
+      </h2>
+      <div class="card-body skinny-top">
+        <!--p class="lead" style="margin-bottom: 1px">Need help with school? No stress!</p-->
+        <p class="no-margin">Come get help with...</p>
+        <ul>
         <% @subjects.each do |subject| %>
-          <%= link_to subject.name, plc_path(subject: subject.hash_id) %>,
-        <% end %>and <%= link_to "many more!", plc_path %>
+          <li><%= link_to subject.name, plc_path(subject: subject.hash_id) %></li>
+        <% end %>
+        <li>and <%= link_to "many more!", plc_path %></li>
+        
       </div>
     </div>
 
