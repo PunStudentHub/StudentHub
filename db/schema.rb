@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2018_09_09_224458) do
   create_table "events_class_years", id: false, force: :cascade do |t|
     t.integer "event_id"
     t.integer "class_year_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
