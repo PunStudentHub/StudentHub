@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   end
 
   def index
+    #eventually should display as a calender, troopwebhostesque
     @events = Event.all.paginate(page: params[:page], per_page: 25)
   end
 
