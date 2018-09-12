@@ -9,19 +9,16 @@
         
         <div class="float-left">
           <small>
-          <em>
-            Created by
-          </em>
-          <%= render 'users/colored_name_link', user: User.find(@announcement.user_id) %>
+          Created by
+            <%= render 'users/colored_name_link', user: User.find(@announcement.user_id) %>
           </small>
           <%= render 'users/badges', user: User.find(@announcement.user_id) %>
           <small>
-          <em>
             <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago 
-          <% if @announcement.updated_at != @announcement.created_at %>
-            , Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
-          <% end %>
-          </em></small>
+            <% if @announcement.updated_at != @announcement.created_at %>
+              , Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
+            <% end %>
+          </small>
           <%= render 'shared/class_year_tags', object: @announcement %>
         </div>
       </div>

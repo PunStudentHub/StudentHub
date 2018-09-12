@@ -13,11 +13,12 @@
       <div class="card-body skinny-top">
         <!--p class="lead" style="margin-bottom: 1px">Need help with school? No stress!</p-->
         <p class="no-margin">Come get help with...</p>
-        <ul>
-        <% @subjects.each do |subject| %>
-          <li><%= link_to subject.name, plc_path(subject: subject.hash_id) %></li>
-        <% end %>
-        <li>and <%= link_to "many more!", plc_path %></li>
+        <ul class="no-margin">
+          <% @subjects.each do |subject| %>
+            <li><%= link_to subject.name, plc_path(subject: subject.hash_id) %></li>
+          <% end %>
+          <li>and <%= link_to "many more!", plc_path %></li>
+        </ul>
         
       </div>
     </div>
