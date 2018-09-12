@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
+  default_scope -> {order(:created_at)}
 #  before_create :create_activation_digest
 
   validates :name, presence: true,
