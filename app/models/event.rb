@@ -7,7 +7,6 @@ class Event < ApplicationRecord
   validates :location, presence: true, length: {maximum: 140}
   validates :start_time, presence: true
   validates :end_time, presence: true
-
   validate :ends_after_start
   validate :date_in_future
 
@@ -19,7 +18,7 @@ class Event < ApplicationRecord
 
   def date_in_future
     if (start_time < Time.zone.now)
-      errors.add(:start_time, 'must be in the future')
+      errors.add(:start_time, "must be in the future #{start_time}, #{Time.zone.now}")
     end
 
     if (end_time < Time.zone.now)

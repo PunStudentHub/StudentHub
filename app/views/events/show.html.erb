@@ -1,0 +1,51 @@
+<% provide(:title, @event.title) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="float-left">
+        <h2><%= @event.title %></h2>
+
+
+        <div class="float-left">
+          <small>
+          <em>
+            Created by
+          </em>
+          <%= render 'users/colored_name_link', user: User.find(@event.user_id) %>
+          </small>
+          <%= render 'users/badges', user: User.find(@event.user_id) %>
+          <small>
+          <em>
+            <%= distance_of_time_in_words(@event.created_at.to_time, Time.now) %> ago
+          <% if @event.updated_at != @event.created_at %>
+            , Last updated <%= distance_of_time_in_words(@event.updated_at.to_time, Time.now) %> ago
+          <% end %>
+          </em></small>
+        </div>
+      </div>
+
+      <% if logged_in? %>
+        <% if current_user.admin? %>
+          <div class="float-right">
+            <%= link_to "Edit", edit_announcement_path(@event), class: "text-warning"%> |
+            <%= link_to "Delete", announcement_path(@event), method: :delete, class: "text-danger",
+                      data: {confirm: "Are you sure you want to do this?"} %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-10">
+      <%=  @event.location %>
+      <br><br>
+      <%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %>-
+      <%=  @event.end_time.strftime("%I:%M %p") %>
+      <br><br>
+      <%= simple_format @event.description %>
+
+    </div>
+  </div>
+</div>

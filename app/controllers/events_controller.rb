@@ -35,9 +35,20 @@ class EventsController < ApplicationController
   end
 
   def create
+    @event = current_user.events.build(event_params)
+    @event.approved = !!current_user.admin
+    if (@event.save)
+      flash[:success] = "Event created!"
+      redirect_to @event
+    else
+      render 'new'
+    end
 #admins can aprove events currently
 #in purgatory, they get posted to
 #main events page
+  end
+
+  def approve
   end
 
   private
