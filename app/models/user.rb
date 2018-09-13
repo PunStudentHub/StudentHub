@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :announcements, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_and_belongs_to_many :roles
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
   default_scope -> {order(:created_at)}

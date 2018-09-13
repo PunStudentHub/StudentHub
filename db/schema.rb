@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_09_224458) do
+ActiveRecord::Schema.define(version: 2018_09_13_075339) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -53,6 +53,22 @@ ActiveRecord::Schema.define(version: 2018_09_09_224458) do
   create_table "events_class_years", id: false, force: :cascade do |t|
     t.integer "event_id"
     t.integer "class_year_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+    t.boolean "approve", default: false
+    t.boolean "blog", default: false
+    t.boolean "moderate", default: false
+    t.boolean "admin", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "subjects", force: :cascade do |t|
