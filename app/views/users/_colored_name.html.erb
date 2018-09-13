@@ -1,2 +1,2 @@
-<% color = user.admin? ? 'admin-rank' : '' %>
-<span class= <%= color %>><%= user.name %> </span>
+<% rank = "#{get_highest_rank_color user}" %>
+<span style="color: #<%= rank %>"><%= user.name %> </span>
