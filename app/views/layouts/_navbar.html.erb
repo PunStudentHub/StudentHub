@@ -6,7 +6,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <% pages =  %w{Home Announcements PLC Contact} %>
-    <% pages << 'Users' if logged_in? %>
+    <% pages << 'Users' if current_user.can_do :approve %>
     <ul class="navbar-nav">
       <% pages.each do |name| %>
         <% unless name == "Home" %>

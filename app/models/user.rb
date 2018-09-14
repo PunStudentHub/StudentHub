@@ -66,6 +66,10 @@ class User < ApplicationRecord
     redirect_to root_url
   end
 
+  def can_do permission
+    self.roles.map {|r| r.send(permission)}.include?(true)
+  end
+
 
   private
 
