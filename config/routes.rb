@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/help', to: 'pages#help'
   get '/contact', to: 'pages#contact'
   get '/home', to: 'pages#home'
+  get '/staff', to: 'pages#staff'
   get '/plc', to: 'plc#index'
   delete '/logout', to: 'sessions#destroy'
   get '/filter/get', to: 'filters#get', as: 'get_filter'

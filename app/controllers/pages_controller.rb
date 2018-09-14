@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  before_action :logged_in_user, only: [:staff]
+
   def home
     @announcements = helpers.filter_announcements_class_years
     @subjects = Subject.all.sample(3)
@@ -8,5 +11,10 @@ class PagesController < ApplicationController
   end
 
   def contact
+  end
+
+  def staff
+    @admins = Role.find_by(name: "Admin").users
+    @mods = Role.find_by(name: "Moderator").users
   end
 end

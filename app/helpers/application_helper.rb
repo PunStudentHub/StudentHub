@@ -8,15 +8,27 @@ module ApplicationHelper
     end
   end  
 
-
-  
-
   def navbar_current?(button, page_title = '')
     if button == page_title
       'nav-item nav-link active' 
     else
       'nav-item nav-link'
     end
+  end
+
+  def has_permission(user, permission)
+    permission_array = user.roles.map{ |r| r.send(permission)} 
+    permission_array.include? true
+  end
+
+  def get_highest_rank_color user
+    first_id = user.roles.map {|r| r.id}.sort[0]
+    if first_id
+      Role.find(first_id).color
+    else
+      ""
+    end
+
   end
 
   # I did not write this.
@@ -85,3 +97,4 @@ module ApplicationHelper
     end
   end
 end
+

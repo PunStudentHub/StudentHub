@@ -12,7 +12,7 @@
 
     </div>
   <% if logged_in? %>
-    <% if current_user.admin? %>
+    <% if current_user.can_do :moderate %>
       <div class="col-sm-1">
         <div class="float-right no-link-padding">
           <%= link_to "Edit", edit_announcement_path(announcement), class: "text-warning"%><br>

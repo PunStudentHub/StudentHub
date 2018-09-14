@@ -3,8 +3,10 @@ class User < ApplicationRecord
 
   has_many :announcements, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_and_belongs_to_many :roles
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
+  default_scope -> {order(:created_at)}
 #  before_create :create_activation_digest
 
   validates :name, presence: true,
@@ -62,6 +64,10 @@ class User < ApplicationRecord
 
   def redirect_stuff
     redirect_to root_url
+  end
+
+  def can_do permission
+    self.roles.map {|r| r.send(permission)}.include?(true)
   end
 
 

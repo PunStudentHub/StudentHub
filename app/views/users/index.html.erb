@@ -2,7 +2,5 @@
 <h1>User List</h1>
 
 <%= will_paginate %>
-<ul class="users">
-  <%= render @users %>
-</ul>
+<%= render 'users/user_table', users: @users, options: true %>
 <%= will_paginate %>
