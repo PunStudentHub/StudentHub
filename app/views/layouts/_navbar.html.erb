@@ -8,6 +8,7 @@
     <% pages =  %w{Home Announcements PLC Contact} %>
     <% if logged_in? %>
       <% pages << 'Users' if current_user.can_do :approve %>
+      <% pages << 'Events' if current_user.can_do :approve %>
     <% end %> 
     <ul class="navbar-nav">
       <% pages.each do |name| %>

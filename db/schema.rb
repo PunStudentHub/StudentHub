@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2018_09_14_012400) do
 
   create_table "announcements", force: :cascade do |t|
@@ -44,8 +45,6 @@ ActiveRecord::Schema.define(version: 2018_09_14_012400) do
     t.datetime "end_time"
     t.string "hash_id"
     t.boolean "approved", default: false
-    t.string "purgatory"
-    t.string "boolean"
     t.index ["start_time", "user_id", "created_at"], name: "index_events_on_start_time_and_user_id_and_created_at"
     t.index ["user_id"], name: "index_events_on_user_id"
   end

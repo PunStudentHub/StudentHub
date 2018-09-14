@@ -32,7 +32,7 @@ class AnnouncementsController < ApplicationController
 
   def create
     @announcement = current_user.announcements.build(announcement_params)
-    if (@announcement.save) 
+    if (@announcement.save)
       flash[:success] = "Announcement created!"
       redirect_to @announcement
     else
