@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :admin_user, only: [:create, :destroy]
+  before_action :admin_user, only: [:destroy]
 
   def show
     @event = Event.friendly.find(params[:id])
@@ -18,8 +18,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-#need to make sure only admins and whoever posted event
-#can edit
+    @event = Event.friendly.find(params[:id])
   end
 
   def update
