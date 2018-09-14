@@ -1,6 +1,6 @@
 class AnnouncementsController < ApplicationController
 
-  before_action :admin_user, only: [:new, :edit, :update, :create, :destroy]
+  before_action -> {has_permission(:moderate)}, only: [:new, :edit, :update, :create, :destroy]
 
   def show
     @announcement = Announcement.friendly.find(params[:id])
@@ -41,7 +41,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def new
-    @announcement = current_user.announcements.build if current_user.admin?
+    @announcement = current_user.announcements.build if current_user.can_do :moderate
   end
 
   private

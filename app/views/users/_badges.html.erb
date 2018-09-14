@@ -1,5 +1,5 @@
-<% if user.admin? %>
-  <span class="badge badge-admin">Admin</span>
+<% user.roles.each do |r| %>
+  <span class="badge" style="color: white; background-color: #<%= r.color %>"><%= r.name %></span>
 <% end %>
 
 <!--%= render 'users/badges', user: user %-->
