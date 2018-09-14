@@ -25,7 +25,7 @@
       <div class="float-right">
         <%= link_to "Back to Events", events_path %>
         <% if logged_in? %>
-          <% if current_user.admin? %>
+          <% if current_user.can_do :approve %>
             |
             <%= link_to "Edit", edit_event_path(@event), class: "text-warning"%> |
             <%= link_to "Delete", event_path(@event), method: :delete, class: "text-danger",

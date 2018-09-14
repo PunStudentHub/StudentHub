@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :admin_user, only: [:destroy]
+  before_action -> {has_permission :moderate}, only: [:destroy]
 
   def show
     @event = Event.friendly.find(params[:id])
@@ -35,7 +35,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-    @event.approved = !!current_user.admin
+    @event.approved = !!(current_user.can_do :approve)
     if (@event.save)
       flash[:success] = "Event created!"
       redirect_to @event
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :location, :description, :purgatory, :start_time, :end_time)
+    params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time)
 
   end
 
