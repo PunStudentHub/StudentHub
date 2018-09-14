@@ -1,6 +1,6 @@
 <% provide(:title, "New Event") %>
 <h2>New Event</h2>
-<% if current_user.admin? %>
+<% if current_user.can_do :moderate %>
   <%= render 'layouts/eventsparams', url: events_url, submit_text: "Submit" %>
 <% else %>
   <%= render 'layouts/eventsparams', url: events_url, submit_text: "Send to purgatory" %>

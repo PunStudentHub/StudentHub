@@ -5,5 +5,8 @@
 
     </p>
     <%= link_to "About Us", href="/contact" %>
+    <% if logged_in? %>
+      | <%= link_to "Staff", href="/staff" %>
+    <% end %> 
   </div>
 </footer>

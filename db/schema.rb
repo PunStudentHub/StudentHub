@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_13_075339) do
+ActiveRecord::Schema.define(version: 2018_09_14_012400) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 2018_09_13_075339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "activation_digest"
-    t.boolean "admin", default: false
     t.string "hash_id"
     t.string "remember_digest"
     t.string "provider"

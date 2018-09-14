@@ -1,11 +1,18 @@
 
 
-<li>
-  <%= render "users/colored_name_link", user: user %>
-  <% if current_user.admin? && !current_user?(user) %>
-   | <%= link_to "delete", user_path(user), method: :delete, class: "text-danger",
-                                 data: {confirm: "Are you sure you want to do this?"} %>
-  <% end %>
-  
-
-</li>
+<tr>
+  <td>
+    <%= render "users/colored_name_link", user: user %>
+  </td>
+  <td class="text-secondary">
+    <%= user.email %>
+  </td>
+  <td>
+    <% if current_user.can_do(:admin) && !current_user?(user) %>
+      <% if options %> 
+        <%= link_to "delete", user_path(user), method: :delete, class: "text-danger",
+                                   data: {confirm: "Are you sure you want to do this?"} %>
+      <% end %> 
+    <% end %>
+  </td>
+</tr>

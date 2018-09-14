@@ -1,0 +1,6 @@
+<% provide :title, "Staff" %>
+<h3 style="color: #<%= Role.find(1).color %>"> Administrators</h6>
+<%= render 'users/user_table', users: @admins, options: false %>
+
+<h3 style="color: #<%= Role.find(2).color %>"> Moderators</h6>
+<%= render 'users/user_table', users: @mods, options: false %>

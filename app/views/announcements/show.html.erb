@@ -27,7 +27,7 @@
       </div>
 
       <% if logged_in? %>
-        <% if current_user.admin? %>
+        <% if current_user.can_do :moderate %>
           <div class="float-right">
             <%= link_to "Edit", edit_announcement_path(@announcement), class: "text-warning"%> |
             <%= link_to "Delete", announcement_path(@announcement), method: :delete, class: "text-danger", 

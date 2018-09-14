@@ -41,7 +41,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def new
-    @announcement = current_user.announcements.build if current_user.admin?
+    @announcement = current_user.announcements.build if current_user.can_do :moderate
   end
 
   private
