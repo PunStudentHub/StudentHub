@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :admin_user, only: [:create, :destroy]
+  before_action :admin_user, only: [:destroy]
 
   def show
     @event = Event.friendly.find(params[:id])
@@ -18,8 +18,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-#need to make sure only admins and whoever posted event
-#can edit
+    @event = Event.friendly.find(params[:id])
   end
 
   def update
@@ -35,9 +34,20 @@ class EventsController < ApplicationController
   end
 
   def create
+    @event = current_user.events.build(event_params)
+    @event.approved = !!current_user.admin
+    if (@event.save)
+      flash[:success] = "Event created!"
+      redirect_to @event
+    else
+      render 'new'
+    end
 #admins can aprove events currently
 #in purgatory, they get posted to
 #main events page
+  end
+
+  def approve
   end
 
   private
