@@ -3,7 +3,7 @@ class AnnouncementsController < ApplicationController
   before_action -> {has_permission(:moderate)}, only: [:new, :edit, :update, :create, :destroy]
 
   def show
-    @announcement = Announcement.friendly.find(params[:id])
+    @announcement = Announcement.find_by_hash_id(params[:id])
   end
 
   def index
@@ -11,17 +11,17 @@ class AnnouncementsController < ApplicationController
   end
 
   def destroy
-    Announcement.friendly.find(params[:id]).delete
+    Announcement.find_by_hash_id(params[:id]).delete
     flash[:success] = "Announcement deleted!"
     redirect_to announcements_url
   end
 
   def edit
-    @announcement = Announcement.friendly.find(params[:id])
+    @announcement = Announcement.find_by_hash_id(params[:id])
   end
 
   def update
-    @announcement = Announcement.friendly.find(params[:id])
+    @announcement = Announcement.find_by_hash_id(params[:id])
     if (@announcement.update_attributes(announcement_params))
       flash[:success] = "Announcement updated"
       redirect_to @announcement

@@ -1,0 +1,13 @@
+<li class="list-group-item no-padding">
+  <div class="row">
+    <div class="col-sm-12">
+      <h6 class="no-margin"><%= link_to blog_post.title, blog_path(blog_post.hash_id) %></h6>
+      <small>
+        Posted by
+        <%= render 'users/colored_name_link', user: User.find(blog_post.user_id) %> 
+        <%= distance_of_time_in_words(blog_post.created_at.to_time, Time.now) + " ago" %> 
+      </small>
+
+    </div>
+  </div>
+</li>

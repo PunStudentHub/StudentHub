@@ -1,2 +1,3 @@
-<h1>Blog#edit</h1>
-<p>Find me in app/views/blog/edit.html.erb</p>
+<% provide(:title, "Editing Blog Post") %>
+<h2>Editing Post: <%= @blogpost.title %></h2>
+<%= render 'blog/blogparams', url: blog_path, submit_text: "Save Edits" %>

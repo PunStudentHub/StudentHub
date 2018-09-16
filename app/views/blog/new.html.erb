@@ -1,2 +1,3 @@
-<h1>Blog#new</h1>
-<p>Find me in app/views/blog/new.html.erb</p>
+<% provide(:title, "New Blog Post") %>
+<h2>New Blog Post</h2>
+<%= render 'blog/blogparams', url: blog_index_url, submit_text: "Post" %>

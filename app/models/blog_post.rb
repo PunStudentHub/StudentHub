@@ -7,4 +7,8 @@ class BlogPost < ApplicationRecord
   default_scope -> {order(created_at: :desc)}
 
 
+  def to_partial_path
+    "blog/blog_post"
+  end
+
 end
