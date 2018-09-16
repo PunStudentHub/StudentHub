@@ -1,24 +1,37 @@
-<li class="list-group-item no-padding">
-  <div class="row">
-    <div class="col-sm-11">
-      <h6 class="no-margin"><%= link_to event.title, event %>  <%= event.start_time.strftime("%A %B %d")%></h6>
-      <small>
-        Posted by
-        <%= render 'users/colored_name_link', user: User.find(event.user_id) %>
-        <%= distance_of_time_in_words(event.created_at.to_time, Time.now) + " ago" %>
-      </small>
-
-    </div>
-  <% if logged_in? %>
-    <% if current_user.admin? %>
-      <div class="col-sm-1">
-        <div class="float-right no-link-padding">
-          <%= link_to "Edit", edit_event_path(event), class: "text-warning"%><br>
-          <%= link_to "Delete", event_path(event), method: :delete, class: "text-danger",
-                  data: {confirm: "Are you sure you want to do this?"} %>
-        </div>
+<% if logged_in? && (event.approved  || current_user.can_do(:approve)) && event.start_time > Time.zone.now %>
+<% approved = current_user.can_do(:approve) && !event.approved ? "bg-light" : "" %>
+<% id = event.id %>
+  <li class="list-group-item no-padding <%= approved %>" id="id">
+    <div class="row">
+      <div class="col-sm-11">
+        <h6 class="no-margin"><%= link_to event.title, event %>  <%= event.start_time.strftime("%A %B %d")%></h6>
+        <small>
+          Posted by
+          <%= render 'users/colored_name_link', user: User.find(event.user_id) %>
+          <%= distance_of_time_in_words(event.created_at.to_time, Time.now) + " ago" %>
+        </small>
       </div>
-    <% end %>
-  <% end %>
-  </div>
-</li>
+      <% if logged_in? %>
+        <% if current_user.can_do(:approve) %>
+          <div class="col-sm-1">
+            <% if event.approved %>
+              <div class="float-right no-link-padding">
+                <%= link_to "Edit", edit_event_path(event), class: "text-warning"%><br>
+                <%= link_to "Delete", event_path(event), method: :delete, class: "text-danger",
+                  data: {confirm: "Are you sure you want to do this?"} %>
+              </div>
+            <% else %>
+              <div class="float-right no-link-padding">
+                <%= link_to "Approve", approve_event_path(:id => event.id), method: :approve, class: "float-right btn btn-sm btn-primary" %>
+                <br>
+                <%= link_to "Remove", event_path(event), method: :delete, class: "float-right btn btn-sm btn-danger", data: {confirm: "Are you sure you want to do this?"} %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </li>
+<% elsif !logged_in? %>
+  <% flash.now[:danger] = "Log in to view events!" %>
+<% end %>

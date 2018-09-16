@@ -23,7 +23,7 @@ class AnnouncementsController < ApplicationController
   def update
     @announcement = Announcement.find_by_hash_id(params[:id])
     if (@announcement.update_attributes(announcement_params))
-      flash[:success] = "Announcement updated"
+      flash.now[:success] = "Announcement updated"
       redirect_to @announcement
     else
       render 'edit'

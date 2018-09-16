@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
-  before_action :admin_user, only: [:destroy]
+  before_action -> {has_permission :moderate}, only: [:destroy]
+  before_action -> {has_permission :approve}, only: [:approve]
 
   def show
     @event = Event.friendly.find(params[:id])
@@ -12,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    Events.friendly.find(params[:id]).delete
+    Event.friendly.find(params[:id]).delete
     flash[:success] = "Event deleted!"
     redirect_to events_url
   end
@@ -22,23 +23,36 @@ class EventsController < ApplicationController
   end
 
   def update
-
+    @event = Event.friendly.find(params[:id])
+    if (@event.update_attributes(event_params))
+      flash.now[:success] = "Event updated"
+      redirect_to @event
+    else
+      render 'edit'
+    end
   end
 
   def new
     @event = current_user.events.build
-#anyone can make a new event, gets
-#put in event purgatory until
-#an admin creates
+  end
 
+  def approve
+    @event = Event.friendly.find(params[:id])
+    @event.update_attributes(approved: true)
+    render 'new'
   end
 
   def create
     @event = current_user.events.build(event_params)
-    @event.approved = !!current_user.admin
+    @event.approved = !!(current_user.can_do(:approve))
     if (@event.save)
-      flash[:success] = "Event created!"
-      redirect_to @event
+      if (@event.approved)
+        flash[:success] = "Event created!"
+        redirect_to @event
+      else
+        flash[:danger] = "Your event is anxiously awaiting moderator approval."
+        redirect_to @events
+      end
     else
       render 'new'
     end
@@ -47,13 +61,10 @@ class EventsController < ApplicationController
 #main events page
   end
 
-  def approve
-  end
-
   private
 
   def event_params
-    params.require(:event).permit(:title, :location, :description, :purgatory, :start_time, :end_time)
+    params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time)
 
   end
 

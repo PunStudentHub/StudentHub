@@ -52,7 +52,11 @@ body {
     margin-bottom: 0;
   }
 }
+/* events */
+.greyed-out {
+  background-color: #eeeeee;
 
+}
 /* forms */
 
 #error_explanation {
@@ -68,7 +72,7 @@ body {
   .form-control {
     @extend .is-invalid;
   }
-  
+
 }
 
 .no-margin {
