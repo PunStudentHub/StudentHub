@@ -12,7 +12,7 @@ class AnnouncementsController < ApplicationController
 
   def destroy
     Announcement.friendly.find(params[:id]).delete
-    flash[:success] = "Announcement deleted!"
+    flash.now[:success] = "Announcement deleted!"
     redirect_to announcements_url
   end
 
@@ -23,7 +23,7 @@ class AnnouncementsController < ApplicationController
   def update
     @announcement = Announcement.friendly.find(params[:id])
     if (@announcement.update_attributes(announcement_params))
-      flash[:success] = "Announcement updated"
+      flash.now[:success] = "Announcement updated"
       redirect_to @announcement
     else
       render 'edit'
