@@ -22,15 +22,6 @@
         
       </div>
     </div>
-
-
-    <div class="card bg-light text-secondary">
-      <div class="card-body">
-        <h2 style="margin-bottom: 0px">Our Blog</h2>
-        <em>Coming Soon</em>
-      </div>
-    </div>
-
   </div>
 
   <div class="col-md-5">
@@ -52,5 +43,10 @@
         <%= render 'filters/filter_settings' %>
       </div>
     </div>
+
+    <%= render 'shared/model_ataglance',  path: blog_index_path, 
+                                          display_name: 'Our Blog', 
+                                          count: 3, 
+                                          variable: @blogposts %>
   </div>
 </div>

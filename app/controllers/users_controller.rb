@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    id = User.friendly.find(params[:id])
+    id = User.find_by_hash_id(params[:id])
     @user = id
 #    unless @user.activated?
 #      flash[:warning] = "That account is not activated!"
@@ -36,11 +36,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.friendly.find(params[:id])
+    @user = User.find_by_hash_id(params[:id])
   end
 
   def update
-    @user = User.friendly.find(params[:id])
+    @user = User.find_by_hash_id(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.friendly.find(params[:id]).destroy
+    User.find_by_hash_id(params[:id]).destroy
     flash[:success] = "User Deleted"
     redirect_to users_url
   end
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-      @user = User.friendly.find(params[:id])
+      @user = User.find_by_hash_id(params[:id])
       redirect_to(edit_user_path(@user)) unless current_user?(@user)
     end
 
