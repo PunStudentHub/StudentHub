@@ -14,9 +14,8 @@
           </small>
           <%= render 'users/badges', user: User.find(@announcement.user_id) %>
           <small>
-            <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago 
-            <% if @announcement.updated_at != @announcement.created_at %>
-              , Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
+            <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago<% if @announcement.updated_at != @announcement.created_at %>,
+              Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
             <% end %>
           </small>
           <%= render 'shared/class_year_tags', object: @announcement %>

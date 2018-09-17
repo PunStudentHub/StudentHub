@@ -4,7 +4,8 @@
     <a href="#">Back to top</a> 
 
     </p>
-    <%= link_to "About Us", href="/contact" %>
+    <%= link_to "About Us", href="/contact" %> |
+    <%= link_to "Blog", href="/blog" %>
     <% if logged_in? %>
       | <%= link_to "Staff", href="/staff" %>
     <% end %> 

@@ -14,9 +14,7 @@
           </small>
           <%= render 'users/badges', user: User.find(@blogpost.user_id) %>
           <small>
-            <%= distance_of_time_in_words(@blogpost.created_at.to_time, Time.now) %> ago 
-            <% if @blogpost.updated_at != @blogpost.created_at %>
-              , Last updated <%= distance_of_time_in_words(@blogpost.updated_at.to_time, Time.now) %> ago 
+            <%= distance_of_time_in_words(@blogpost.created_at.to_time, Time.now) %> ago<% if @blogpost.updated_at != @blogpost.created_at %>, Last updated <%= distance_of_time_in_words(@blogpost.updated_at.to_time, Time.now) %> ago 
             <% end %>
           </small>
         </div>
@@ -34,7 +32,8 @@
         
     </div>
   </div>
+  <br>
   <div class="row justify-content-center">
-    <div class="col-md-8 blog-pg"><%= simple_format @blogpost.content %></div>
+    <div class="col-md-9"><%= simple_format @blogpost.content %></div>
   </div>
 </div>
