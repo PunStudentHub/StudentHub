@@ -39,23 +39,24 @@ class EventsController < ApplicationController
   def approve
     @event = Event.friendly.find(params[:id])
     @event.update_attributes(approved: true)
-    redirect_to events_path
+    redirect_to request.referrer
   end
 
   def rsvp
     @event = Event.friendly.find(params[:id])
     @event.users << current_user
-    redirect_to events_path
+    redirect_to request.referrer
   end
 
   def unrsvp
     @event = Event.friendly.find(params[:id])
     @event.users.destroy(current_user)
-    redirect_to events_path
+    redirect_to request.referrer
   end
 
   def create
     @event = current_user.events.build(event_params)
+    @event.user_id = current_user.id
     @event.approved = !!(current_user.can_do(:approve))
     if (@event.save)
       if (@event.approved)
@@ -63,7 +64,7 @@ class EventsController < ApplicationController
         redirect_to @event
       else
         flash[:danger] = "Your event is anxiously awaiting moderator approval."
-        redirect_to @events
+        redirect_to events_path
       end
     else
       render 'new'

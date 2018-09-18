@@ -48,4 +48,21 @@
 
     </div>
   </div>
+  <div class="row">
+    
+    <p><%= @event.users.all.count %> people attending<br></p>
+  </div>
+  <div class="row">
+    <% if logged_in? %>
+      <div class="btn-group float-left">
+        <% if !@event.users.exists?(current_user.id) %>
+        <%= link_to "RSVP", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-outline-primary" %>
+        <button class="btn btn-primary" disabled>UnRSVP</button>
+        <% else %>
+        <button class="btn btn-primary" disabled>RSVP</button>
+        <%= link_to "UnRSVP", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-outline-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
