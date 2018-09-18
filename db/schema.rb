@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_072631) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "hash_id"
+    t.index ["hash_id"], name: "index_announcements_on_hash_id", unique: true
     t.index ["user_id", "created_at"], name: "index_announcements_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_announcements_on_user_id"
   end
@@ -26,6 +27,17 @@ ActiveRecord::Schema.define(version: 2018_09_18_072631) do
   create_table "announcements_class_years", id: false, force: :cascade do |t|
     t.integer "announcement_id"
     t.integer "class_year_id"
+  end
+
+  create_table "blog_posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "hash_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hash_id"], name: "index_blog_posts_on_hash_id"
+    t.index ["user_id"], name: "index_blog_posts_on_user_id"
   end
 
   create_table "class_years", force: :cascade do |t|
@@ -105,6 +117,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_072631) do
     t.string "uid"
     t.datetime "oauth_expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["hash_id"], name: "index_users_on_hash_id", unique: true
   end
 
 end

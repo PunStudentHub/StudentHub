@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'blog/new'
+  get 'blog/create'
+  get 'blog/edit'
+  get 'blog/update'
+  get 'blog/destroy'
   root 'pages#home'
   get '/help', to: 'pages#help'
   get '/contact', to: 'pages#contact'
@@ -19,6 +24,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :destroy]
   resources :events
   resources :announcements
+  resources :blog
   resources :account_activations, only: [:edit]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
