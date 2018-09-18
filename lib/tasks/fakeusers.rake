@@ -20,6 +20,7 @@ namespace :fakeusers do
       a.save
     end
 
+
     6.times do |day|
       8.times do |mod|
         Timeslot.create(day: day, time: mod)

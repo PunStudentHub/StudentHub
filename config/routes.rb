@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   post '/event/approve', to: 'events#approve', as: 'approve_event'
+  post '/event/rsvp', to: 'events#rsvp', as: 'rsvp_event'
+  post '/event/unrsvp', to: 'events#unrsvp', as: 'unrsvp_event'
 
   resources :users, only: [:show, :index, :destroy]
   resources :events

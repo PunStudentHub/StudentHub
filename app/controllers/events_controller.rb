@@ -26,7 +26,7 @@ class EventsController < ApplicationController
     @event = Event.friendly.find(params[:id])
     if (@event.update_attributes(event_params))
       flash.now[:success] = "Event updated"
-      redirect_to @event
+      redirect_to events_path
     else
       render 'edit'
     end
@@ -39,7 +39,19 @@ class EventsController < ApplicationController
   def approve
     @event = Event.friendly.find(params[:id])
     @event.update_attributes(approved: true)
-    render 'new'
+    redirect_to events_path
+  end
+
+  def rsvp
+    @event = Event.friendly.find(params[:id])
+    @event.users << current_user
+    redirect_to events_path
+  end
+
+  def unrsvp
+    @event = Event.friendly.find(params[:id])
+    @event.users.destroy(current_user)
+    redirect_to events_path
   end
 
   def create
@@ -56,9 +68,6 @@ class EventsController < ApplicationController
     else
       render 'new'
     end
-#admins can aprove events currently
-#in purgatory, they get posted to
-#main events page
   end
 
   private
