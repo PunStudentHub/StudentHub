@@ -1,13 +1,13 @@
-<footer class="footer">
+<footer class="footer bg-secondary text-light">
   <div class="container">
     <p class="float-right">
-    <a href="#">Back to top</a> 
+    <a href="#" class="text-white">Back to top</a> 
 
     </p>
-    <%= link_to "About Us", href="/contact" %> |
-    <%= link_to "Blog", href="/blog" %>
+    <%= link_to "About Us", href="/contact", class: "text-white" %> |
+    <%= link_to "Blog", href="/blog", class: "text-white" %>
     <% if logged_in? %>
-      | <%= link_to "Staff", href="/staff" %>
+      | <%= link_to "Staff", href="/staff", class: "text-white" %>
     <% end %> 
   </div>
 </footer>

@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def home
     @announcements = helpers.filter_announcements_class_years
     @subjects = Subject.all.sample(3)
-    @blogposts = BlogPost.all.sample(3)
+    @blogposts = BlogPost.take(3)
   end
 
   def help
