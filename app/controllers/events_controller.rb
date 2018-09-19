@@ -9,7 +9,11 @@ class EventsController < ApplicationController
 
   def index
     #eventually should display as a calender, troopwebhostesque
-    @events = Event.all.paginate(page: params[:page], per_page: 25)
+    if current_user.can_do(:approve)
+      @events = Event.all
+    else
+      @events = Event.all.approved_events
+    end
   end
 
   def destroy
@@ -44,13 +48,17 @@ class EventsController < ApplicationController
 
   def rsvp
     @event = Event.friendly.find(params[:id])
-    @event.users << current_user
+    unless @event.users.exists?(current_user.id)
+      @event.users << current_user
+    end
     redirect_to request.referrer
   end
 
   def unrsvp
     @event = Event.friendly.find(params[:id])
-    @event.users.destroy(current_user)
+    if @event.users.exists?(current_user.id)
+      @event.users.destroy(current_user)
+    end
     redirect_to request.referrer
   end
 

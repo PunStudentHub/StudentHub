@@ -1,9 +1,4 @@
 <% provide(:title, "Events") %>
-<% if current_user.can_do(:approve) %>
-  <%= will_paginate @events %>
-<% else %>
-  <%= will_paginate @events.approved_events %>
-<% end %>
 <div class="card">
   <div class="card-body">
     <h2 style="margin-bottom: 0px" class="float-left">Events</h2>
@@ -20,9 +15,3 @@
   </ul>
 
 </div>
-
-<% if current_user.can_do(:approve) %>
-  <%= will_paginate @events %>
-<% else %>
-  <%= will_paginate @events.approved_events %>
-<% end %>

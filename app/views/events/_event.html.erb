@@ -28,11 +28,11 @@
       <div class="col-sm-1">
         <div class="btn-group-vertical float-right">
             <% if !event.users.exists?(current_user.id) %>
-            <%= link_to "RSVP", rsvp_event_path(:id => event.id), method: :rsvp, class: "btn btn-outline-primary" %>
-            <button class="btn btn-primary" disabled>UnRSVP</button>
+            <%= link_to "RSVP", rsvp_event_path(:id => event.id), method: :rsvp, class: "btn btn-sm btn-outline-primary" %>
+            <button class="btn btn-sm btn-primary" disabled>UnRSVP</button>
             <% else %>
-            <button class="btn btn-primary" disabled>RSVP</button>
-            <%= link_to "UnRSVP", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-outline-primary" %>
+            <button class="btn btn-sm btn-primary" disabled>RSVP</button>
+            <%= link_to "UnRSVP", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-sm btn-outline-primary" %>
             <% end %>
         </div>
       </div>
