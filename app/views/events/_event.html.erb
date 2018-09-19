@@ -3,7 +3,7 @@
 <% id = event.id %>
   <li class="list-group-item no-padding <%= approved %>" id="id">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-sm-10">
         <h6 class="no-margin"><%= link_to event.title, event %>  <%= event.start_time.strftime("%A %B %d")%></h6>
         <small>
           Posted by
@@ -11,25 +11,31 @@
           <%= distance_of_time_in_words(event.created_at.to_time, Time.now) + " ago" %>
         </small>
       </div>
-      <% if logged_in? %>
-        <% if current_user.can_do(:approve) %>
-          <div class="col-sm-1">
+      <% if current_user.can_do(:approve) %>
+        <div class="col-sm-1">
+          <div class="btn-group-vertical float-right">
             <% if event.approved %>
-              <div class="float-right no-link-padding">
-                <%= link_to "Edit", edit_event_path(event), class: "text-warning"%><br>
-                <%= link_to "Delete", event_path(event), method: :delete, class: "text-danger",
-                  data: {confirm: "Are you sure you want to do this?"} %>
-              </div>
+              <%= link_to "Edit", edit_event_path(event), class: "btn btn-sm btn-info"%>
             <% else %>
-              <div class="float-right no-link-padding">
-                <%= link_to "Approve", approve_event_path(:id => event.id), method: :approve, class: "float-right btn btn-sm btn-primary" %>
-                <br>
-                <%= link_to "Remove", event_path(event), method: :delete, class: "float-right btn btn-sm btn-danger", data: {confirm: "Are you sure you want to do this?"} %>
-              </div>
+              <%= link_to "Approve", approve_event_path(:id => event.id), method: :approve, class: "btn btn-sm btn-success" %>
             <% end %>
+            <%= link_to "Remove", event_path(event), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "Are you sure you want to do this?"} %>
           </div>
-        <% end %>
+        </div>
+      <% else %>
+        <div class="col-sm-1"></div>
       <% end %>
+      <div class="col-sm-1">
+        <div class="btn-group-vertical float-right">
+            <% if !event.users.exists?(current_user.id) %>
+            <%= link_to "RSVP", rsvp_event_path(:id => event.id), method: :rsvp, class: "btn btn-sm btn-outline-primary" %>
+            <button class="btn btn-sm btn-primary" disabled>UnRSVP</button>
+            <% else %>
+            <button class="btn btn-sm btn-primary" disabled>RSVP</button>
+            <%= link_to "UnRSVP", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-sm btn-outline-primary" %>
+            <% end %>
+        </div>
+      </div>
     </div>
   </li>
 <% elsif !logged_in? %>

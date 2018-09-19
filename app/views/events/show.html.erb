@@ -25,12 +25,10 @@
       <div class="float-right">
         <%= link_to "Back to Events", events_path %>
         <% if logged_in? %>
-          <% if current_user.can_do :approve %>
-            |
+          <% if current_user.can_do :approve %> |
             <%= link_to "Edit", edit_event_path(@event), class: "text-warning"%> |
             <%= link_to "Delete", event_path(@event), method: :delete, class: "text-danger",
                       data: {confirm: "Are you sure you want to do this?"} %>
-
           <% end %>
         <% end %>
       </div>
@@ -45,7 +43,24 @@
       <%=  @event.end_time.strftime("%I:%M %p") %>
       <br><br>
       <%= simple_format @event.description %>
-
     </div>
   </div>
+  <% if logged_in? %>
+    <div class="btn-group">
+      <% if !@event.users.exists?(current_user.id) %>
+      <%= link_to "RSVP", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-outline-primary" %>
+      <button class="btn btn-primary" disabled>UnRSVP</button>          <% else %>
+      <button class="btn btn-primary" disabled>RSVP</button>
+      <%= link_to "UnRSVP", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-outline-primary" %>
+      <% end %>
+    </div>
+  <% end %>
+  <% if (@event.user_id == current_user.id || current_user.can_do(:approve)) && !@event.users.empty? %>
+    <h6><br>Current attendees: <%= @event.users.all.count %></h6>
+    <ul>
+      <% @event.users.each do |attendee| %>
+        <li><%= attendee.email %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

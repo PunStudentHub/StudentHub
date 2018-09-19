@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :events, dependent: :destroy
   has_many :blog_posts, dependent: :destroy
   has_and_belongs_to_many :roles
+  has_and_belongs_to_many :events
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
   default_scope -> {order(:created_at)}
@@ -18,11 +19,6 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@punahou\.edu/i },
                     uniqueness: { case_sensitive: false }
 
-#  validates :password, presence: true,
-#                       length: {minimum: 8},
-#                       allow_nil: true
-
-#  has_secure_password
 
   def self.get_color rank
     colors[rank]

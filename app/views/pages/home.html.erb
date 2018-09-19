@@ -1,11 +1,60 @@
 <% provide(:title, "Home") %>
 <div class="row">
   <div class="col-md-7">
-    <%= render 'shared/model_ataglance',  path: announcements_path, 
-                                          display_name: 'Announcements', 
-                                          count: 5, 
+    <%= render 'shared/model_ataglance',  path: announcements_path,
+                                          display_name: 'Announcements',
+                                          count: 5,
                                           variable: @announcements %>
-    
+    <div class="card">
+      <h2 class="card-header bg-white">
+        <%= link_to "Upcoming Events", events_path, class: "text-dark" %>
+      </h2>
+      <div class="card-body skinny-top p-1 m-1">
+        <div class="card m-0">
+          <div class="card-group">
+            <div class="card border-left-0 border-top-0 border-bottom-0">
+              <div class="card-header">
+                <h5 class="card-title m-0">Today</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <% @today.each do |event| %>
+                  <li class="list-group-item">
+                    <%= link_to event.title, event_path(event) %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="card border-left-0 border-top-0 border-bottom-0">
+              <div class="card-header">
+                <h5 class="card-title m-0">Tomorrow</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <% @tomorrow.each do |event| %>
+                  <li class="list-group-item">
+                    <%= link_to event.title, event_path(event) %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="card border-0">
+              <div class="card-header">
+                <h5 class="card-title m-0"><%= 2.days.from_now.strftime("%A") %></h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <% @day_after_tomorrow.each do |event| %>
+                  <li class="list-group-item">
+                    <%= link_to event.title, event_path(event) %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <%= link_to "See more...", events_path %>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card">
       <h2 class="card-header bg-white">
         <%= link_to "Peer Learning Center", plc_path, class: "text-dark" %>
@@ -19,7 +68,7 @@
           <% end %>
           <li>and <%= link_to "many more!", plc_path %></li>
         </ul>
-        
+
       </div>
     </div>
   </div>
