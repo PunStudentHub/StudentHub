@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Parameters:
   - display_name
   - path
@@ -6,15 +6,13 @@
   - variable
  -->
 <div class="card">
-  <div class="card-body">
-    <h2 style="margin-bottom: 0px">
-      <%= link_to display_name, path, class: 'text-dark' %>
-    </h2>
+  <div class="card-header blue darken-3 white-text">
+    <h3 class="card-title"><i class="fas fa-bullhorn"></i>Announcements</h3>
   </div>
   <ul class="list-group list-group-flush">
     <%= render variable.take(5) %>
   </ul>
   <div class="card-body see-more-section">
-    <%= link_to 'See more...', path, class: 'text-secondary' %>
+    <%= link_to 'See more...', path, class: 'text-primary' %>
   </div>
 </div>

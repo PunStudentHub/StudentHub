@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
-  <%= link_to "Punahou Student Hub", "#", class: 'navbar-brand', style: "color: yellow" %>
+  <%= link_to "Punahou Student Hub", "/", class: 'navbar-brand', style: "color: #1565c0;font-size: 25px;" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,7 +28,7 @@
         </div>
       </li>
       <% else %>
-        <%= link_to "Log In", "/auth/google_oauth2", id: "sign_in", class: navbar_current?("Log In", yield(:title)) %>
+        <%= link_to "Log In", "/auth/google_oauth2", id: "sign_in", class: "btn btn-outline-primary btn-block btn-sm" %>
       <% end %>
     </ul>
   </div>

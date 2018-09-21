@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 2018_09_09_224458) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "activation_digest"
     t.boolean "admin", default: false
     t.string "hash_id"
     t.string "remember_digest"

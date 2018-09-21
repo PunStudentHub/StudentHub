@@ -1,18 +1,21 @@
 <% provide(:title, "Home") %>
 <div class="row">
   <div class="col-md-7">
-    <%= render 'shared/model_ataglance',  path: announcements_path, 
-                                          display_name: 'Announcements', 
-                                          count: 5, 
+    <%= render 'shared/model_ataglance',  path: announcements_path,
+                                          count: 5,
                                           variable: @announcements %>
-    
+
     <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title"><i class="fas fa-book"></i>Peer Learning Center</h3>
+      </div>
       <div class="card-body">
-        <h2 class="no-margin"><%= link_to "Peer Learning Center", plc_path, class: "text-dark" %></h2>
         <p style="margin-bottom: 1px">Need help with school? No stress! Come get help from your friends in</p>
         <% @subjects.each do |subject| %>
           <%= link_to subject.name, plc_path(subject: subject.hash_id) %>,
         <% end %>and <%= link_to "many more!", plc_path %>
+        <p>(NOTE: maybe rephrase stuff, like general overview of plc, since theres a designated button now)</p>
+        <%= button_to "View PLC Schedule", plc_path, :method => "get", class: "btn btn-primary btn-block waves-effect btn-sm" %>
       </div>
     </div>
 
@@ -28,8 +31,10 @@
 
   <div class="col-md-5">
     <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title"><i class="fas fa-info-circle"></i>Information</h3>
+      </div>
       <div class="card-body">
-        <h2>Information</h2>
         <p class="lead">
           Welcome to the Punahou Student Hub.
           <br>We're glad you're here.
@@ -40,8 +45,10 @@
       </div>
     </div>
     <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title"><i class="fas fa-sliders-h"></i>Settings</h3>
+      </div>
       <div class="card-body">
-        <h2>Settings</h2>
         <%= render 'filters/filter_settings' %>
       </div>
     </div>

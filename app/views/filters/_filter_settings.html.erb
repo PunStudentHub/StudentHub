@@ -2,14 +2,14 @@
   <div class="form-group">
     <label>See posts for these classes:</label>
     <% ClassYear.all.each do |c| %>
-      <div class="form-check">
-        <%= check_box_tag 'class_year_ids[]', c.id, get_class_year_ids.include?(c.id.to_s), 
-          class: "form-check-input"%>
-        <%= f.label c.id, class: "form-check-label" %>
+      <div class="custom-control custom-checkbox">
+        <%= check_box_tag 'class_year_ids[]', c.id, get_class_year_ids.include?(c.id.to_s),
+          class: "custom-control-input", id: "idName#{c.id}"%>
+        <%= f.label c.id, class: "custom-control-label", for: "idName#{c.id}"%>
       </div>
     <% end %>
   </div>
 
-  <%= f.submit "Update", class: "btn btn-primary" %>
+  <%= f.submit "Update", class: "btn btn-primary btn-block waves-effect btn-sm" %>
 
 <% end %>
