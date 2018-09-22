@@ -100,3 +100,40 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.card-header {
+  padding: 20px;
+  padding-top: 11px;
+  padding-bottom: 9px;
+}
+
+.card-title {
+  margin-bottom: 0px;
+  font-family: "Roboto Condensed";
+}
+
+.fas {
+  margin-right: 5px;
+  margin-left: 1px;
+}
+
+.btn {
+  margin: 0px !important;
+}
+
+.navbar-brand {
+  font-family: "Roboto Condensed";
+}
+
+#sign_in {
+  color: white;
+}
+
+#sign_in:hover {
+  color: white;
+}
+
+.card-btn {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}

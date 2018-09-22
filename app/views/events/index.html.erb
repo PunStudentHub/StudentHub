@@ -1,17 +1,20 @@
 <% provide(:title, "Events") %>
-<div class="card">
-  <div class="card-body">
-    <h2 style="margin-bottom: 0px" class="float-left">Events</h2>
-    <% if logged_in?%>
-      <%= link_to "New", new_event_path, class: "float-right btn btn-primary" %>
-    <% end %>
+<% if logged_in? %>
+  <div class="card">
+    <div class="card-body">
+      <h2 style="margin-bottom: 0px" class="float-left">Events</h2>
+      <% if logged_in?%>
+        <%= link_to "New", new_event_path, class: "float-right btn btn-primary" %>
+      <% end %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% if current_user.can_do(:approve) %>
+        <%= render @events %>
+      <% else %>
+        <%= render @events.approved_events %>
+      <% end %>
+    </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <% if current_user.can_do(:approve) %>
-      <%= render @events %>
-    <% else %>
-      <%= render @events.approved_events %>
-    <% end %>
-  </ul>
-
-</div>
+<% else %>
+  <% flash.now[:warning] = "Log in to view events" %>
+<% end %>

@@ -6,9 +6,10 @@
                                           count: 5,
                                           variable: @announcements %>
     <div class="card">
-      <h2 class="card-header bg-white">
-        <%= link_to "Upcoming Events", events_path, class: "text-dark" %>
-      </h2>
+      <div class="card-header blue darken-3 white-text">
+        <!-- put the events icon here-->
+        <h3 class="card-title">Upcoming Events</h3>
+      </div>
       <div class="card-body skinny-top p-1 m-1">
         <div class="card m-0">
           <div class="card-group">
@@ -75,8 +76,10 @@
 
   <div class="col-md-5">
     <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title"><i class="fas fa-info-circle"></i>Information</h3>
+      </div>
       <div class="card-body">
-        <h2>Information</h2>
         <p class="lead">
           Welcome to the Punahou Student Hub.
           <br>We're glad you're here.
@@ -87,15 +90,17 @@
       </div>
     </div>
     <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title"><i class="fas fa-sliders-h"></i>Settings</h3>
+      </div>
       <div class="card-body">
-        <h2>Settings</h2>
         <%= render 'filters/filter_settings' %>
       </div>
     </div>
 
-    <%= render 'shared/model_ataglance',  path: blog_index_path, 
-                                          display_name: 'Our Blog', 
-                                          count: 3, 
+    <%= render 'shared/model_ataglance',  path: blog_index_path,
+                                          display_name: 'Our Blog',
+                                          count: 3,
                                           variable: @blogposts %>
   </div>
 </div>

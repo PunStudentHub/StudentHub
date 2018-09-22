@@ -9,10 +9,12 @@ class EventsController < ApplicationController
 
   def index
     #eventually should display as a calender, troopwebhostesque
-    if current_user.can_do(:approve)
-      @events = Event.all
-    else
-      @events = Event.all.approved_events
+    if logged_in?
+      if current_user.can_do(:approve)
+        @events = Event.all
+      else
+        @events = Event.all.approved_events
+      end
     end
   end
 
