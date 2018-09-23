@@ -19,8 +19,9 @@
         <% end %>
       <% end %>
     </ul>
+    <% if logged_in? %>
     <ul class="navbar-nav ml-auto">
-      <% if logged_in? %>
+      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle active" href='#' id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
         <div class="dropdown-menu" aria-labelledby="user-dropdown">
@@ -30,10 +31,11 @@
 
         </div>
       </li>
-      <% else %>
-        <%= link_to "Log In", "/auth/google_oauth2", id: "sign_in", class: "btn btn-outline-primary btn-block btn-sm" %>
-      <% end %>
+      
     </ul>
+    <% else %>
+      <%= link_to "Log In", "/auth/google_oauth2", class: "nav-item nav-link ml-auto" %>
+    <% end %>
   </div>
   </div>
 </nav>
