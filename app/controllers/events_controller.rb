@@ -32,7 +32,7 @@ class EventsController < ApplicationController
     @event = Event.friendly.find(params[:id])
     if (@event.update_attributes(event_params))
       flash.now[:success] = "Event updated"
-      redirect_to events_path
+      redirect_to event_path(@event)
     else
       render 'edit'
     end

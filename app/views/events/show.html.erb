@@ -39,8 +39,14 @@
     <div class="col-md-10">
       <%=  @event.location %>
       <br><br>
-      <%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %>-
-      <%=  @event.end_time.strftime("%I:%M %p") %>
+      <% unless @event.start_time.to_date == @event.end_time.to_date %>
+        <ul>
+          <li><b>Start: </b><%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %></li>
+          <li><b>End: </b><%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %></li>
+        </ul>
+      <% else %>
+        <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%>
+      <% end %>  
       <br><br>
       <%= simple_format @event.description %>
     </div>
@@ -48,10 +54,11 @@
   <% if logged_in? %>
     <div class="btn-group">
       <% if !@event.users.exists?(current_user.id) %>
-      <%= link_to "RSVP", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-outline-primary" %>
-      <button class="btn btn-primary" disabled>UnRSVP</button>          <% else %>
-      <button class="btn btn-primary" disabled>RSVP</button>
-      <%= link_to "UnRSVP", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-outline-primary" %>
+        <%= link_to "Coming", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-sm btn-outline-primary" %>
+          <button class="btn btn-sm btn-primary" disabled>Not Coming</button>          
+        <% else %>
+          <button class="btn btn-sm btn-primary" disabled>Coming</button>
+          <%= link_to "Not Coming", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-sm btn-outline-primary" %>
       <% end %>
     </div>
   <% end %>

@@ -10,7 +10,7 @@
         <%= event.start_time.strftime("%d")%>
       </div> 
       <% if current_user.can_do(:approve) %>
-        <div class="col-lg-7 col-sm-10 col-xs-4">
+        <div class="col-lg-6 col-sm-10 col-xs-4">
       <% else %>
         <div class="col-lg-8">
       <% end %>
@@ -23,16 +23,17 @@
       </div>
       
       <% if current_user.can_do(:approve) %>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
       <% else %> 
-        <div class="col-lg-2 col-xs-12">
+        <div class="col-lg-3 col-xs-12">
       <% end %> 
-        <div class="float-right">
-          <% if rsvp %>
-          <%= link_to "I'm Not Coming", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-sm btn-outline-warning fixed-btn-wh"%>
+        <div class="float-right btn-group">
+          <% unless rsvp %>
+            <%= link_to "Coming", rsvp_event_path(:id => event.id), method: :rsvp, class: "btn btn-sm btn-outline-primary" %>
+            <button class="btn btn-sm btn-primary" disabled>Not Coming</button>          
           <% else %>
-            <%= link_to "I'm Coming", rsvp_event_path(id: event.id), 
-                method: :rsvp, class: "btn btn-sm btn-outline-success fixed-btn-wh" %>
+            <button class="btn btn-sm btn-primary" disabled>Coming</button>
+            <%= link_to "Not Coming", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-sm btn-outline-primary" %>
           <% end %>
         </div>
         <% if current_user.can_do(:approve) %>
