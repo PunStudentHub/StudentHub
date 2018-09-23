@@ -34,15 +34,15 @@ We're open source, and welcome contributions (if you know Ruby on Rails, which i
 
 Steps to install:
 
-0. Install Ruby 2.4.4 and `gem install rails`
+0. Install Ruby 2.4.4 and `$ gem install rails`
 1. Fork the repository
 2. Clone it to your local system
 3. Run the following:
- * `bundle install`
- * `rails db:migrate`
+ * `$ bundle install`
+ * `$ rails db:migrate`
 4. Import the sample data
- * `rake classyear:load`
- * `rake plc:import`
- * `rake role:generate`
-5. `rails server`, then go to http://localhost:3000 in your browser
+ * `$ rake classyear:load`
+ * `$ rake plc:import`
+ * `$ rake role:generate`
+5. `$ rails server`, then go to http://localhost:3000 in your browser
 6. Enjoy!
