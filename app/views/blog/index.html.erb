@@ -2,7 +2,7 @@
 <%= will_paginate @blogposts %>
 <div class="card">
   <div class="card-header bg-white">
-    <h2 class="float-left">Blog Posts</h2>
+    <h2 class="float-left card-title">Blog Posts</h2>
     <% if logged_in? && current_user.can_do(:admin)%>
       <%= link_to "New", new_blog_path, class: "float-right btn btn-primary" %>
     <% end %>

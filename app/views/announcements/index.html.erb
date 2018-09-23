@@ -2,7 +2,7 @@
 <%= will_paginate @announcements %>
 <div class="card">
   <div class="card-header bg-white">
-    <h2 class="float-left">Announcements</h2>
+    <h2 class="card-title float-left">Announcements</h2>
     <% if logged_in? && current_user.can_do(:moderate)%>
       <%= link_to "New", new_announcement_path, class: "float-right btn btn-primary" %>
     <% end %>
@@ -14,3 +14,4 @@
 </div>
 
 <%= will_paginate @announcements %>
+  

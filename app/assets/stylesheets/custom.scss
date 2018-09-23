@@ -125,6 +125,10 @@ body {
   font-family: "Roboto Condensed";
 }
 
+.cool-font {
+  font-family: "Roboto Condensed";
+}
+
 #sign_in {
   color: white;
 }
@@ -136,5 +140,13 @@ body {
 .card-btn {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+}
+
+.card {
+  font-weight: 300 !important;
+}
+
+.fixed-btn-wh {
+  width: 8em;
 }
 

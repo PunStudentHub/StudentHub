@@ -1,8 +1,8 @@
 <% provide(:title, "Events") %>
 <% if logged_in? %>
   <div class="card">
-    <div class="card-body">
-      <h2 style="margin-bottom: 0px" class="float-left">Events</h2>
+    <div class="card-header bg-white">
+      <h2 class="float-left card-title">Events</h2>
       <% if logged_in?%>
         <%= link_to "New", new_event_path, class: "float-right btn btn-primary" %>
       <% end %>

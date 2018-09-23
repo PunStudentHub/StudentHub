@@ -15,10 +15,10 @@
           <%= render 'users/badges', user: User.find(@event.user_id) %>
           <small>
           <em>
-            <%= distance_of_time_in_words(@event.created_at.to_time, Time.now) %> ago
-          <% if @event.updated_at != @event.created_at %>
-            , Last updated <%= distance_of_time_in_words(@event.updated_at.to_time, Time.now) %> ago
-          <% end %>
+            <%= distance_of_time_in_words(@event.created_at.to_time, Time.now) %> 
+            ago<% if @event.updated_at != @event.created_at %>, 
+            Last updated <%= distance_of_time_in_words(@event.updated_at.to_time, Time.now) %> ago
+            <% end %>
           </em></small>
         </div>
       </div>
