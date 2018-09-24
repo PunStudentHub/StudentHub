@@ -1,17 +1,19 @@
 <% provide(:title, "Announcements") %>
 <%= will_paginate @announcements %>
 <div class="card">
-  <div class="card-header bg-white">
-    <h2 class="card-title float-left">Announcements</h2>
-    <% if logged_in? && current_user.can_do(:moderate)%>
-      <%= link_to "New", new_announcement_path, class: "float-right btn btn-primary" %>
-    <% end %>
+  <div class="card-header blue darken-3 white-text">
+    <h3 class="card-title">
+      Announcements
+      <% if logged_in? && current_user.can_do(:moderate)%>
+        <%= link_to "New", new_announcement_path, class: "float-right btn btn-primary" %>
+      <% end %>
+    </h3>
   </div>
-  <ul class="list-group list-group-flush">
-    <%= render @announcements %>
-  </ul>
-
+  <div class="card-body" style="padding: 0px;">
+    <ul class="list-group list-group-flush">
+      <%= render @announcements %>
+    </ul>
+  </div>
 </div>
 
 <%= will_paginate @announcements %>
-  
