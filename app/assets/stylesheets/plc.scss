@@ -5,7 +5,6 @@
 .plc-table {
   display: table;
   table-layout: fixed;
-  border: 2px solid black;
 }
 
 .plc-cell {
@@ -22,8 +21,7 @@
 .plc-header {
   height: 1em;
   text-align: center;
-  background-color: #333;
-  color: white;
+  color: black;
 }
 
 .narrow {
@@ -35,12 +33,10 @@
   background-color: #eee;
 }
 
-.last {
-  border-bottom: 2px solid black;
-}
 
 .plc-list-item {
   padding: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.125)
 }
 
 .plc-subject {
@@ -51,10 +47,20 @@
 
 .plc-list {
   overflow: scroll;
-  height: 500px;
+  height: 487px;
 }
 
 
 .highlighted {
   background-color: yellow;
+}
+
+.div-selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.div-selected:hover {
+  background-color: #007bff;
+  color: white;
 }

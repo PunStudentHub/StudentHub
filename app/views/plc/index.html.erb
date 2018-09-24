@@ -1,52 +1,73 @@
 <% provide :title, "PLC" %>
 <% letters = %w{A B C D E F} %>
-<h2 class="cool-font">Peer Learning Center
-  <% if @selected_subject %>
-    <small class="text-muted"><%= @selected_subject.name %></small>
-  <% end %>
-</h2>
 <div class="row">
   <div class="col-sm-8">
-    <table class="plc-table">
-      <tr class="plc-row">
-        <td class="plc-cell narrow plc-header"></td>
-        <% 6.times do |col| %>
-          <td class="plc-cell plc-header"><%= letters[col] %></td>
-        <% end %>
-      </tr>
-      <% 8.times do |row| %>
-        <tr class="plc-row <% if row.odd? %> odd <% end %>">    
-        
-        <td class="plc-cell narrow"><%= human_time row %></td>
-
-          <% 6.times do |col| %>
-            <td class="plc-cell timeslot 
-              <% if row == 7%>last<%end%>
-              <% if @timeslots %>
-                <% if @timeslots.by_day(col).by_time(row).any? %>
-                  highlighted
-                <% end %>
-              <% end %>">
-            </td>
+    <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title">
+          Peer Learning Center
+          <% if @selected_subject %>
+            <small><%= @selected_subject.name %></small>
           <% end %>
+        </h3>
+      </div>
+      <div class="card-body" style="padding: 0px">
+        <table class="plc-table">
+          <tr class="plc-row">
+            <td class="plc-cell narrow plc-header"></td>
+            <% 6.times do |col| %>
+              <td class="plc-cell plc-header"><%= letters[col] %></td>
+            <% end %>
+          </tr>
+          <% 8.times do |row| %>
+            <tr class="plc-row <% if row.even? %> odd <% end %>">
 
-        </tr>
-      <% end %>
-    </table>
+            <td class="plc-cell narrow"><%= human_time row %></td>
+
+              <% 6.times do |col| %>
+                <td class="plc-cell timeslot
+                  <% if row == 7%>last<%end%>
+                  <% if @timeslots %>
+                    <% if @timeslots.by_day(col).by_time(row).any? %>
+                      highlighted
+                    <% end %>
+                  <% end %>">
+                </td>
+              <% end %>
+
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
   </div>
-
   <div class="col-sm-4">
-    <div class="plc-list">
-      <div class="list-group" id="list">
-
+    <div class="card">
+      <div class="card-header blue darken-3 white-text" style="padding-left: 12px;">
+        <h3 class="card-title">
+          Select Subject
+        </h3>
+      </div>
+      <div class="card-body" style="padding: 0px;">
+        <div class="plc-list" id="list">
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+  $('#list').html("");
+  <% @subjects.each do |sub| %>
+      $('#list').append($('<a></a>').attr('href', "<%= "?subject=#{sub.hash_id}" %>").append($('<div></div>').attr('class', 'plc-list-item list-group-item-action plc-subject')
+                                    .html("<%= sub.name %>")
+                                    <% if sub == @selected_subject %>
+                                      .addClass("div-selected")
+                                    <% end %> ))
+  <% end %>
+
+/*
   $('#list').html("")
-  $('#list').append($('<h4></h4>').attr('class', 'list-group-item plc-list-item no-margin').html('Subject <small class="text-muted">Click one</small>'))
 
   <% @subjects.each do |sub| %>
       $('#list').append($('<a></a>').attr('class', 'list-group-item plc-list-item list-group-item-action plc-subject')
@@ -55,6 +76,6 @@
                                     <% if sub == @selected_subject %>
                                       .addClass("active")
                                     <% end %> )
-  <% end %> 
+  <% end %>
+  */
 </script>
-
