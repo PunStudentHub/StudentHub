@@ -104,11 +104,17 @@ body {
 .card-header {
   padding-top: 11px;
   padding-bottom: 9px;
+  padding-left: 14px;
 }
 
 .card-title {
   margin-bottom: 0px;
   font-family: "Roboto Condensed";
+}
+
+.fas {
+  margin-right: 5px;
+  margin-left: 1px;
 }
 
 .btn {
@@ -143,3 +149,4 @@ body {
 .fixed-btn-wh {
   width: 8em;
 }
+
