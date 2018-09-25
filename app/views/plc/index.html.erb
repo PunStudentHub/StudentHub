@@ -36,15 +36,46 @@
   </div>
 
   <div class="col-sm-4">
+<<<<<<< HEAD
     <div class="plc-list">
       <div class="list-group" id="list">
 
+=======
+    <div class="card">
+      <div class="card-header blue darken-3 white-text" style="padding-left: 12px;" id="test">
+        <h3 class="card-title">
+          Select Subject
+        </h3>
+      </div>
+      <div class="card-body" style="padding: 0px;">
+        <div class="plc-list" id="list">
+        </div>
+>>>>>>> 1e6dc27... added edit/delete icon, removed profile/logout icon, added missing semicolon in css
       </div>
     </div>
   </div>
 </div>
 
 <script>
+<<<<<<< HEAD
+=======
+  $('#list').html("");
+  <% @subjects.each do |sub| %>
+      $('#list').append($('<a></a>').attr('href', "<%= "?subject=#{sub.hash_id}" %>").append($('<div></div>').attr('class', 'plc-list-item list-group-item-action plc-subject')
+                                    .html("<%= sub.name %>")
+                                    <% if sub == @selected_subject %>
+                                      .addClass("div-selected")
+                                    <% end %> ))
+  <% end %>
+/*
+  document.getElementById("list").onscroll = function() {
+    if(document.getElementById("list").scrollTop != 0) {
+      document.getElementById("test").className = "card-header blue darken-3 white-text z-depth-1"
+    }
+  }
+*/
+/*
+>>>>>>> 1e6dc27... added edit/delete icon, removed profile/logout icon, added missing semicolon in css
   $('#list').html("")
   $('#list').append($('<h4></h4>').attr('class', 'list-group-item plc-list-item no-margin').html('Subject <small class="text-muted">Click one</small>'))
 
