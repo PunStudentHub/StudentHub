@@ -7,7 +7,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def index
-    @announcements = helpers.filter_announcements_class_years.paginate(page: params[:page], per_page: 25)
+    @announcements = helpers.filter_class_years(Announcement).paginate(page: params[:page], per_page: 25)
   end
 
   def destroy
