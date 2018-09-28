@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
+  before_action -> { correct_user(:admin) }, only: [:edit, :update]
   before_action -> { has_permission(:admin) }, only: [:destroy]
   before_action -> { has_permission(:approve) }, only: [:index] 
   before_action :not_logged_in, only: [:new, :create]
@@ -11,13 +11,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    id = User.find_by_hash_id(params[:id])
-    @user = id
-#    unless @user.activated?
-#      flash[:warning] = "That account is not activated!"
-#      redirect_to root_url and return
-#    end
-    @announcements = Announcement.where(user_id: id).paginate(page: params[:announcement_page], per_page: 1)
+    @user = User.find_by_hash_id(params[:id])
+    unless @user
+      flash[:warning] = "That user does not exist!"
+      redirect_to root_url
+    end
   end
 
   def index
@@ -58,12 +56,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:biography)
-    end
-
-    def correct_user
-      @user = User.find_by_hash_id(params[:id])
-      redirect_to(edit_user_path(@user)) unless current_user?(@user)
+      params.require(:user).permit(:biography, class_year_ids: [])
     end
 
     def not_logged_in

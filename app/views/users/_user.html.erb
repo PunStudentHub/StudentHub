@@ -10,7 +10,9 @@
   <td>
     <% if current_user.can_do(:admin) && !current_user?(user) %>
       <% if options %> 
-        <%= link_to "delete", user_path(user), method: :delete, class: "text-danger",
+
+        <%= link_to "Edit", edit_user_path(user), class: "text-warning" %>   
+        <%= link_to "Delete", user_path(user), method: :delete, class: "text-danger",
                                    data: {confirm: "Are you sure you want to do this?"} %>
       <% end %> 
     <% end %>

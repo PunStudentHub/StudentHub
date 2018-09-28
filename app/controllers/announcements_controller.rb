@@ -1,6 +1,6 @@
 class AnnouncementsController < ApplicationController
 
-  before_action -> {has_permission(:moderate)}, only: [:new, :edit, :update, :create, :destroy]
+  before_action -> {has_permission(:moderate)}, except: [:index, :show]
 
   def show
     @announcement = Announcement.find_by_hash_id(params[:id])

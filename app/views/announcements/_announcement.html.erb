@@ -8,17 +8,19 @@
         <%= distance_of_time_in_words(announcement.created_at.to_time, Time.now) + " ago" %>
 
       </small>
-      <%= render 'shared/class_year_tags', object: announcement %>
+      <!--%= render 'shared/class_year_tags', object: announcement %-->
 
     </div>
   <% if logged_in? %>
-      <div class="col-sm-1">
-        <div class="float-right no-link-padding">
+    <div class="col-sm-1">
+      <div class="float-right no-link-padding">
+        <% if current_user.can_do (:moderate) || announcement.user == current_user %>
           <%= link_to ("<i class='fas fa-edit'></i>").html_safe, edit_announcement_path(announcement), class: "text-warning"%><br>
           <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, announcement_path(announcement), method: :delete, class: "text-danger",
                   data: {confirm: "Are you sure you want to do this?"} %>
-        </div>
+        <% end %>
       </div>
+    </div>
   <% end %>
   </div>
 </li>
