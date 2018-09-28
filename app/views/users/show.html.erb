@@ -1,27 +1,23 @@
 <% provide(:title, @user.name) %>
 
 <div class="row">
-  <div class="col-md-5">
-    <h2>
-      <%= render 'users/colored_name', user: @user %>
-      <br>
-      <small class="text-muted"><%= @user.email %></small>
-    </h2>
+  <div class="col-md-4">
+    <h3 style="display: inline;"><%= render 'users/colored_name', user: @user %></h3> 
     <%= render 'users/badges', user: @user %>
-
-
+    <h3>
+      <small class="text-muted"><%= @user.email %></small>
+    </h3>
   </div>
-  <div class="col-md-7">
-    <% if @user.announcements.any? %>
-
-      <%= render 'shared/model_byuser', path: announcements_path, 
-                                        display_name: 'Announcements', 
-                                        variable: @user.announcements
-                                                  .paginate(page: params[:announcement_page], per_page: 5),
-                                        user: @user,
-                                        param_name: :announcement_page %>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <% if @user.biography %>
+      <div class="card card-body">
+        <%= markdown(@user.biography) %>
+      </div>
     <% end %>
   </div>
+  
 </div>
 
 

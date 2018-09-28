@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'redcarpet'
 
 #test
 gem 'guard',                    '2.13.0'

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   post '/event/rsvp', to: 'events#rsvp', as: 'rsvp_event'
   post '/event/unrsvp', to: 'events#unrsvp', as: 'unrsvp_event'
 
-  resources :users, only: [:show, :index, :destroy]
+  resources :users, only: [:show, :index, :destroy, :edit, :update]
   resources :events
   resources :announcements
   resources :blog

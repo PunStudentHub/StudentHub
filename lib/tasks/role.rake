@@ -22,6 +22,10 @@ namespace :role do
         approve: true,
         moderate: true,
         admin: true
+      },
+      {
+        name: "PLC",
+        color: "800008"
       }
     ].each do |r|
       Role.create!(r)

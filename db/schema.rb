@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_072631) do
+ActiveRecord::Schema.define(version: 2018_09_26_074610) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_072631) do
     t.string "oauth_token"
     t.string "uid"
     t.datetime "oauth_expires_at"
+    t.string "biography"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["hash_id"], name: "index_users_on_hash_id", unique: true
   end
