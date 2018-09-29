@@ -36,6 +36,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
+  def find_classyear
+    number_index = (email =~ /[0-9]{2}/)
+    ClassYear.find(email.split("")[number_index..number_index+1].join.to_i + 2000)
+  end
+
   class << self
     def digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -78,6 +83,10 @@ class User < ApplicationRecord
   end
 
   private
+
+    def save_classyears
+      self.class_years = [find_classyear]
+    end
   
     def downcase_email
       self.email = email.downcase
