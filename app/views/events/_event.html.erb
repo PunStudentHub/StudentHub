@@ -1,53 +1,50 @@
 <% if logged_in? && (event.approved  || current_user.can_do(:approve)) && event.start_time > Time.zone.now %>
-<% approved = (current_user.can_do(:approve) && !event.approved) ? "bg-light" : "" %>
+<% approved = (current_user.can_do(:approve) && !event.approved) ? "grey lighten-3" : "" %>
 <% rsvp = event.users.exists?(current_user.id) %>
 <% id = event.id %>
 
-  <li class="list-group-item no-padding <%= approved %>" id="id">
+  <li class="list-group-item <%= approved %>" id="id" >
     <div class="row">
-      <div class="col-sm-1" style="margin-top: -8px; max-width: 55px">
-        <small><%= event.start_time.strftime("%b")%></small>
-        <%= event.start_time.strftime("%d")%>
-      </div> 
+      <div class="col-md-2 custom-flex-center">
+        <span>
+          <%= event.start_time.strftime("%b")%>
+          <%= event.start_time.strftime("%d")%>,
+          <%= event.start_time.strftime("%l:%M %p")%>
+        </span>
+      </div>
       <% if current_user.can_do(:approve) %>
-        <div class="col-lg-6 col-sm-10 col-xs-4">
+        <div class="col-md-5 custom-flex-center">
       <% else %>
-        <div class="col-lg-8">
+        <div class="col-md-7 custom-flex-center">
       <% end %>
-        <h6 class="no-margin"><%= event.start_time.strftime("%l:%M %p")%> <%= link_to event.title, event %></h6>
-        <small>
+        <h6 class="no-margin" style="width: 100%"> <%= link_to event.title, event %></h6>
+        <small style="width: 100%;">
           Posted by
           <%= render 'users/colored_name_link', user: User.find(event.user_id) %>
           <%= distance_of_time_in_words(event.created_at.to_time, Time.now) + " ago" %>
         </small>
       </div>
-      
+
       <% if current_user.can_do(:approve) %>
-        <div class="col-lg-5">
-      <% else %> 
-        <div class="col-lg-3 col-xs-12">
-      <% end %> 
-        <div class="float-right btn-group">
-          <% unless rsvp %>
-            <%= link_to "Coming", rsvp_event_path(:id => event.id), method: :rsvp, class: "btn btn-sm btn-outline-primary" %>
-            <button class="btn btn-sm btn-primary" disabled>Not Coming</button>          
-          <% else %>
-            <button class="btn btn-sm btn-primary" disabled>Coming</button>
-            <%= link_to "Not Coming", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-sm btn-outline-primary" %>
-          <% end %>
-        </div>
+        <div class="col-md-5 custom-flex-center custom-flex-right">
+      <% else %>
+        <div class="col-md-3 custom-flex-center custom-flex-right">
+      <% end %>
+        <% unless rsvp %>
+          <%= link_to "Not Attending", rsvp_event_path(:id => event.id), method: :rsvp, class: "btn btn-sm btn-outline-blue-grey float-right" %>
+        <% else %>
+          <%= link_to "Attending", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-sm btn-outline-success float-right" %>
+        <% end %>
         <% if current_user.can_do(:approve) %>
-          <div class="float-right">
-            <div class="btn-group">
-              <% unless event.approved %>
-              <%= link_to "Approve", approve_event_path(id: event.id), method: :approve, class: "btn btn-sm btn-success" %>
-              <% end %>
-              <%= link_to "Edit", edit_event_path(id: event.id), class: "btn btn-sm btn-secondary" %>
-              <%= link_to "Remove", event_path(event), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "Are you sure you want to do this?"} %>&nbsp;
-            </div>
+          <div class="no-link-padding">
+            <% unless event.approved %>
+            <%= link_to ("<i class='far fa-check-square' style='margin-left: 9px; margin-right: -4px;'></i>").html_safe, approve_event_path(id: event.id), method: :approve, class: "text-success" %>
+            <% end %>
+            <%= link_to ("<i class='far fa-edit' style='margin-left: 9px;'></i>").html_safe, edit_event_path(id: event.id), class: "text-warning" %>
+            <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, event_path(event), method: :delete, class: "text-danger", data: {confirm: "Are you sure you want to do this?"} %>
           </div>
-        <% end %> 
-      
+        <% end %>
+
       </div>
     </div>
   </li>

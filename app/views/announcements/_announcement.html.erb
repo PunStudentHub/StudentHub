@@ -1,26 +1,24 @@
-<li class="list-group-item no-padding">
+<li class="list-group-item">
   <div class="row">
-    <div class="col-sm-11">
-      <h6 class="no-margin"><%= link_to announcement.title, announcement %></h6>
-      <small>
+    <div class="col-sm-11 custom-flex-center">
+      <h6 class="no-margin" style="width: 100%"><%= link_to announcement.title, announcement %></h6>
+      <small style="width: 100%">
         Posted by
         <%= render 'users/colored_name_link', user: User.find(announcement.user_id) %>
         <%= distance_of_time_in_words(announcement.created_at.to_time, Time.now) + " ago" %>
 
       </small>
-      <!--%= render 'shared/class_year_tags', object: announcement %-->
-
     </div>
   <% if logged_in? %>
-    <div class="col-sm-1">
-      <div class="float-right no-link-padding">
-        <% if current_user.can_do (:moderate) || announcement.user == current_user %>
-          <%= link_to ("<i class='fas fa-edit'></i>").html_safe, edit_announcement_path(announcement), class: "text-warning"%><br>
+    <% if current_user.can_do :moderate %>
+      <div class="col-sm-1 custom-flex-center custom-flex-right">
+        <div class="no-link-padding">
+          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_announcement_path(announcement), class: "text-warning"%>
           <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, announcement_path(announcement), method: :delete, class: "text-danger",
                   data: {confirm: "Are you sure you want to do this?"} %>
-        <% end %>
+      
       </div>
-    </div>
+    <% end %>
   <% end %>
   </div>
 </li>

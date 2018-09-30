@@ -5,7 +5,7 @@
     <h3 class="card-title">
       Announcements
       <% if logged_in? && current_user.can_do(:moderate)%>
-        <%= link_to "New", new_announcement_path, class: "float-right btn btn-primary" %>
+        <%= link_to ("<i class='fas fa-plus fa-lg' style='color: dodgerblue;'></i>").html_safe, new_announcement_path, class: "btn btn-sm btn-white float-right card-header-button"%>
       <% end %>
     </h3>
   </div>

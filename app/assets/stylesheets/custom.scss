@@ -117,6 +117,7 @@ body {
 
 .navbar-brand {
   font-family: "Roboto Condensed";
+  font-weight: 400;
 }
 
 .cool-font {
@@ -129,6 +130,14 @@ body {
 
 #sign_in:hover {
   color: white;
+}
+
+.card-header-button {
+  font-size: 14px !important;
+  padding-top: 7px !important;
+  padding-bottom: 5px !important;
+  padding-left: 9px !important;
+  padding-right: 9px !important;
 }
 
 .card-btn {
@@ -148,7 +157,24 @@ i {
   margin-top: 2px;
 }
 
-.form-group > label {
-  font-weight: 400 !important;
-  font-size: 13pt;
+.custom-flex-center {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+}
+
+.custom-flex-right {
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 767px) {
+  .custom-flex-right{
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+}
+
+.event-card-title {
+  text-align: center;
+  font-weight: 300;
 }

@@ -15,12 +15,11 @@
           <%= content_tag(:a, "Events", href: events_path, class: "text-white")%>
           <i class="fas fa-calendar float-right"></i></h3>
       </div>
-      <div class="card-body skinny-top p-1 m-1">
         <div class="card m-0">
           <div class="card-group">
             <div class="card border-left-0 border-top-0 border-bottom-0">
-              <div class="card-header">
-                <h5 class="card-title m-0">Today</h5>
+              <div class="card-header white">
+                <h5 class="card-title m-0 event-card-title">Today</h5>
               </div>
               <ul class="list-group list-group-flush">
                 <% @today.each do |event| %>
@@ -30,9 +29,9 @@
                 <% end %>
               </ul>
             </div>
-            <div class="card border-left-0 border-top-0 border-bottom-0">
-              <div class="card-header">
-                <h5 class="card-title m-0">Tomorrow</h5>
+            <div class="card border-0">
+              <div class="card-header white">
+                <h5 class="card-title m-0 event-card-title">Tomorrow</h5>
               </div>
               <ul class="list-group list-group-flush">
                 <% @tomorrow.each do |event| %>
@@ -42,24 +41,12 @@
                 <% end %>
               </ul>
             </div>
-            <div class="card border-0">
-              <div class="card-header">
-                <h5 class="card-title m-0"><%= 2.days.from_now.strftime("%A") %></h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <% @day_after_tomorrow.each do |event| %>
-                  <li class="list-group-item">
-                    <%= link_to event.title, event_path(event) %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
+
           </div>
-          <div class="card-footer">
+          <div class="card-footer white">
             <%= link_to "See more...", events_path %>
           </div>
         </div>
-      </div>
     </div>
 
 
