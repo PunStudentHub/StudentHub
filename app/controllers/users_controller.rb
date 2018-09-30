@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action -> { correct_user(:admin) }, only: [:edit, :update]
-  before_action -> { has_permission(:admin) }, only: [:destroy]
+  before_action -> { has_permission(:admin) }, only: [:destroy, :update_perms]
   before_action -> { has_permission(:approve) }, only: [:index] 
   before_action :not_logged_in, only: [:new, :create]
 
@@ -36,6 +36,20 @@ class UsersController < ApplicationController
     User.find_by_hash_id(params[:id]).destroy
     flash[:success] = "User Deleted"
     redirect_to users_url
+  end
+
+  def update_perms
+    @user = User.find_by_hash_id(params[:id])
+    if (@user.roles.include?(Role.find(1)))
+      @user.roles = [Role.find(1)]
+    else
+      @user.roles = []
+    end
+
+    params[:user][:roles].each do |r|
+      @user.roles << Role.find(r) unless r.empty?
+    end
+    redirect_to @user
   end
 
   private
