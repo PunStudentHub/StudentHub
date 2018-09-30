@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   get '/staff', to: 'pages#staff'
   get '/plc', to: 'plc#index'
+  get '/plc/subject', to: 'plc#subject_slots'
   delete '/logout', to: 'sessions#destroy'
   get '/filter/get', to: 'filters#get', as: 'get_filter'
   post '/filter/update', to: 'filters#update', as: 'update_filter'

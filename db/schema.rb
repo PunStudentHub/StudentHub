@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_021123) do
+ActiveRecord::Schema.define(version: 2018_09_30_021538) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2018_09_28_021123) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "hash_id"
+    t.index ["hash_id"], name: "index_subjects_on_hash_id", unique: true
   end
 
   create_table "subjects_timeslots", id: false, force: :cascade do |t|
