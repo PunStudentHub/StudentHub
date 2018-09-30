@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_072631) do
+ActiveRecord::Schema.define(version: 2018_09_30_021538) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -43,6 +43,11 @@ ActiveRecord::Schema.define(version: 2018_09_18_072631) do
   create_table "class_years", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "class_years_users", id: false, force: :cascade do |t|
+    t.integer "class_year_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -91,6 +96,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_072631) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "hash_id"
+    t.index ["hash_id"], name: "index_subjects_on_hash_id", unique: true
   end
 
   create_table "subjects_timeslots", id: false, force: :cascade do |t|
@@ -116,6 +122,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_072631) do
     t.string "oauth_token"
     t.string "uid"
     t.datetime "oauth_expires_at"
+    t.string "biography"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["hash_id"], name: "index_users_on_hash_id", unique: true
   end

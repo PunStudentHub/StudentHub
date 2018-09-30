@@ -6,9 +6,9 @@
       <div class="card-header blue darken-3 white-text">
         <h3 class="card-title">
           Peer Learning Center
-          <% if @selected_subject %>
-            <small><%= @selected_subject.name %></small>
-          <% end %>
+          
+          <small id="subject-name"></small>
+          
         </h3>
       </div>
       <div class="card-body" style="padding: 0px">
@@ -23,18 +23,9 @@
             <tr class="plc-row <% if row.even? %> odd <% end %>">
 
             <td class="plc-cell narrow"><%= human_time row %></td>
-
               <% 6.times do |col| %>
-                <td class="plc-cell timeslot
-                  <% if row == 7%>last<%end%>
-                  <% if @timeslots %>
-                    <% if @timeslots.by_day(col).by_time(row).any? %>
-                      highlighted
-                    <% end %>
-                  <% end %>">
-                </td>
+                <%= content_tag(:td, "", class: "plc-cell timeslot " + (row == 7? " last":""), id: "cell-#{col}-#{row}") %>
               <% end %>
-
             </tr>
           <% end %>
         </table>
@@ -43,7 +34,7 @@
   </div>
   <div class="col-sm-4">
     <div class="card">
-      <div class="card-header blue darken-3 white-text" style="padding-left: 12px;">
+      <div class="card-header blue darken-3 white-text" style="padding-left: 12px;" id="test">
         <h3 class="card-title">
           Select Subject
         </h3>
@@ -59,23 +50,44 @@
 <script>
   $('#list').html("");
   <% @subjects.each do |sub| %>
-      $('#list').append($('<a></a>').attr('href', "<%= "?subject=#{sub.hash_id}" %>").append($('<div></div>').attr('class', 'plc-list-item list-group-item-action plc-subject')
-                                    .html("<%= sub.name %>")
-                                    <% if sub == @selected_subject %>
-                                      .addClass("div-selected")
-                                    <% end %> ))
+      $('#list').append($('<a></a>')
+          .append($('<div></div>')
+              .attr('class', 'plc-list-item list-group-item-action plc-subject')
+              .html("<%= sub.name %>")
+              .attr('id', '<%= sub.hash_id %>'))
+          .click(function() {
+            $('.timeslot').attr('class', 'plc-cell timeslot')
+            $('.plc-subject').attr('class', 'plc-list-item list-group-item-action plc-subject')
+            $('#' + "<%= sub.hash_id %>" ).addClass('selected')
+            $('#subject-name').html("<%=sub.name%>")
+            $.ajax({
+              type: 'GET',
+              url: '/plc/subject',
+              data: { subject: "<%= sub.hash_id %>" }, 
+              success: function(data, textStatus, jqXHR) {
+                slots = data.timeslots
+
+                for (var i = 0; i < slots.length; i++) {
+                  highlight(slots[i][0], slots[i][1])
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                console.log("banans")
+                console.log(errorThrown)
+              }
+            })
+          }))
   <% end %>
+
+  function highlight(col, row) {
+    $('#cell-' + col + "-" + row).addClass('highlighted')
+  }
 
 /*
-  $('#list').html("")
-
-  <% @subjects.each do |sub| %>
-      $('#list').append($('<a></a>').attr('class', 'list-group-item plc-list-item list-group-item-action plc-subject')
-                                    .attr('href', "<%= "?subject=#{sub.hash_id}" %>")
-                                    .html("<%= sub.name %>")
-                                    <% if sub == @selected_subject %>
-                                      .addClass("active")
-                                    <% end %> )
-  <% end %>
-  */
+  document.getElementById("list").onscroll = function() {
+    if(document.getElementById("list").scrollTop != 0) {
+      document.getElementById("test").className = "card-header blue darken-3 white-text z-depth-1"
+    }
+  }
+*/
 </script>

@@ -1,13 +1,13 @@
 class AnnouncementsController < ApplicationController
 
-  before_action -> {has_permission(:moderate)}, only: [:new, :edit, :update, :create, :destroy]
+  before_action -> {has_permission(:moderate)}, except: [:index, :show]
 
   def show
     @announcement = Announcement.find_by_hash_id(params[:id])
   end
 
   def index
-    @announcements = helpers.filter_announcements_class_years.paginate(page: params[:page], per_page: 25)
+    @announcements = helpers.filter_class_years(Announcement).paginate(page: params[:page], per_page: 25)
   end
 
   def destroy

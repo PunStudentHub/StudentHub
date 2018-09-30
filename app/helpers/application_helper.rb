@@ -1,4 +1,14 @@
+require 'redcarpet'
+
 module ApplicationHelper
+  
+
+  def markdown (text)
+    renderer = Redcarpet::Render::HTML.new(filter_html: true, no_images: true, prettify: true, hard_wrap: true, space_after_headers: true)
+    mdcarpet = Redcarpet::Markdown.new(renderer, {disable_indented_code_blocks: true})
+    mdcarpet.render(text).html_safe
+  end
+
   def get_title page_name
     default_title = "Punahou Student Hub"
     if page_name.empty?

@@ -5,6 +5,7 @@ namespace :role do
     [
       { 
         name: "Admin",
+        id: 1,
         color: "ef4040",
         approve: true,
         moderate: true,
@@ -13,15 +14,27 @@ namespace :role do
       },
       { 
         name: "Moderator",
+        id: 2,
         color: "32ba3d",
         approve: true
       },
       { 
         name: "Dean",
-        color: "8e25a8",
+        id: 3,
+        color: "800008",
         approve: true,
         moderate: true,
         admin: true
+      },
+      {
+        name: "PLC",
+        id: 4,
+        color: "800080"
+      },
+      {
+        name: "Faculty",
+        id: 5,
+        color: "ffae00"
       }
     ].each do |r|
       Role.create!(r)

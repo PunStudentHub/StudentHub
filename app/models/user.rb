@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :blog_posts, dependent: :destroy
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :events
+  has_and_belongs_to_many :class_years
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
   default_scope -> {order(:created_at)}
@@ -35,6 +36,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
+  def find_classyear
+    number_index = (email =~ /[0-9]{2}/)
+    ClassYear.find(email.split("")[number_index..number_index+1].join.to_i + 2000)
+  end
+
   class << self
     def digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -54,7 +60,6 @@ class User < ApplicationRecord
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
-
   def forget
       update_attribute(:remember_digest, nil)
   end
@@ -67,9 +72,22 @@ class User < ApplicationRecord
     self.roles.map {|r| r.send(permission)}.include?(true)
   end
 
+  def smart_class_years
+    self.class_years if self.class_years.any?
+    ClassYear.all
+  end
+
+
+  def smart_class_year_ids
+    smart_class_years.map { |c| c.id.to_s }
+  end
 
   private
 
+    def save_classyears
+      self.class_years = [find_classyear]
+    end
+  
     def downcase_email
       self.email = email.downcase
     end

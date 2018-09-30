@@ -1,0 +1,13 @@
+<%= form_for(@user, url: update_perms_user_path(@user.hash_id)) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <label>Roles</label>
+    <%= f.collection_check_boxes(:roles, Role.all[1..Role.count-1], :id, :name) do |c| %> 
+      <div class="custom-control custom-checkbox">
+        <%= c.check_box(class: "custom-control-input", checked: @user.roles.include?(c.object)) %>
+        <%= c.label(class: "custom-control-label") %> 
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit "Update", class: "btn btn-primary" %>
+<%end%>

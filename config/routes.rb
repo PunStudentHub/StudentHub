@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get '/contact', to: 'pages#contact'
   get '/home', to: 'pages#home'
   get '/staff', to: 'pages#staff'
+  get '/feedback', to: 'pages#feedback'
   get '/plc', to: 'plc#index'
+  get '/plc/subject', to: 'plc#subject_slots'
   delete '/logout', to: 'sessions#destroy'
   get '/filter/get', to: 'filters#get', as: 'get_filter'
   post '/filter/update', to: 'filters#update', as: 'update_filter'
@@ -21,7 +23,10 @@ Rails.application.routes.draw do
   post '/event/rsvp', to: 'events#rsvp', as: 'rsvp_event'
   post '/event/unrsvp', to: 'events#unrsvp', as: 'unrsvp_event'
 
-  resources :users, only: [:show, :index, :destroy]
+  resources :users, only: [:show, :index, :destroy, :edit, :update] do
+    patch :update_perms, on: :member
+  end
+  
   resources :events
   resources :announcements
   resources :blog
