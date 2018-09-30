@@ -23,4 +23,7 @@ class PagesController < ApplicationController
     @admins = Role.find_by(name: "Admin").users
     @mods = Role.find_by(name: "Moderator").users
   end
+
+  def feedback
+  end
 end

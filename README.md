@@ -18,11 +18,9 @@ We are always looking for new ideas. If you have one, don't hesitate to contact 
 
 
 #### Small stuff we want to add and fix
-- Bios to user profiles
 - Better filtering for announcements
 - Better date/time input in events
 - Put the cycle day / time on the front page
-- Fix how the PLC menu scrolls back to the top each time you select a class
 
 We also have a [blog](https://punahoustudenthub.herokuapp.com/blog) where talk about a variety of things. Please check it out!
 
