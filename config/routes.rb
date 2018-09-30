@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get 'blog/new'
-  get 'blog/create'
+  #get 'blog/create'
   get 'blog/edit'
-  get 'blog/update'
+  #get 'blog/update'
   get 'blog/destroy'
   root 'pages#home'
   get '/help', to: 'pages#help'
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :destroy, :edit, :update] do
     patch :update_perms, on: :member
   end
-  resources :blog
+  resources :blog, only: [:new, :create, :edit, :update, :destroy, :index]
   resources :events
   resources :announcements
   resources :account_activations, only: [:edit]
