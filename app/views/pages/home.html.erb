@@ -11,7 +11,9 @@
     <div class="card">
       <div class="card-header blue darken-3 white-text">
         <!-- put the events icon here-->
-        <h3 class="card-title">Upcoming Events<i class="fas fa-calendar float-right"></i></h3>
+        <h3 class="card-title">
+          <%= content_tag(:a, "Events", href: events_path, class: "text-white")%>
+          <i class="fas fa-calendar float-right"></i></h3>
       </div>
       <div class="card-body skinny-top p-1 m-1">
         <div class="card m-0">
@@ -63,7 +65,10 @@
 
     <div class="card">
       <div class="card-header blue darken-3 white-text">
-        <h3 class="card-title">Peer Learning Center<i class="fas fa-book float-right"></i></h3>
+        <h3 class="card-title">
+          <%= content_tag(:a, "Peer Learning Center", href: plc_path, class: "text-white") %> 
+          <i class="fas fa-book float-right"></i></h3>
+
       </div>
       <div class="card-body skinny-top">
         <!--p class="lead" style="margin-bottom: 1px">Need help with school? No stress!</p-->
@@ -94,10 +99,31 @@
         </p>
       </div>
     </div>
+    
 
-    <%= render 'shared/model_ataglance',  path: blog_index_path,
-                                          display_name: 'Our Blog',
-                                          count: 3,
-                                          variable: @blogposts %>
+    <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title">
+          <%= content_tag(:a, "Our Blog", href: blog_index_path, class: "text-white")%>
+          <i class="fas fa-pencil-alt float-right"></i>
+        </h3>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% @blogposts.each do |post| %>
+          <li class="no-padding list-group-item">
+            <h6 class="no-margin"><%= link_to post.title, blog_index_url + "##{post.hash_id}" %></h6>
+            <small>
+              Posted by
+              <%= render 'users/colored_name_link', user: User.find(post.user_id) %>
+              <%= distance_of_time_in_words(post.created_at.to_time, Time.now) + " ago" %>
+
+            </small>
+          </li>
+        <% end %>
+      </ul>
+      <div class="card-body see-more-section">
+        <%= link_to "See more...", blog_index_path %>
+          
+      </div>
   </div>
 </div>

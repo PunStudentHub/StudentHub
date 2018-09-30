@@ -1,13 +1,38 @@
-<li class="list-group-item no-padding">
-  <div class="row">
-    <div class="col-sm-12">
-      <h6 class="no-margin"><%= link_to blog_post.title, blog_path(blog_post.hash_id) %></h6>
-      <small>
-        Posted by
-        <%= render 'users/colored_name_link', user: User.find(blog_post.user_id) %> 
-        <%= distance_of_time_in_words(blog_post.created_at.to_time, Time.now) + " ago" %> 
-      </small>
+<%= content_tag(:div, class: "card card-body", id: blog_post.hash_id) do %>
+  <div>
+    <div class="float-left">
+      <h3 class="card-title"><%= blog_post.title %></h2>
 
+      <div class="float-left">
+        <small>
+        Created by
+          <%= render 'users/colored_name_link', user: User.find(blog_post.user_id) %>
+        </small>
+        <%= render 'users/badges', user: User.find(blog_post.user_id) %>
+        <small>
+          <%= distance_of_time_in_words(blog_post.created_at.to_time, Time.now) %> ago<% if blog_post.updated_at != blog_post.created_at %>,
+            Last updated <%= distance_of_time_in_words(blog_post.updated_at.to_time, Time.now) %> ago 
+          <% end %>
+        </small>
+        
+      </div>
     </div>
+
+
+    <% if logged_in? %>
+      <% if current_user.can_do :moderate %>
+        <div class="float-right">
+          <%= link_to "Edit", edit_blog_path(blog_post), class: "text-warning"%> |
+          <%= link_to "Delete", blog_path(blog_post), method: :delete, class: "text-danger", 
+                    data: {confirm: "Are you sure you want to do this?"} %>
+        </div>
+      <% end %>
+    <% end %>
+    <br>
   </div>
-</li>
+  <hr style="margin: 10px">
+  <div>
+      <%= markdown(blog_post.content).html_safe %>
+  </div>
+
+<% end %>

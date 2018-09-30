@@ -1,16 +1,30 @@
 <% provide(:title, "Blog") %>
-<%= will_paginate @blogposts %>
-<div class="card">
-  <div class="card-header bg-white">
-    <h2 class="float-left card-title">Blog Posts</h2>
-    <% if logged_in? && current_user.can_do(:admin)%>
-      <%= link_to "New", new_blog_path, class: "float-right btn btn-primary" %>
-    <% end %>
-  </div>
-  <ul class="list-group list-group-flush">
+
+<div class="row">
+  <div class="col-md-9">
+    <div class="card card-body">
+      <h2 class="card-title">
+        <div class="float-left">
+          Student Hub Blog
+          <small class="text-muted">All the freshest news</small>
+        </div>
+        <% if logged_in? && current_user.can_do(:admin)%>
+          <%= link_to "New Post", new_blog_path, class: "float-right btn btn-primary"%>
+        <% end %>
+      </h2>
+    </div>
     <%= render @blogposts %>
-  </ul>
-  
+  </div>
+  <div class="col-md-3 order-first order-md-2">
+    <div class="card card-body">
+      <h5 class="card-title">Quick Jump</h5>
+      <ul style="padding: 5px 0px 0px 20px">
+        <% @blogposts.each do |b| %>
+          <%= content_tag(:li, content_tag(:a, b.title, href: "##{b.hash_id}")) %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
 
-<%= will_paginate @blogposts %>
+

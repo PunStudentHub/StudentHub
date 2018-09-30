@@ -10,14 +10,14 @@ class BlogController < ApplicationController
     @blogpost = current_user.blog_posts.build(blogpost_params)
     if (@blogpost.save) 
       flash[:success] = "Blog post created!"
-      redirect_to blog_url(@blogpost.hash_id)
+      redirect_to blog_index_url 
     else
       render 'new'
     end
   end
 
   def index
-    @blogposts = BlogPost.all.paginate(page: params[:page], per_page: 25)
+    @blogposts = BlogPost.all
   end
 
   def edit
@@ -28,7 +28,7 @@ class BlogController < ApplicationController
     @blogpost = BlogPost.friendly.find(params[:id])
     if (@blogpost.update_attributes(blogpost_params))
       flash[:success] = "Blogpost updated"
-      redirect_to blog_url(@blogpost.hash_id)
+      redirect_to blog_index_url + '#' + @blogpost.hash_id
     else
       #render 'edit'
     end
@@ -40,9 +40,6 @@ class BlogController < ApplicationController
     redirect_to blog_index_url
   end
 
-  def show
-    @blogpost = BlogPost.find_by_hash_id(params[:id])
-  end
 
   private
     def blogpost_params

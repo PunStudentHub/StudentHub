@@ -2,72 +2,80 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <div class="float-left">
-        <h2><%= @event.title %></h2>
+    <div class="col-md-10 col-md-offset-1 card card-body">
+      <div>
         <div class="float-left">
-          <small>
-          <em>
-            Created by
-          </em>
-          <%= render 'users/colored_name_link', user: User.find(@event.user_id) %>
-          </small>
-          <%= render 'users/badges', user: User.find(@event.user_id) %>
-          <small>
-          <em>
-            <%= distance_of_time_in_words(@event.created_at.to_time, Time.now) %> 
-            ago<% if @event.updated_at != @event.created_at %>, 
-            Last updated <%= distance_of_time_in_words(@event.updated_at.to_time, Time.now) %> ago
+          <h2 class="card-title"><%= @event.title %></h2>
+          <div class="float-left">
+            <small>
+            <em>
+              Created by
+            </em>
+            <%= render 'users/colored_name_link', user: User.find(@event.user_id) %>
+            </small>
+            <%= render 'users/badges', user: User.find(@event.user_id) %>
+            <small>
+            <em>
+              <%= distance_of_time_in_words(@event.created_at.to_time, Time.now) %> 
+              ago<% if @event.updated_at != @event.created_at %>, 
+              Last updated <%= distance_of_time_in_words(@event.updated_at.to_time, Time.now) %> ago
+              <% end %>
+            </em></small>
+          </div>
+        </div>
+        <div class="float-right">
+          <%= link_to "Back to Events", events_path %>
+          <% if logged_in? %>
+            <% if current_user.can_do :approve %> |
+              <%= link_to "Edit", edit_event_path(@event), class: "text-warning"%> |
+              <%= link_to "Delete", event_path(@event), method: :delete, class: "text-danger",
+                        data: {confirm: "Are you sure you want to do this?"} %>
             <% end %>
-          </em></small>
+          <% end %>
         </div>
       </div>
-      <div class="float-right">
-        <%= link_to "Back to Events", events_path %>
+      <hr style="margin: 10px">
+      <div>
+        <div>
+          <%=  @event.location %>
+          <br><br>
+          <% unless @event.start_time.to_date == @event.end_time.to_date %>
+            <ul>
+              <li><b>Start: </b><%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %></li>
+              <li><b>End: </b><%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %></li>
+            </ul>
+          <% else %>
+            <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%>
+          <% end %>  
+          <br><br>
+          <%= simple_format @event.description %>
+        </div>
         <% if logged_in? %>
-          <% if current_user.can_do :approve %> |
-            <%= link_to "Edit", edit_event_path(@event), class: "text-warning"%> |
-            <%= link_to "Delete", event_path(@event), method: :delete, class: "text-danger",
-                      data: {confirm: "Are you sure you want to do this?"} %>
-          <% end %>
+          <div class="btn-group">
+            <% if !@event.users.exists?(current_user.id) %>
+              <%= link_to "Coming", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-sm btn-outline-primary" %>
+                <button class="btn btn-sm btn-primary" disabled>Not Coming</button>          
+              <% else %>
+                <button class="btn btn-sm btn-primary" disabled>Coming</button>
+                <%= link_to "Not Coming", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-sm btn-outline-primary" %>
+            <% end %>
+          </div>
+        <% end %>
+        <% if (@event.user_id == current_user.id || current_user.can_do(:approve)) && !@event.users.empty? %>
+          <h6><br>Current attendees: <%= @event.users.all.count %></h6>
+          <ul>
+            <% @event.users.each do |attendee| %>
+              <li><%= attendee.email %></li>
+            <% end %>
+          </ul>
         <% end %>
       </div>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="col-md-10">
-      <%=  @event.location %>
-      <br><br>
-      <% unless @event.start_time.to_date == @event.end_time.to_date %>
-        <ul>
-          <li><b>Start: </b><%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %></li>
-          <li><b>End: </b><%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %></li>
-        </ul>
-      <% else %>
-        <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%>
-      <% end %>  
-      <br><br>
-      <%= simple_format @event.description %>
-    </div>
-  </div>
-  <% if logged_in? %>
-    <div class="btn-group">
-      <% if !@event.users.exists?(current_user.id) %>
-        <%= link_to "Coming", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-sm btn-outline-primary" %>
-          <button class="btn btn-sm btn-primary" disabled>Not Coming</button>          
-        <% else %>
-          <button class="btn btn-sm btn-primary" disabled>Coming</button>
-          <%= link_to "Not Coming", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-sm btn-outline-primary" %>
-      <% end %>
-    </div>
-  <% end %>
-  <% if (@event.user_id == current_user.id || current_user.can_do(:approve)) && !@event.users.empty? %>
-    <h6><br>Current attendees: <%= @event.users.all.count %></h6>
-    <ul>
-      <% @event.users.each do |attendee| %>
-        <li><%= attendee.email %></li>
-      <% end %>
-    </ul>
-  <% end %>
 </div>
+
+
+
+
+
+    

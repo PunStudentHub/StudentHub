@@ -26,10 +26,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :destroy, :edit, :update] do
     patch :update_perms, on: :member
   end
-  
+  resources :blog
   resources :events
   resources :announcements
-  resources :blog
   resources :account_activations, only: [:edit]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -2,39 +2,44 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <div class="float-left">
-        <h2><%= @announcement.title %></h2>
-
-        
+    <div class="col-md-10 offset-md-1 card card-body">
+      <div>
         <div class="float-left">
-          <small>
-          Created by
-            <%= render 'users/colored_name_link', user: User.find(@announcement.user_id) %>
-          </small>
-          <%= render 'users/badges', user: User.find(@announcement.user_id) %>
-          <small>
-            <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago<% if @announcement.updated_at != @announcement.created_at %>,
-              Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
-            <% end %>
-          </small>
-          <%= render 'shared/class_year_tags', object: @announcement %>
-        </div>
-      </div>
+          <h2 class="card-title"><%= @announcement.title %></h2>
 
-      <% if logged_in? %>
-        <% if current_user.can_do :moderate %>
-          <div class="float-right">
-            <%= link_to "Edit", edit_announcement_path(@announcement), class: "text-warning"%> |
-            <%= link_to "Delete", announcement_path(@announcement), method: :delete, class: "text-danger", 
-                      data: {confirm: "Are you sure you want to do this?"} %>
+          <div class="float-left">
+            <small>
+            Created by
+              <%= render 'users/colored_name_link', user: User.find(@announcement.user_id) %>
+            </small>
+            <%= render 'users/badges', user: User.find(@announcement.user_id) %>
+            <small>
+              <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago<% if @announcement.updated_at != @announcement.created_at %>,
+                Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
+              <% end %>
+            </small>
+            <%= render 'shared/class_year_tags', object: @announcement %>
           </div>
+        </div>
+
+
+        <% if logged_in? %>
+          <% if current_user.can_do :moderate %>
+            <div class="float-right">
+              <%= link_to "Edit", edit_announcement_path(@announcement), class: "text-warning"%> |
+              <%= link_to "Delete", announcement_path(@announcement), method: :delete, class: "text-danger", 
+                        data: {confirm: "Are you sure you want to do this?"} %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+        <br>
+      </div>
+      <hr style="margin: 10px">
+      <div>
+          <%= markdown(@announcement.content).html_safe %>
+      </div>
     </div>
   </div>
-  <br>
-  <div class="row">
-    <div class="col-md-10"><%= simple_format @announcement.content %></div>
-  </div>
+    
+
 </div>
