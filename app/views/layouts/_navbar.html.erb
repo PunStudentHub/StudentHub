@@ -27,7 +27,7 @@
           <%= link_to "Profile", current_user, class: 'dropdown-item' %>
           <%= link_to "Settings", edit_user_path(current_user), class: 'dropdown-item' %>
           <div class="dropdown-divider"></div>
-          <%= link_to ("Log Out <i class='fas fa-sign-out-alt float-right'></i>").html_safe, logout_path, method: :delete, class: 'dropdown-item' %>
+          <%= link_to "Log Out", logout_path, method: :delete, class: 'dropdown-item' %>
 
         </div>
       </li>

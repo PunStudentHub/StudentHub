@@ -82,8 +82,8 @@
         <p class="lead text-muted" style="margin-bottom: 0px">
           <% time = Time.now.getlocal('-10:00') %>
           <%= Time.now.getlocal('-10:00').strftime("%A, %B %e") %>
-          <% if SchoolDay.find_by_date(Date.today) %>
-            <%= "(#{SchoolDay.find_by_date(Date.today).cycle_day.letter})" %>
+          <% if SchoolDay.find_by_date(time.to_date) %>
+            <%= "(#{SchoolDay.find_by_date(time.to_date).cycle_day.letter})" %>
           <% end %>
         </p>
         <hr style="margin: 5px">
