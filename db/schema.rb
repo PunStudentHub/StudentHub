@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_02_020423) do
+ActiveRecord::Schema.define(version: 2018_10_02_223949) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 2018_10_02_020423) do
   create_table "sections_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "section_id", null: false
+    t.index ["section_id", "user_id"], name: "index_sections_users_on_section_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_sections_users_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -128,6 +130,8 @@ ActiveRecord::Schema.define(version: 2018_10_02_020423) do
   create_table "taskees_tasks", id: false, force: :cascade do |t|
     t.integer "task_id", null: false
     t.integer "taskee_id", null: false
+    t.index ["task_id", "taskee_id"], name: "index_taskees_tasks_on_task_id_and_taskee_id", unique: true
+    t.index ["taskee_id"], name: "index_taskees_tasks_on_taskee_id"
   end
 
   create_table "tasks", force: :cascade do |t|
