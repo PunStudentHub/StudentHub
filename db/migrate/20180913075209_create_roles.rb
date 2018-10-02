@@ -7,7 +7,6 @@ class CreateRoles < ActiveRecord::Migration[5.2]
       t.boolean :blog, default: false
       t.boolean :moderate, default: false
       t.boolean :admin, default: false
-
       t.timestamps
     end
   end

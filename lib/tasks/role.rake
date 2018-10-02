@@ -3,28 +3,31 @@ namespace :role do
   task generate: :environment do
     Role.delete_all
     [
-      { 
+      {
         name: "Admin",
         id: 1,
         color: "ef4040",
         approve: true,
         moderate: true,
-        admin: true, 
-        blog: true
+        admin: true,
+        blog: true,
+        teach: true
       },
-      { 
+      {
         name: "Moderator",
         id: 2,
         color: "32ba3d",
-        approve: true
+        approve: true,
+        teach: false
       },
-      { 
+      {
         name: "Dean",
         id: 3,
         color: "800008",
         approve: true,
         moderate: true,
-        admin: true
+        admin: true,
+        teach: true
       },
       {
         name: "PLC",
@@ -34,7 +37,8 @@ namespace :role do
       {
         name: "Faculty",
         id: 5,
-        color: "ffae00"
+        color: "ffae00",
+        teach: true
       }
     ].each do |r|
       Role.create!(r)
