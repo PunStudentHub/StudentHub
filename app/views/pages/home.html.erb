@@ -69,15 +69,24 @@
 
       </div>
     </div>
-
   </div>
 
   <div class="col-md-5">
+
+
     <div class="card">
       <div class="card-header blue darken-3 white-text">
         <h3 class="card-title">Information<i class="fas fa-info-circle float-right"></i></h3>
       </div>
       <div class="card-body">
+        <p class="lead text-muted" style="margin-bottom: 0px">
+          <% time = Time.now.getlocal('-10:00') %>
+          <%= Time.now.getlocal('-10:00').strftime("%A, %B %e") %>
+          <% if SchoolDay.find_by_date(Date.today) %>
+            <%= "(#{SchoolDay.find_by_date(Date.today).cycle_day.letter})" %>
+          <% end %>
+        </p>
+        <hr style="margin: 5px">
         <p class="lead">
           Welcome to the Punahou Student Hub.
         </p>

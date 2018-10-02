@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_30_021538) do
+ActiveRecord::Schema.define(version: 2018_09_30_224117) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 2018_09_30_021538) do
   create_table "class_years_users", id: false, force: :cascade do |t|
     t.integer "class_year_id", null: false
     t.integer "user_id", null: false
+  end
+
+  create_table "cycle_days", force: :cascade do |t|
+    t.string "letter"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["letter"], name: "index_cycle_days_on_letter", unique: true
   end
 
   create_table "events", force: :cascade do |t|
@@ -89,6 +96,15 @@ ActiveRecord::Schema.define(version: 2018_09_30_021538) do
   create_table "roles_users", id: false, force: :cascade do |t|
     t.integer "role_id", null: false
     t.integer "user_id", null: false
+  end
+
+  create_table "school_days", force: :cascade do |t|
+    t.integer "cycle_day_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date"
+    t.index ["cycle_day_id"], name: "index_school_days_on_cycle_day_id"
+    t.index ["date"], name: "index_school_days_on_date", unique: true
   end
 
   create_table "subjects", force: :cascade do |t|
