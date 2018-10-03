@@ -26,6 +26,21 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def not_banned
+      if not logged_in?
+        store_location
+        flash[:danger] = "Please log in"
+        redirect_to root_url
+      else
+        if current_user.roles.any?
+          if current_user.can_do :banned
+            flash[:danger] = "You are currently banned."
+            redirect_to(root_url)
+          end
+        end
+      end
+    end
+
     def correct_user permission_level
       if logged_in?
         @user = User.find_by_hash_id(params[:id])

@@ -35,6 +35,11 @@ namespace :role do
         name: "Faculty",
         id: 5,
         color: "ffae00"
+      },
+      {
+        name: "Banned",
+        id: 6,
+        color: "333333"
       }
     ].each do |r|
       Role.create!(r)

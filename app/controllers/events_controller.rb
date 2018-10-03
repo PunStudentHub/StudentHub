@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   before_action -> {has_permission :moderate}, only: [:destroy]
   before_action -> {has_permission :approve}, only: [:approve]
+  before_action :not_banned, only: [:new, :create, :update, :edit]
 
   def show
     @event = Event.friendly.find(params[:id])
