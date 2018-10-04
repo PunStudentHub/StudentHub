@@ -1,10 +1,14 @@
 class SectionsController < ApplicationController
-  before_action :not_logged_in, only: []
+  before_action -> {logged_in?}
+
   def show
     @section = Section.find(params[:id])
   end
   def index
     @sections = Section.all
+  end
+  def new
+    @section = current_user.sections.build
   end
   def edit
     @section = Section.find(params[:id])
@@ -25,6 +29,6 @@ class SectionsController < ApplicationController
   end
   private
     def section_params
-      params.require(:name).permit(:description)
+      params.require(:name).permit(:description, :location)
     end
 end

@@ -16,10 +16,14 @@
       <% end %>
     </h3>
   </div>
-  <ul class="list-group list-group-flush">
-    <%= render variable.take(5) %>
-  </ul>
-  <div class="card-body see-more-section">
-    <%= link_to 'See more...', path, class: 'text-primary' %>
-  </div>
+  <% if true %>
+    <ul class="list-group list-group-flush">
+      <%= render variable.take(5) %>
+    </ul>
+    <div class="card-body see-more-section">
+      <%= link_to 'See more...', path, class: 'text-primary' %>
+    </div>
+  <% else %>
+    <p class="card-text"><%= link_to "Log In", "/auth/google_oauth2" %> to view <%= display_name %></p>
+  <% end %>
 </div>
