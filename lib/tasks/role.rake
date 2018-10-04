@@ -16,7 +16,8 @@ namespace :role do
         name: "Moderator",
         id: 2,
         color: "32ba3d",
-        approve: true
+        approve: true,
+        moderate: true
       },
       { 
         name: "Dean",
