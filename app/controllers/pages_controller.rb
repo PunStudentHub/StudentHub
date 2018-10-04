@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :logged_in_user, only: [:staff]
 
   def home
-    @announcements = helpers.filter_class_years(Announcement)
+    @announcements = helpers.filter_class_years(Announcement.approved_announcements)
     @subjects = Subject.all.sample(3)
     @blogposts = BlogPost.take(3)
 

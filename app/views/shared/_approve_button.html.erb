@@ -1,0 +1,18 @@
+<!--
+
+Parameters:
+- object
+- model_name
+-->
+<% unless object.approved %>
+  <%= content_tag :a, 
+    class: "text-success approve_icon",
+    onclick: "approve('#{model_name}', '#{object.hash_id}')",
+    id: "approve-" + object.hash_id do %>
+    <%= content_tag :i, 
+      class: 'far fa-check-square ', 
+      style: 'margin-left: 9px; margin-right: -4px;' do %>
+    <% end %>
+  <% end %>
+
+<% end %>

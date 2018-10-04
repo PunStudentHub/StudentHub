@@ -40,19 +40,9 @@
       <% end %>
       <% if current_user.can_do(:approve) %>
         <div class="no-link-padding">
-          <% unless event.approved %>
 
-            <%= content_tag :a, 
-              class: "text-success approve_icon",
-              onclick: "approve_event(\"#{event.hash_id}\")",
-              id: "approve-" + event.hash_id do %>
-              <%= content_tag :i, 
-                class: 'far fa-check-square ', 
-                style: 'margin-left: 9px; margin-right: -4px' do %>
-              <% end %>
-            <% end %>
-
-          <% end %>
+          <%= render 'shared/approve_button', model_name: 'event', object: event %>
+      
           <%= link_to ("<i class='far fa-edit' style='margin-left: 9px;'></i>").html_safe, edit_event_path(id: event.id), class: "text-warning" %>
           <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, event_path(event), method: :delete, class: "text-danger", data: {confirm: "Are you sure you want to do this?"} %>
         </div>

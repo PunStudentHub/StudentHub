@@ -11,13 +11,13 @@ module Approvable
     before_action -> {has_permission :approve}, only: [:approve]
 
     def approve
-      @object = linked_model.friendly.find(params[:id])
+      @object = linked_model.find_by_hash_id(params[:id])
       @object.update_attributes(approved: true)
       #redirect_to request.referrer
     end
 
     def get_partial
-      render partial: linked_model.friendly.find(params[:id])
+      render partial: linked_model.find_by_hash_id(params[:id])
     end
   end
 

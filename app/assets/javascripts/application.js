@@ -18,3 +18,54 @@
 //= require turbolinks
 //= require_tree .
 //= stub 'plc'
+
+
+function approve(model, id) {
+  console.log(model + " " + id)
+  $.ajax({
+    type: 'POST',
+    url: '/' + model + '/approve',
+    data: { id: id }, 
+    success: function(data, textStatus, jqXHR) {
+      update(model, id)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("banans")
+      console.log(errorThrown)
+    }
+  });
+}
+
+function rsvp(id, status) {
+  console.log(id)
+  console.log('/event/' + (status? 'rsvp':'unrsvp'))
+  $.ajax({
+    type: 'POST',
+    url: '/event/' + (status? 'rsvp':'unrsvp'),
+    data: { id: id }, 
+    success: function(data, textStatus, jqXHR) {
+      update("event", id)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("banans")
+      console.log(errorThrown)
+    }
+  });
+}
+
+function update(model, id) {
+  $.ajax({
+    type: 'GET',
+    url: '/' + model + '/get_partial',
+    data: { id: id }, 
+    success: function(data, textStatus, jqXHR) {
+      $('#' + id).after(data)
+      $('#' + id).remove()
+
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("banans")
+      console.log(errorThrown)
+    }
+  })
+}

@@ -54,5 +54,18 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def correct_model_user permission_level, model
+      if logged_in?
+        @object = model.find_by_hash_id(params[:id])
+        unless (current_user?(User.find(@object.user_id)) || current_user.can_do(permission_level))
+          flash[:danger] = "You aren't allowed to do that!"
+          redirect_to root_url
+        end
+      else
+        flash[:warning] = "Please log in!"
+        redirect_to root_url
+      end
+    end    
+
 
 end
