@@ -1,0 +1,42 @@
+<% provide(:title, @section.name) %>
+<div class="card">
+  <div class="card-header blue darken-3 white-text">
+    <div class="float-left">
+      <h2 class="card-title"><%= @section.name %></h2>
+    </div>
+    <% if logged_in? %>
+      <% if current_user.can_do :admin %>
+        <div class="float-right">
+          <%= link_to "Edit", edit_section_path(@section), class: "text-warning"%> |
+          <%= link_to "Delete", section_path(@section), method: :delete, class: "text-danger",
+                    data: {confirm: "Are you sure you want to do this?"} %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card card-body">
+          <h5 class="card-title">Assignments</h5>
+          Coming soon!
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card card-body">
+          <% unless @section.description.blank? %>
+            <%= @section.description %>
+          <% end %>
+        </div>
+        <div class="card card-body">
+          <h5 class="card-title">Students:</h5>
+          <ul class="mb-0 mt-1">
+            <% @section.users.each do |s| %>
+              <li><%= s.name%>, <%= s.email %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_30_224117) do
+ActiveRecord::Schema.define(version: 2018_10_02_231808) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -105,6 +105,20 @@ ActiveRecord::Schema.define(version: 2018_09_30_224117) do
     t.date "date"
     t.index ["cycle_day_id"], name: "index_school_days_on_cycle_day_id"
     t.index ["date"], name: "index_school_days_on_date", unique: true
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sections_users", id: false, force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.integer "user_id", null: false
+    t.index ["section_id", "user_id"], name: "index_sections_users_on_section_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_sections_users_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|

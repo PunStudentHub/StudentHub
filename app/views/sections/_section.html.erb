@@ -1,0 +1,21 @@
+<li class="list-group-item">
+  <div class="row">
+    <div class="col-sm-2 custom-flex-center">
+      <h6 class="no-margin" style="width: 100%"><%= link_to section.name, section %></h6>
+    </div>
+    <div class="col-sm-9">
+      <h6 class="no-margin" style="width: 100%">Somethingsomethingclassmeetingtimesorsomething?</h6>
+    </div>
+  <% if logged_in? %>
+    <% if current_user.can_do :admin %>
+      <div class="col-sm-1 custom-flex-center custom-flex-right">
+        <div class="no-link-padding">
+          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_section_path(section), class: "text-warning"%>
+          <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, section_path(section), method: :delete, class: "text-danger",
+                  data: {confirm: "Are you sure you want to do this?"} %>
+
+      </div>
+    <% end %>
+  <% end %>
+  </div>
+</li>

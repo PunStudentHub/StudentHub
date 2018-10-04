@@ -24,6 +24,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle active" href='#' id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
         <div class="dropdown-menu" aria-labelledby="user-dropdown">
+          <%= link_to "My Sections", sections_path, class:'dropdown-item'%>
           <%= link_to "Profile", current_user, class: 'dropdown-item' %>
           <%= link_to "Settings", edit_user_path(current_user), class: 'dropdown-item' %>
           <div class="dropdown-divider"></div>
