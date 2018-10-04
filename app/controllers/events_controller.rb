@@ -1,8 +1,16 @@
 class EventsController < ApplicationController
 
+  include Approvable
+
+
+  def linked_model 
+    Event
+  end
+
   before_action -> {has_permission :moderate}, only: [:destroy]
-  before_action -> {has_permission :approve}, only: [:approve]
+
   before_action :not_banned, only: [:new, :create, :update, :edit]
+
 
   def show
     @event = Event.friendly.find(params[:id])
@@ -43,18 +51,14 @@ class EventsController < ApplicationController
     @event = current_user.events.build
   end
 
-  def approve
-    @event = Event.friendly.find(params[:id])
-    @event.update_attributes(approved: true)
-    redirect_to request.referrer
-  end
+
 
   def rsvp
     @event = Event.friendly.find(params[:id])
     unless @event.users.exists?(current_user.id)
       @event.users << current_user
     end
-    redirect_to request.referrer
+    #redirect_to request.referrer
   end
 
   def unrsvp
@@ -62,7 +66,7 @@ class EventsController < ApplicationController
     if @event.users.exists?(current_user.id)
       @event.users.destroy(current_user)
     end
-    redirect_to request.referrer
+    #redirect_to request.referrer
   end
 
   def create
@@ -82,10 +86,14 @@ class EventsController < ApplicationController
     end
   end
 
+
+
   private
 
   def event_params
     params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time)
+
+
 
   end
 

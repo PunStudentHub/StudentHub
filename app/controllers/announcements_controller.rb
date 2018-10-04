@@ -2,6 +2,8 @@ class AnnouncementsController < ApplicationController
 
   before_action -> {has_permission(:moderate)}, except: [:index, :show]
 
+  include Approvable
+
   def show
     @announcement = Announcement.find_by_hash_id(params[:id])
   end
@@ -32,6 +34,7 @@ class AnnouncementsController < ApplicationController
 
   def create
     @announcement = current_user.announcements.build(announcement_params)
+    @announcement.approved = !!(current_user.can_do(:approve))
     if (@announcement.save)
       flash[:success] = "Announcement created!"
       redirect_to @announcement
