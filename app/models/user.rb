@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :events
   has_and_belongs_to_many :class_years
+  has_and_belongs_to_many :clubs
+
+
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
   default_scope -> {order(:created_at)}
