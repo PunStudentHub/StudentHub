@@ -12,9 +12,9 @@ class Event < ApplicationRecord
   has_and_belongs_to_many :users
 
   scope :approved_events, -> {where(approved: true)}
-  scope :today, -> { where(start_time: DateTime.now.beginning_of_day..DateTime.now.end_of_day) }
-  scope :tomorrow, -> { where(start_time: (DateTime.now.beginning_of_day + 1.day)..(DateTime.now.end_of_day + 1.day)) }
-  scope :day_after_tomorrow, -> { where(start_time: (DateTime.now.beginning_of_day + 2.days)..(DateTime.now.end_of_day + 2.days)) }
+  scope :today, -> { where(start_time: DateTime.now.getlocal.beginning_of_day..DateTime.now.getlocal.end_of_day) }
+  scope :tomorrow, -> { where(start_time: (DateTime.now.getlocal.beginning_of_day + 1.day)..(DateTime.now.getlocal.end_of_day + 1.day)) }
+  scope :day_after_tomorrow, -> { where(start_time: (DateTime.now.getlocal.beginning_of_day + 2.days)..(DateTime.now.getlocal.end_of_day + 2.days)) }
 
   def ends_after_start
     if (end_time < start_time)
