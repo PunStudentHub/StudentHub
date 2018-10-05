@@ -1,5 +1,5 @@
 <% provide(:title, "New Section") %>
-<h2>New Event</h2>
+<h2>New Section</h2>
 <% if current_user.can_do :teach %>
   <%= render 'sectionsparams', url: sections_url, submit_text: "Create" %>
 <% end %>
