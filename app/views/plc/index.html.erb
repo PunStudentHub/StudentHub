@@ -6,9 +6,9 @@
       <div class="card-header blue darken-3 white-text">
         <h3 class="card-title">
           Peer Learning Center
-          
+
           <small id="subject-name"></small>
-          
+
         </h3>
       </div>
       <div class="card-body" style="padding: 0px">
@@ -48,6 +48,18 @@
 </div>
 
 <script>
+  var arr = [];
+  $.ajax({
+    type: 'GET',
+    url: '/plc/subject',
+    success: function(data, textStatus, jqXHR) {
+      arr = data;
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("banans")
+      console.log(errorThrown)
+    }
+  })
   $('#list').html("");
   <% @subjects.each do |sub| %>
       $('#list').append($('<a></a>')
@@ -59,23 +71,11 @@
             $('.timeslot').attr('class', 'plc-cell timeslot')
             $('.plc-subject').attr('class', 'plc-list-item list-group-item-action plc-subject')
             $('#' + "<%= sub.hash_id %>" ).addClass('selected')
-            $('#subject-name').html("<%=sub.name%>")
-            $.ajax({
-              type: 'GET',
-              url: '/plc/subject',
-              data: { subject: "<%= sub.hash_id %>" }, 
-              success: function(data, textStatus, jqXHR) {
-                slots = data.timeslots
-
-                for (var i = 0; i < slots.length; i++) {
-                  highlight(slots[i][0], slots[i][1])
-                }
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                console.log("banans")
-                console.log(errorThrown)
-              }
-            })
+            $('#subject-name').html("<%=sub.name%>");
+            for (var i = 0; i < arr[arrNum("<%= sub.hash_id %>")].timeslots.length; i++) {
+              highlight(arr[arrNum("<%= sub.hash_id %>")].timeslots[i][0], arr[arrNum("<%= sub.hash_id %>")].timeslots[i][1])
+            }
+            console.log(arr)
           }))
   <% end %>
 
@@ -83,6 +83,13 @@
     $('#cell-' + col + "-" + row).addClass('highlighted')
   }
 
+  function arrNum(id) {
+    for(var i = 0; i < arr.length; i++) {
+      if(arr[i].hash_id == id) {
+        return i;
+      }
+    }
+  }
 /*
   document.getElementById("list").onscroll = function() {
     if(document.getElementById("list").scrollTop != 0) {
