@@ -48,29 +48,18 @@
 </div>
 
 <script>
-var arr = [];
-$(document).ready(function() {
-  var list = document.getElementById("list");
-  for(var i = 0; i < list.children.length; i++) {
-    var sub_id = list.children[i].children[0].id;
-    $.ajax({
-      type: 'GET',
-      url: '/plc/subject',
-      data: { subject: sub_id },
-      success: function(data, textStatus, jqXHR) {
-        var object = {
-          id: data.hash_id,
-          timeslots: data.timeslots
-        }
-        arr.push(object);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log("banans")
-        console.log(errorThrown)
-      }
-    })
-  }
-})
+  var arr = [];
+  $.ajax({
+    type: 'GET',
+    url: '/plc/subject',
+    success: function(data, textStatus, jqXHR) {
+      arr = data;
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("banans")
+      console.log(errorThrown)
+    }
+  })
   $('#list').html("");
   <% @subjects.each do |sub| %>
       $('#list').append($('<a></a>')
@@ -96,7 +85,7 @@ $(document).ready(function() {
 
   function arrNum(id) {
     for(var i = 0; i < arr.length; i++) {
-      if(arr[i].id == id) {
+      if(arr[i].hash_id == id) {
         return i;
       }
     }
