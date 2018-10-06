@@ -9,7 +9,7 @@
           <small class="text-muted">All the freshest news</small>
         </div>
         <% if logged_in? && current_user.can_do(:admin)%>
-          <%= link_to "New Post", new_blog_path, class: "float-right btn btn-primary"%>
+          <%= link_to "New Post", new_blog_path, class: "float-right btn btn-sm btn-outline-primary blog-header-button"%>
         <% end %>
       </h2>
     </div>
@@ -26,5 +26,3 @@
     </div>
   </div>
 </div>
-
-
