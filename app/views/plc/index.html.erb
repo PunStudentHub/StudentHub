@@ -1,5 +1,6 @@
 <% provide :title, "PLC" %>
 <% letters = %w{A B C D E F} %>
+
 <div class="row">
   <div class="col-sm-8">
     <div class="card">
@@ -48,35 +49,25 @@
 </div>
 
 <script>
-  var arr = [];
-  $.ajax({
-    type: 'GET',
-    url: '/plc/subject',
-    success: function(data, textStatus, jqXHR) {
-      arr = data;
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log("banans")
-      console.log(errorThrown)
-    }
-  })
+  arr = <%= @array.to_json.html_safe %>;
+
   $('#list').html("");
   <% @subjects.each do |sub| %>
-      $('#list').append($('<a></a>')
-          .append($('<div></div>')
-              .attr('class', 'plc-list-item list-group-item-action plc-subject')
-              .html("<%= sub.name %>")
-              .attr('id', '<%= sub.hash_id %>'))
-          .click(function() {
-            $('.timeslot').attr('class', 'plc-cell timeslot')
-            $('.plc-subject').attr('class', 'plc-list-item list-group-item-action plc-subject')
-            $('#' + "<%= sub.hash_id %>" ).addClass('selected')
-            $('#subject-name').html("<%=sub.name%>");
-            for (var i = 0; i < arr[arrNum("<%= sub.hash_id %>")].timeslots.length; i++) {
-              highlight(arr[arrNum("<%= sub.hash_id %>")].timeslots[i][0], arr[arrNum("<%= sub.hash_id %>")].timeslots[i][1])
-            }
-            console.log(arr)
-          }))
+    $('#list').append($('<a></a>')
+        .append($('<div></div>')
+            .attr('class', 'plc-list-item list-group-item-action plc-subject')
+            .html("<%= sub.name %>")
+            .attr('id', '<%= sub.hash_id %>'))
+        .click(function() {
+          $('.timeslot').attr('class', 'plc-cell timeslot')
+          $('.plc-subject').attr('class', 'plc-list-item list-group-item-action plc-subject')
+          $('#' + "<%= sub.hash_id %>" ).addClass('selected')
+          $('#subject-name').html("<%=sub.name%>");
+          for (var i = 0; i < arr[arrNum("<%= sub.hash_id %>")].timeslots.length; i++) {
+            highlight(arr[arrNum("<%= sub.hash_id %>")].timeslots[i][0], arr[arrNum("<%= sub.hash_id %>")].timeslots[i][1])
+          }
+          //console.log(arr)
+        }))
   <% end %>
 
   function highlight(col, row) {
