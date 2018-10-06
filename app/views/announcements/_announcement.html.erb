@@ -1,7 +1,14 @@
-<% if (announcement.approved? || current_user.can_do(:approve)) %>
+<% if logged_in? %>
+  <% if (announcement.approved? || current_user.can_do(:approve)) %>
+    <% approved = (current_user.can_do(:approve) && !announcement.approved) ? "grey lighten-3" : "" %>
+    <% show = true %>
+  <% end %>
+<% else %>
+  <% approved = "" %>
+  <% show = true %>
+<% end %>
 
-  <% approved = (current_user.can_do(:approve) && !announcement.approved) ? "grey lighten-3" : "" %>
-
+<% if show %>
   <%= content_tag :li,  class: "list-group-item " + approved,
                         id: announcement.hash_id do %>
     <div class="row">
