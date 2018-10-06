@@ -182,3 +182,9 @@ i {
 .rsvp {
   min-width: 150px
 }
+
+div {
+  -webkit-border-radius: 0.125rem !important;
+     -moz-border-radius: 0.125rem !important;
+          border-radius: 0.125rem !important;
+}
