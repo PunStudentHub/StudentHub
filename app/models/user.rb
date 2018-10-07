@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :announcements, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :blog_posts, dependent: :destroy
+  has_many :leaderships, foreign_key: "president_id", class_name: "Club"
+
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :events
   has_and_belongs_to_many :class_years
