@@ -1,7 +1,7 @@
 class AnnouncementsController < ApplicationController
 
-  before_action -> {has_permission(:moderate)}, only: [:destroy]
-  before_action -> {correct_model_user(:moderate, Announcement)}, only: [:edit, :update, :destroy]
+  before_action -> {has_permission(:moderate)}, only: [:edit, :update, :destroy]
+  before_action :not_banned, only: [:create, :new]
 
   include Approvable
 
