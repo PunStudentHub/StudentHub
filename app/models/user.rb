@@ -11,7 +11,8 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
   default_scope -> {order(:created_at)}
-#  before_create :create_activation_digest
+  has_many :taskees
+  has_many :tasks, :through => :taskees
 
   validates :name, presence: true,
                    length: {maximum: 50}

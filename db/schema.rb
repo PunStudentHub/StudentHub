@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_05_230708) do
+ActiveRecord::Schema.define(version: 2018_10_07_192050) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -118,6 +118,11 @@ ActiveRecord::Schema.define(version: 2018_10_05_230708) do
     t.string "user_id"
   end
 
+  create_table "sections_tasks", id: false, force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.integer "task_id", null: false
+  end
+
   create_table "sections_users", id: false, force: :cascade do |t|
     t.integer "section_id", null: false
     t.integer "user_id", null: false
@@ -136,6 +141,24 @@ ActiveRecord::Schema.define(version: 2018_10_05_230708) do
   create_table "subjects_timeslots", id: false, force: :cascade do |t|
     t.integer "subject_id", null: false
     t.integer "timeslot_id", null: false
+  end
+
+  create_table "taskees", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "task_id"
+    t.boolean "completed", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_taskees_on_task_id"
+    t.index ["user_id"], name: "index_taskees_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "duedate"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "timeslots", force: :cascade do |t|
