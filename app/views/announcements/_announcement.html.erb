@@ -1,7 +1,14 @@
-<% if (announcement.approved? || current_user.can_do(:approve)) %>
+<% if logged_in? %>
+  <% if (announcement.approved? || current_user.can_do(:approve)) %>
+    <% approved = (current_user.can_do(:approve) && !announcement.approved) ? "grey lighten-3" : "" %>
+    <% show = true %>
+  <% end %>
+<% else %>
+  <% approved = "" %>
+  <% show = true %>
+<% end %>
 
-  <% approved = (current_user.can_do(:approve) && !announcement.approved) ? "grey lighten-3" : "" %>
-
+<% if show %>
   <%= content_tag :li,  class: "list-group-item " + approved,
                         id: announcement.hash_id do %>
     <div class="row">
@@ -24,7 +31,7 @@
           <% end %> 
 
 
-          <% if (current_user.can_do(:moderate)) || (announcement.user_id == current_user.id) %>
+          <% if (current_user.can_do(:moderate)) %>
 
             <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_announcement_path(announcement), class: "text-warning"%>
             <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, announcement_path(announcement), method: :delete, class: "text-danger",
