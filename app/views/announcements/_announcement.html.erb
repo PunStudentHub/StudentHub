@@ -22,13 +22,13 @@
         </small>
       </div>
     <% if logged_in? %>
-      
+
       <div class="col-sm-2 custom-flex-center custom-flex-right">
-        <div class="no-link-padding">
+        <div class="options">
 
           <% if current_user.can_do :approve %>
-            <%= render "shared/approve_button", model_name: "announcement", object: announcement %> &nbsp;
-          <% end %> 
+            <%= render "shared/approve_button", model_name: "announcement", object: announcement %>
+          <% end %>
 
 
           <% if (current_user.can_do(:moderate)) %>
@@ -37,11 +37,11 @@
             <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, announcement_path(announcement), method: :delete, class: "text-danger",
                     data: {confirm: "Are you sure you want to do this?"} %>
 
-          <% end %> 
-      
+          <% end %>
+
         </div>
       </div>
-      
+
     <% end %>
   <% end %>
 

@@ -168,10 +168,7 @@ i {
 }
 
 @media only screen and (max-width: 767px) {
-  .custom-flex-right{
-    justify-content: flex-start;
-    margin-top: 8px;
-  }
+
 }
 
 .event-card-title {
@@ -187,4 +184,19 @@ i {
   -webkit-border-radius: 0.125rem !important;
      -moz-border-radius: 0.125rem !important;
           border-radius: 0.125rem !important;
+}
+
+.options {
+  display:flex;
+  align-items:flex-end;
+  margin-left: 4px;
+}
+.options i {
+  margin-left: 4px;
+}
+.approve-wrapper {
+  overflow:hidden;
+  height:23px;
+  width:18px;
+  margin-right: 4px;
 }

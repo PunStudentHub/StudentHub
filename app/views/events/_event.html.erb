@@ -31,19 +31,19 @@
       <% end %>
       <% if event.approved %>
         <% unless rsvp %>
-          <%= content_tag :a, "Not Attending", class: "btn btn-sm btn-outline-blue-grey float-right rsvp", 
+          <%= content_tag :a, "Not Attending", class: "btn btn-sm btn-outline-blue-grey float-right rsvp",
           onclick: "rsvp(\"#{event.hash_id}\", true)" %>
         <% else %>
-          <%= content_tag :a, "Attending", class: "btn btn-sm btn-outline-success float-right rsvp", 
+          <%= content_tag :a, "Attending", class: "btn btn-sm btn-outline-success float-right rsvp",
           onclick: "rsvp(\"#{event.hash_id}\", false)" %>
         <% end %>
       <% end %>
       <% if current_user.can_do(:approve) %>
-        <div class="no-link-padding">
+        <div class="options">
 
           <%= render 'shared/approve_button', model_name: 'event', object: event %>
-      
-          <%= link_to ("<i class='far fa-edit' style='margin-left: 9px;'></i>").html_safe, edit_event_path(id: event.id), class: "text-warning" %>
+
+          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_event_path(id: event.id), class: "text-warning" %>
           <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, event_path(event), method: :delete, class: "text-danger", data: {confirm: "Are you sure you want to do this?"} %>
         </div>
       <% end %>
@@ -53,5 +53,3 @@
 <% elsif !logged_in? %>
   <% flash.now[:danger] = "Log in to view events!" %>
 <% end %>
-
-
