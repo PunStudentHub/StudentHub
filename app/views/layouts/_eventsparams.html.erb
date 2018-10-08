@@ -1,6 +1,6 @@
 <%= form_for(@event, url: url) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  
+
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: "form-control" %>
@@ -27,5 +27,5 @@
   </div>
 
 
-  <%= f.submit submit_text, class: "btn btn-primary" %>
+  <%= f.submit submit_text, class: "btn btn-outline-warning btn-block" %>
 <% end %>
