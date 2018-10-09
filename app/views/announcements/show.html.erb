@@ -15,7 +15,7 @@
             <%= render 'users/badges', user: User.find(@announcement.user_id) %>
             <small>
               <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago<% if @announcement.updated_at != @announcement.created_at %>,
-                Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago 
+                Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago
               <% end %>
             </small>
             <%= render 'shared/class_year_tags', object: @announcement %>
@@ -27,7 +27,7 @@
           <% if (current_user.can_do :moderate ) %>
             <div class="float-right">
               <%= link_to "Edit", edit_announcement_path(@announcement), class: "text-warning"%> |
-              <%= link_to "Delete", announcement_path(@announcement), method: :delete, class: "text-danger", 
+              <%= link_to "Delete", announcement_path(@announcement), method: :delete, class: "text-danger",
                         data: {confirm: "Are you sure you want to do this?"} %>
             </div>
           <% end %>
@@ -40,6 +40,6 @@
       </div>
     </div>
   </div>
-    
+
 
 </div>

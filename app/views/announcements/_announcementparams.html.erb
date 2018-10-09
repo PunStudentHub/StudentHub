@@ -20,6 +20,10 @@
     <%= f.label :content %>
     <%= f.text_area :content, class: "form-control" %>
   </div>
+  <% if submit_text == "Post" %>
+    <%= f.submit submit_text, class: "btn btn-outline-success btn-block" %>
+  <% elsif submit_text == "Save Edits"%>
+    <%= f.submit submit_text, class: "btn btn-outline-warning btn-block" %>
+  <% end %>
 
-  <%= f.submit submit_text, class: "btn btn-outline-blue darken-3 btn-block" %>
 <% end %>

@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="google-site-verification" content="q1hxLiMflJBbT_9qWo2BGAKzSA84oPYdXsX3uKlVh5s" />
@@ -16,7 +17,12 @@
     <%= render 'layouts/navbar' %>
     <main role="main" class="container">
       <% flash.each do |message_type, message| %>
-        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %><br>
+        <%= content_tag :div,
+          class: "card text-center z-depth-2 #{message_type}-color" do %>
+          <div class="card-body" style="padding-top: 15px; padding-bottom: 15px;">
+            <%= content_tag(:p, message, class: "white-text mb-0", style: "text-align: left;") %>
+          </div>
+        <% end %>
       <% end %>
       <%= yield %>
 
