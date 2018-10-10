@@ -70,10 +70,33 @@
 
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h3 class="card-title">
+          <%= link_to "Clubs", clubs_path, class: "text-white" %>
+          <i class="fas fa-users float-right"></i>
+        </h3>
+      </div>
+      <div class="card-body skinny-top">
+        <p class="no-margin lead">
+          Check out some of our cool clubs!
+        </p>
+        <% i = 0 %>
+        <% @clubs.each do |club| %>
+          <% unless i == 0 %>
+           <b>•</b>
+          <% end %>
+          <%= link_to club.name, club %>
+          
+          <% i += 1 %>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 
   <div class="col-md-5">
-
 
     <div class="card">
       <div class="card-header blue darken-3 white-text">

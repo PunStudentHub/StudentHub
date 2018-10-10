@@ -10,6 +10,8 @@ class PagesController < ApplicationController
     @today = Event.all.approved_events.today.sample(3)
     @tomorrow = Event.all.approved_events.tomorrow.sample(3)
     @day_after_tomorrow = Event.all.approved_events.day_after_tomorrow.sample(3)
+
+    @clubs = Club.all.sample(3) 
   end
 
   def help
