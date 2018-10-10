@@ -91,10 +91,15 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time)
-
-
-
+    new_params = params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time, :club)
+    unless new_params[:club].nil?
+      unless new_params[:club].empty?
+        new_params[:club] = Club.find(new_params[:club]) 
+      else
+        new_params[:club] = nil
+      end
+    end
+    new_params
   end
 
 end

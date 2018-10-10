@@ -9,11 +9,14 @@
       </div>
       <div class="card-body">
         <% if current_user.can_do :moderate %>
-          <%= render 'layouts/eventsparams', url: events_url, submit_text: "Post" %>
+          <%= render 'layouts/eventsparams', url: events_url, submit_text: "Post", 
+          clubs: current_user.leaderships %>
         <% else %>
-          <%= render 'layouts/eventsparams', url: events_url, submit_text: "Send to purgatory" %>
+          <%= render 'layouts/eventsparams', url: events_url, submit_text: "Send to purgatory", 
+          clubs: current_user.leaderships %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+

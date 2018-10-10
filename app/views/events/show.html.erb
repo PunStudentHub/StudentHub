@@ -37,8 +37,9 @@
       <hr style="margin: 10px">
       <div>
         <div>
-          <%=  @event.location %>
-          <br><br>
+          <b>Location:</b> <%= @event.location %>
+          <br>
+          <br>
           <% unless @event.start_time.to_date == @event.end_time.to_date %>
             <ul>
               <li><b>Start: </b><%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %></li>
@@ -47,8 +48,14 @@
           <% else %>
             <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%>
           <% end %>  
-          <br>
-          <%= simple_format @event.description %>
+          
+          <%= markdown @event.description %>
+          
+          <% unless @event.club.nil? %>
+            Sponsored by <%= link_to @event.club.name, @event.club %>
+          <% end %>
+          <br><br>
+
         </div>
         <% if logged_in? %>
           <div class="btn-group">

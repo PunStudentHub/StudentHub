@@ -40,7 +40,8 @@ namespace :role do
       {
         name: "Banned",
         id: 6,
-        color: "333333"
+        color: "333333",
+        banned: true
       }
     ].each do |r|
       Role.create!(r)
