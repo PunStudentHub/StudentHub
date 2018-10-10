@@ -11,10 +11,10 @@
     <div class="card">
       <div class="card-header blue darken-3 white-text">
         <!-- put the events icon here-->
-        <h3 class="card-title">
+        <h4 class="card-title">
           <%= content_tag(:a, "Events", href: events_path, class: "text-white")%>
           <i class="fas fa-calendar float-right"></i>
-        </h3>
+        </h4>
       </div>
         <div class="card-body m-0" style="padding: 0px;">
           <div class="card-group">
@@ -53,9 +53,9 @@
 
     <div class="card">
       <div class="card-header blue darken-3 white-text">
-        <h3 class="card-title">
+        <h4 class="card-title">
           <%= content_tag(:a, "Peer Learning Center", href: plc_path, class: "text-white") %>
-          <i class="fas fa-book float-right"></i></h3>
+          <i class="fas fa-book float-right"></i></h4>
 
       </div>
       <div class="card-body skinny-top">
@@ -100,7 +100,7 @@
 
     <div class="card">
       <div class="card-header blue darken-3 white-text">
-        <h3 class="card-title">Information<i class="fas fa-info-circle float-right"></i></h3>
+        <h4 class="card-title">Information<i class="fas fa-info-circle float-right"></i></h4>
       </div>
       <div class="card-body">
         <p class="lead text-muted" style="margin-bottom: 0px">
@@ -123,10 +123,10 @@
 
     <div class="card">
       <div class="card-header blue darken-3 white-text">
-        <h3 class="card-title">
+        <h4 class="card-title">
           <%= content_tag(:a, "Our Blog", href: blog_index_path, class: "text-white")%>
           <i class="fas fa-pencil-alt float-right"></i>
-        </h3>
+        </h4>
       </div>
       <ul class="list-group list-group-flush">
         <% @blogposts.each do |post| %>

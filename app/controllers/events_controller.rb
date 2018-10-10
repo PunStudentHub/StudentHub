@@ -58,7 +58,9 @@ class EventsController < ApplicationController
     unless @event.users.exists?(current_user.id)
       @event.users << current_user
     end
-    #redirect_to request.referrer
+    if (params[:redirect])
+      redirect_to request.referrer
+    end
   end
 
   def unrsvp
@@ -66,7 +68,9 @@ class EventsController < ApplicationController
     if @event.users.exists?(current_user.id)
       @event.users.destroy(current_user)
     end
-    #redirect_to request.referrer
+    if (params[:redirect])
+      redirect_to request.referrer
+    end
   end
 
   def create

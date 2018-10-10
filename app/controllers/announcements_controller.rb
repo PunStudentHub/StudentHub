@@ -56,7 +56,7 @@ class AnnouncementsController < ApplicationController
       render 'new'
     end
 
-    if (!current_user.can_do(:approve))
+    if (!@announcement.approved)
       flash[:success] += " It will be shown after a moderator approves it!"
     end
   end

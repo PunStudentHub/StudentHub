@@ -7,14 +7,14 @@
  -->
 <div class="card">
   <div class="card-header blue darken-3 white-text">
-    <h3 class="card-title">
+    <h4 class="card-title">
       <%= content_tag(:a, display_name, href: path, class: "text-white")%>
       <% if display_name == 'Announcements' %>
         <i class="fas fa-bullhorn float-right"></i>
       <% elsif display_name.include?('Blog') %>
         <i class="fas fa-pencil-alt float-right"></i>
       <% end %>
-    </h3>
+    </h4>
   </div>
   <ul class="list-group list-group-flush">
     <%= render variable.take(5) %>
