@@ -25,8 +25,8 @@
     <%= f.label :end_time %>
     <%= f.datetime_select :end_time, :order => [:month, :day, :year, :hour, :minute] %>
   </div>
-  <% unless url.nil? %>
-    
+
+  <% unless url.nil? %>  
     <div class="form-group">
       <label style="margin-bottom: 0px">Club</label>
       <%= f.collection_radio_buttons(:club, clubs, :id, :name) do |club| %>
