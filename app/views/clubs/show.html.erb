@@ -1,8 +1,15 @@
 <% provide :title, @club.name %> 
 <div class="card card-body">
-  <h2 class="card-title">
-    <%= @club.name %>
-  </h2>
+  <div class="float-left">
+    <h2 class="card-title" style="display: inline">
+      <%= @club.name %>
+    </h2>
+    <div class="float-right">
+      <% if current_user == @club.president %>
+        <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
+      <% end %> 
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -13,9 +20,13 @@
       <%= markdown(@club.description).html_safe %> 
     </div>
     <div class="card card-body">
-      <h5 class="card-title text-muted">Events</h5>
+      <h5 class="card-title">Upcoming Events</h5>
       <hr>
-      <em>Coming Soon!</em> 
+      <ul>
+        <% @club.events.each do |event| %>
+          <li><%= link_to event.title, event %></li>
+        <% end %> 
+      </ul>
     </div>
   </div>
   <div class="col-md-5">

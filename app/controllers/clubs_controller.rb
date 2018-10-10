@@ -6,8 +6,9 @@ class ClubsController < ApplicationController
     Club
   end
 
-  before_action :club_president, only: [:accept_user, :edit, :update, :destroy]
+  before_action :club_president, only: [:accept_user, :edit, :update]
   before_action :not_banned, except: [:index, :show]
+  before_action -> {has_permission :admin}, only: [:destroy]
 
   def new
     @club = current_user.leaderships.build

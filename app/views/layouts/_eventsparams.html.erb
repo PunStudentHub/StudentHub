@@ -25,7 +25,18 @@
     <%= f.label :end_time %>
     <%= f.datetime_select :end_time, :order => [:month, :day, :year, :hour, :minute] %>
   </div>
-
+  <% unless url.nil? %>
+    
+    <div class="form-group">
+      <label style="margin-bottom: 0px">Club</label>
+      <%= f.collection_radio_buttons(:club, clubs, :id, :name) do |club| %>
+        <div class="custom-control custom-radio">
+          <%= club.radio_button(class: "custom-control-input") %>
+          <%= club.label(class: "custom-control-label") %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
   <%= f.submit submit_text, class: "btn btn-primary" %>
 <% end %>

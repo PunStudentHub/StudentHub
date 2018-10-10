@@ -13,13 +13,13 @@
                         id: club.hash_id do %>
     <div class="row">
       <div class="col-sm-10 custom-flex-center">
-        <h6 class="no-margin" style="width: 100%"><%= link_to club.name, club %></h6>
-        <small style="width: 100%">
-          Posted by
-          <%= render 'users/colored_name_link', user: User.find(club.president_id) %>
-          <%= distance_of_time_in_words(club.created_at.to_time, Time.now) + " ago" %>
+        <div class="col-sm-7" style="padding: 0px">
+          <h6 class="no-margin" style="width: 100%"><%= link_to club.name, club %></h6>
+        </div>
+        <div class="col-sm-3">
+          <h6 class="text-muted no-margin"><%= pluralize(club.users.count, "member")%></h6>
+        </div>
 
-        </small>
       </div>
     <% if logged_in? %>
       
@@ -31,7 +31,7 @@
           <% end %> 
 
 
-          <% if (current_user.can_do(:moderate)) %>
+          <% if (current_user.can_do(:admin)) %>
 
             <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_club_path(club), class: "text-warning"%>
             <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, club_path(club), method: :delete, class: "text-danger",
