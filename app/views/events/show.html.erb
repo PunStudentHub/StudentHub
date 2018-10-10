@@ -1,79 +1,76 @@
 <% provide(:title, @event.title) %>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 card card-body">
-      <div>
-        <div class="float-left">
-          <h2 class="card-title"><%= @event.title %></h2>
-          <div class="float-left">
-            <small>
-            <em>
-              Created by
-            </em>
-            <%= render 'users/colored_name_link', user: User.find(@event.user_id) %>
-            </small>
-            <%= render 'users/badges', user: User.find(@event.user_id) %>
-            <small>
-            <em>
-              <%= distance_of_time_in_words(@event.created_at.to_time, Time.now) %> 
-              ago<% if @event.updated_at != @event.created_at %>, 
-              Last updated <%= distance_of_time_in_words(@event.updated_at.to_time, Time.now) %> ago
-              <% end %>
-            </em></small>
-          </div>
-        </div>
-        <div class="float-right">
-          <%= link_to "Back to Events", events_path %>
+<div class="row navigation-tools">
+  <div class="col-lg-12">
+    <div class="float-left">
+      <%= link_to "Back", :back, class: "btn btn-sm btn-outline-blue darken-3 navigation-tools-back" %>
+    </div>
+    <div class="float-right">
+      <%= link_to ("<i class='fas fa-chevron-left'></i>").html_safe, "#", class: "btn btn-sm btn-outline-blue darken-3" %>
+      <%= link_to ("<i class='fas fa-chevron-right'></i>").html_safe, "#", class: "btn btn-sm btn-outline-blue darken-3" %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <h2 class="lato-title"><%= @event.title %></h2>
+          <small>
+            Created by
+          <%= render 'users/colored_name_link', user: User.find(@event.user_id) %>
+          </small>
+          <%= render 'users/badges', user: User.find(@event.user_id) %>
+          <small>
+            <%= distance_of_time_in_words(@event.created_at.to_time, Time.now) %>
+            ago<% if @event.updated_at != @event.created_at %>,
+            Last updated <%= distance_of_time_in_words(@event.updated_at.to_time, Time.now) %> ago
+            <% end %></small>
           <% if logged_in? %>
-            <% if current_user.can_do :approve %> |
-              <%= link_to "Edit", edit_event_path(@event), class: "text-warning"%> |
-              <%= link_to "Delete", event_path(@event), method: :delete, class: "text-danger",
+            <% if (current_user.can_do :moderate ) %>
+              <div class="float-right">
+                <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_event_path(@event), class: "text-warning"%>
+                <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, event_path(@event), method: :delete, class: "text-danger",
                         data: {confirm: "Are you sure you want to do this?"} %>
+              </div>
             <% end %>
           <% end %>
         </div>
-      </div>
-      <hr style="margin: 10px">
-      <div>
+        <hr />
         <div>
-          <%=  @event.location %>
-          <br><br>
-          <% unless @event.start_time.to_date == @event.end_time.to_date %>
-            <ul>
-              <li><b>Start: </b><%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %></li>
-              <li><b>End: </b><%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %></li>
-            </ul>
-          <% else %>
-            <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%>
-          <% end %>  
-          <br>
-          <%= simple_format @event.description %>
-        </div>
-        <% if logged_in? %>
-          <div class="btn-group">
-            <% unless @event.users.exists?(current_user.id) %>
-              <%= link_to "Not Attending", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-sm btn-outline-blue-grey float-right" %>
+          <div>
+            <%=  @event.location %>
+            <br><br>
+            <% unless @event.start_time.to_date == @event.end_time.to_date %>
+              <ul>
+                <li><b>Start: </b><%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %></li>
+                <li><b>End: </b><%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %></li>
+              </ul>
             <% else %>
-              <%= link_to "Attending", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-sm btn-outline-success float-right" %>
+              <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%>
             <% end %>
+            <br>
+            <%= simple_format @event.description %>
           </div>
-        <% end %>
-        <% if (@event.user_id == current_user.id || current_user.can_do(:approve)) && !@event.users.empty? %>
-          <h6><br>Current attendees: <%= @event.users.all.count %></h6>
-          <ul>
-            <% @event.users.each do |attendee| %>
-              <li><%= attendee.email %></li>
-            <% end %>
-          </ul>
-        <% end %>
+          <% if logged_in? %>
+            <div class="btn-group">
+              <% unless @event.users.exists?(current_user.id) %>
+                <%= link_to "Not Attending", rsvp_event_path(:id => @event.id), method: :rsvp, class: "btn btn-sm btn-outline-blue-grey float-right" %>
+              <% else %>
+                <%= link_to "Attending", unrsvp_event_path(:id => @event.id), method: :unrsvp, class: "btn btn-sm btn-outline-success float-right" %>
+              <% end %>
+            </div>
+          <% end %>
+          <% if (@event.user_id == current_user.id || current_user.can_do(:approve)) && !@event.users.empty? %>
+            <h6><br>Current attendees: <%= @event.users.all.count %></h6>
+            <ul>
+              <% @event.users.each do |attendee| %>
+                <li><%= attendee.email %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-    
