@@ -1,0 +1,24 @@
+<% provide :title, @club.name %> 
+<div class="card card-body">
+  <h2 class="card-title">
+    <%= @club.name %>
+  </h2>
+</div>
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="card card-body">
+      <h5 class="card-title">Description</h5>
+      <hr>
+      <%= markdown(@club.description).html_safe %> 
+    </div>
+    <div class="card card-body">
+      <h5 class="card-title text-muted">Events</h5>
+      <hr>
+      <em>Coming Soon!</em> 
+    </div>
+  </div>
+  <div class="col-md-5">
+    <%= render 'clubs/user_list' %>
+  </div>
+</div>

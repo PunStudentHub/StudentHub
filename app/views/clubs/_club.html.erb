@@ -1,0 +1,48 @@
+<% if logged_in? %>
+  <% if (club.approved? || current_user.can_do(:approve)) %>
+    <% approved = (current_user.can_do(:approve) && !club.approved) ? "grey lighten-3" : "" %>
+    <% show = true %>
+  <% end %>
+<% else %>
+  <% approved = "" %>
+  <% show = true %>
+<% end %>
+
+<% if show %>
+  <%= content_tag :li,  class: "list-group-item " + approved,
+                        id: club.hash_id do %>
+    <div class="row">
+      <div class="col-sm-10 custom-flex-center">
+        <h6 class="no-margin" style="width: 100%"><%= link_to club.name, club %></h6>
+        <small style="width: 100%">
+          Posted by
+          <%= render 'users/colored_name_link', user: User.find(club.president_id) %>
+          <%= distance_of_time_in_words(club.created_at.to_time, Time.now) + " ago" %>
+
+        </small>
+      </div>
+    <% if logged_in? %>
+      
+      <div class="col-sm-2 custom-flex-center custom-flex-right">
+        <div class="no-link-padding">
+
+          <% if current_user.can_do :approve %>
+            <%= render "shared/approve_button", model_name: "club", object: club %> &nbsp;
+          <% end %> 
+
+
+          <% if (current_user.can_do(:moderate)) %>
+
+            <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_club_path(club), class: "text-warning"%>
+            <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, club_path(club), method: :delete, class: "text-danger",
+                    data: {confirm: "Are you sure you want to do this?"} %>
+
+          <% end %> 
+      
+        </div>
+      </div>
+      
+    <% end %>
+  <% end %>
+
+<% end %>

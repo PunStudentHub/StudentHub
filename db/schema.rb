@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_191601) do
+ActiveRecord::Schema.define(version: 2018_10_08_011441) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -51,18 +51,23 @@ ActiveRecord::Schema.define(version: 2018_10_07_191601) do
     t.integer "user_id", null: false
   end
 
+  create_table "club_members", force: :cascade do |t|
+    t.integer "club_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "accepted", default: false
+  end
+
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "president_id"
+    t.string "hash_id"
+    t.boolean "approved", default: false
     t.index ["president_id"], name: "index_clubs_on_president_id"
-  end
-
-  create_table "clubs_users", id: false, force: :cascade do |t|
-    t.integer "club_id", null: false
-    t.integer "user_id", null: false
   end
 
   create_table "cycle_days", force: :cascade do |t|
@@ -108,6 +113,7 @@ ActiveRecord::Schema.define(version: 2018_10_07_191601) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "teach", default: false
     t.boolean "banned", default: false
   end
 
@@ -125,6 +131,11 @@ ActiveRecord::Schema.define(version: 2018_10_07_191601) do
     t.index ["date"], name: "index_school_days_on_date", unique: true
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -136,6 +147,21 @@ ActiveRecord::Schema.define(version: 2018_10_07_191601) do
   create_table "subjects_timeslots", id: false, force: :cascade do |t|
     t.integer "subject_id", null: false
     t.integer "timeslot_id", null: false
+  end
+
+  create_table "taskees", force: :cascade do |t|
+    t.integer "doer_id"
+    t.string "doer_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "content"
+    t.string "taskee"
+    t.datetime "duedate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "timeslots", force: :cascade do |t|

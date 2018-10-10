@@ -28,10 +28,17 @@ Rails.application.routes.draw do
   post '/announcement/approve', to: 'announcements#approve', as: 'approve_announcement'
   get '/announcement/get_partial', to: 'announcements#get_partial', as: 'announcement_get_partial'
 
+  post '/club/approve', to: 'clubs#approve', as: 'approve_club'
+  get '/club/get_partial', to: 'clubs#get_partial', as: 'club_get_partial'
+
   resources :users, only: [:show, :index, :destroy, :edit, :update] do
     patch :update_perms, on: :member
   end
-  resources :blog, only: [:new, :create, :edit, :update, :destroy, :index]
+  resources :blog, except: [:show]
+  resources :clubs do
+    post :apply, on: :member
+    post :accept_user, on: :member
+  end
   resources :events
   resources :announcements
   resources :account_activations, only: [:edit]

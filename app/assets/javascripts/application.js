@@ -69,3 +69,4 @@ function update(model, id) {
     }
   })
 }
+

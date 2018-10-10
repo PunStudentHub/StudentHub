@@ -1,0 +1,3 @@
+<% provide :title, "Editing #{@club.name}" %>
+<%= content_tag :h2, "Editing #{@club.name}" %>
+<%= render 'clubs/clubparams', url: nil, submit_text: "Save Edits" %>
