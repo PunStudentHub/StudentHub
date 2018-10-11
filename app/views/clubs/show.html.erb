@@ -5,9 +5,11 @@
       <%= @club.name %>
     </h2>
     <div class="float-right">
-      <% if current_user == @club.president %>
-        <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
-      <% end %> 
+      <% if logged_in? %>
+        <% if current_user == @club.president %>
+          <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
+        <% end %> 
+      <% end %>
     </div>
   </div>
 </div>

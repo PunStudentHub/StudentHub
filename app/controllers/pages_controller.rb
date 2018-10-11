@@ -5,6 +5,8 @@ class PagesController < ApplicationController
   def home
     if logged_in?
       @announcements = Announcement.filter_class_years(current_user).approved_announcements
+    else
+      @announcements = Announcement.approved_announcements
     end
     @subjects = Subject.all.sample(3)
     @blogposts = BlogPost.take(3)

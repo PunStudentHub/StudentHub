@@ -1,33 +1,36 @@
+<% if logged_in? %>
 <div class="card card-body" id="user-list">
   <span class="text-muted">
     President: <%= render 'users/colored_name_link', user: @club.president %> 
   </span>
   <hr>
-  <h5 class="card-title">Members:</h5>
-  <ul style="margin-bottom: 0px;margin-top: 5px">
-    <% @club.club_members.accepted_members.each do |member| %>
-      <% user = User.find(member.user_id) %>
-      <% unless user == @club.president %> 
-        <%= content_tag :li, (render "users/colored_name_link", user: user) %>
-      <% end %>
-    <% end %>
-    <% if current_user == @club.president || current_user.can_do(:admin) %>
-      <% @club.club_members.pending_members.each do |member| %>
+  <% if @club.club_members.count > 1 %>
+    <h5 class="card-title">Members:</h5>
+    <ul style="margin-bottom: 0px;margin-top: 5px">
+      <% @club.club_members.accepted_members.each do |member| %>
         <% user = User.find(member.user_id) %>
         <% unless user == @club.president %> 
-          <li>
-            <%= link_to("[#{user.name}]", user, class: 'text-muted') %>
-
-            <%= link_to '<i class="far fa-check-square style="margin-left: 9px; margin-right: -4px;"></i>'.html_safe,
-              accept_user_club_url(id: @club.hash_id, user_id: user.id), 
-              method: :post,
-              class: "text-success approve_icon"%>
-
-          </li>
+          <%= content_tag :li, (render "users/colored_name_link", user: user) %>
         <% end %>
       <% end %>
-    <% end %>
-  </ul>
+      <% if current_user == @club.president || current_user.can_do(:admin) %>
+        <% @club.club_members.pending_members.each do |member| %>
+          <% user = User.find(member.user_id) %>
+          <% unless user == @club.president %> 
+            <li>
+              <%= link_to("[#{user.name}]", user, class: 'text-muted') %>
+
+              <%= link_to '<i class="far fa-check-square style="margin-left: 9px; margin-right: -4px;"></i>'.html_safe,
+                accept_user_club_url(id: @club.hash_id, user_id: user.id), 
+                method: :post,
+                class: "text-success approve_icon"%>
+
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
   <% unless @club.users.include? current_user %>
     <hr>
     <div class="float-left">
@@ -35,3 +38,4 @@
     </div>
   <% end %>
 </div>
+<% end %>

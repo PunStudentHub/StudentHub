@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   before_action -> {has_permission :moderate}, only: [:destroy]
 
   before_action :not_banned, only: [:new, :create, :update, :edit]
+  before_action :logged_in_user
 
 
   def show
