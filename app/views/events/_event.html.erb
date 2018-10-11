@@ -1,4 +1,4 @@
-<% if logged_in? && (event.approved  || current_user.can_do(:approve)) && event.start_time > Time.zone.now %>
+<% if logged_in? && (event.approved  || current_user.can_do(:approve)) %>
 <% approved = (current_user.can_do(:approve) && !event.approved) ? "grey lighten-3" : "" %>
 <% rsvp = event.users.exists?(current_user.id) %>
 <% id = event.id %>

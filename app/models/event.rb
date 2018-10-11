@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   include Friendlyable
+  include Filterable
+
   belongs_to :user, dependent: :destroy
   belongs_to :club, optional: true
   default_scope -> { order('start_time ASC') }
@@ -16,11 +18,29 @@ class Event < ApplicationRecord
   scope :today, -> { where(start_time: DateTime.now.getlocal('-10:00').beginning_of_day..DateTime.now.getlocal('-10:00').end_of_day) }
   scope :tomorrow, -> { where(start_time: (DateTime.now.getlocal('-10:00').beginning_of_day + 1.day)..(DateTime.now.getlocal('-10:00').end_of_day + 1.day)) }
   scope :day_after_tomorrow, -> { where(start_time: (DateTime.now.getlocal('-10:00').beginning_of_day + 2.days)..(DateTime.now.getlocal('-10:00').end_of_day + 2.days)) }
+  scope :future_events, -> { where("start_time > ?", DateTime.now.getlocal('-10:00')) }
+
 
   def ends_after_start
     if (end_time < start_time)
       errors.add(:end_time, 'must be after the start time')
     end
+  end
+
+  def next user
+    Event
+        .where("start_time < ?", start_time)
+        .where(approved: true)
+        .future_events
+        .last
+  end
+
+  def prev user
+    Event
+        .where("start_time > ?", start_time)
+        .where(approved: true)
+        .future_events
+        .first
   end
 
   def date_in_future

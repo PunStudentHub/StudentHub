@@ -20,9 +20,9 @@ class EventsController < ApplicationController
     #eventually should display as a calender, troopwebhostesque
     if logged_in?
       if current_user.can_do(:approve)
-        @events = Event.all
+        @events = Event.future_events
       else
-        @events = Event.all.approved_events
+        @events = Event.future_events.approved_events
       end
     end
   end

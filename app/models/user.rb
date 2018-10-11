@@ -80,8 +80,11 @@ class User < ApplicationRecord
   end
 
   def smart_class_years
-    self.class_years if self.class_years.any?
-    ClassYear.all
+    if self.class_years.any?
+      self.class_years 
+    else
+      ClassYear.all
+    end
   end
 
 

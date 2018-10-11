@@ -1,19 +1,20 @@
 <% provide(:title, @announcement.title) %>
-<div class="row navigation-tools">
-  <div class="col-lg-12">
-    <div class="float-left">
-      <%= link_to "Back", :back, class: "btn btn-sm btn-outline-blue darken-3 navigation-tools-back" %>
-    </div>
-    <div class="float-right">
-      <%= link_to ("<i class='fas fa-chevron-left'></i>").html_safe, "#", class: "btn btn-sm btn-outline-blue darken-3" %>
-      <%= link_to ("<i class='fas fa-chevron-right'></i>").html_safe, "#", class: "btn btn-sm btn-outline-blue darken-3" %>
-    </div>
-  </div>
-</div>
+
 <div class="row">
+
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
+        <div class="row navigation-tools">
+          <div class="col-lg-12">
+            <div class="float-left">
+              <div>
+                <%= link_to "Back", :back, class: "btn btn-sm btn-outline-blue-grey lighten-3 navigation-tools-back" %>
+              </div>
+            </div>
+            <%= render "shared/scroll", object: @announcement %>
+          </div>
+        </div>
         <div>
           <h2 class="lato-title"><%= @announcement.title %></h2>
             <small>

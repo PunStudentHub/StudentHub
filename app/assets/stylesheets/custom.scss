@@ -219,7 +219,11 @@ hr {
 }
 
 .navigation-tools-back {
-  padding-left: 50px !important;
-  padding-right: 50px !important;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
 
+}
+
+.btn-group > .btn, .btn-child {
+  margin-left: -2px !important;
 }

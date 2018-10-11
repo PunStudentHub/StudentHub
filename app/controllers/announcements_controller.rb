@@ -16,13 +16,18 @@ class AnnouncementsController < ApplicationController
   def index
     if logged_in?
       if current_user.can_do (:approve)
-        @announcements = helpers.filter_class_years(Announcement)
-                                  .paginate(page: params[:page], per_page: 25)
+        @announcements =  Announcement.filter_class_years(current_user)
+                                      .paginate(page: params[:page], per_page: 25)
+        return
+      else
+        @announcements =  Announcement.filter_class_years(current_user)
+                                      .approved_announcements
+                                      .paginate(page: params[:page], per_page: 25)
         return
       end
     end
 
-    @announcements = helpers.filter_class_years(Announcement.approved_announcements)
+    @announcements =  Announcement.approved_announcements
                                   .paginate(page: params[:page], per_page: 25)
   end
 
@@ -52,13 +57,14 @@ class AnnouncementsController < ApplicationController
     if (@announcement.save)
       flash[:success] = "Announcement created!"
       redirect_to @announcement
+      if (!@announcement.approved)
+        flash[:success] += " It will be shown after a moderator approves it!"
+      end
     else
       render 'new'
     end
 
-    if (!@announcement.approved)
-      flash[:success] += " It will be shown after a moderator approves it!"
-    end
+    
   end
 
   def new

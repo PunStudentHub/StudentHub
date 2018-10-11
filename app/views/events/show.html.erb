@@ -1,20 +1,18 @@
 <% provide(:title, @event.title) %>
-<div class="row navigation-tools">
-  <div class="col-lg-12">
-    <div class="float-left">
-      <%= link_to "Back", :back, class: "btn btn-sm btn-outline-blue darken-3 navigation-tools-back" %>
-    </div>
-    <div class="float-right">
-      <%= link_to ("<i class='fas fa-chevron-left'></i>").html_safe, "#", class: "btn btn-sm btn-outline-blue darken-3" %>
-      <%= link_to ("<i class='fas fa-chevron-right'></i>").html_safe, "#", class: "btn btn-sm btn-outline-blue darken-3" %>
-    </div>
-  </div>
-</div>
+
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
         <div>
+          <div class="row navigation-tools">
+            <div class="col-lg-12">
+              <div class="float-left">
+                <%= link_to "Back", :back, class: "btn btn-sm btn-outline-blue-grey darken-3 navigation-tools-back" %>
+              </div>
+              <%= render "shared/scroll", object: @event %>
+            </div>
+          </div>
           <h2 class="lato-title"><%= @event.title %></h2>
           <small>
             Created by
@@ -47,9 +45,10 @@
               <li><b>End: </b><%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %></li>
             </ul>
           <% else %>
-            <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%>
+            <b><%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%></b><br>
           <% end %>  
           
+          <br>
           <%= markdown @event.description %>
           
           <% unless @event.club.nil? %>
