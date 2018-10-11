@@ -18,7 +18,7 @@ class ClubsController < ApplicationController
     @club = current_user.leaderships.build(club_params)
     if (@club.save)
       @club.users << current_user
-      @club.members.update_all(accepted: true)
+      @club.club_members.update_all(accepted: true)
       flash[:success] = "Club created!"
       redirect_to clubs_path
     else

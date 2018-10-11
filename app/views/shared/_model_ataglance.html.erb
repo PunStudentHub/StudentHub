@@ -17,7 +17,9 @@
     </h4>
   </div>
   <ul class="list-group list-group-flush">
-    <%= render variable.take(5) %>
+    <% unless variable.nil? %>
+      <%= render variable.take(5) %>
+    <% end %>
   </ul>
   <div class="card-body see-more-section">
     <%= link_to 'See more...', path, class: 'text-primary' %>
