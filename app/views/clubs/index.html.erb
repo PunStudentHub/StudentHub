@@ -2,12 +2,14 @@
 
 <div class="card">
   <div class="card-header blue darken-3 white-text">
-    <h3 class="card-title">
+    <h4 class="card-title float-left">
       Clubs
-      <% if logged_in? %>
-        <%= link_to ("<i class='fas fa-plus fa-lg' style='color: dodgerblue;'></i>").html_safe, new_club_path, class: "btn btn-sm btn-white float-right card-header-button"%>
+      
+    </h4>
+    <% if logged_in? %>
+        <%= link_to ("New Club").html_safe, new_announcement_path, 
+          class: "btn btn-sm btn-primary grey float-right"%>
       <% end %>
-    </h3>
   </div>
   <div class="card-body" style="padding: 0px;">
     <ul class="list-group list-group-flush">
