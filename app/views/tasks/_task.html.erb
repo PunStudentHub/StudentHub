@@ -1,21 +1,17 @@
-<li class="list-group-item">
-  <div class="row">
-    <div class="col-sm-2 custom-flex-center">
-      <h6 class="no-margin" style="width: 100%"><%= link_to task.name, task %></h6>
-    </div>
-    <div class="col-sm-9">
-      
-    </div>
-  <% if logged_in? %>
-    <% if current_user.can_do :admin %>
-      <div class="col-sm-1 custom-flex-center custom-flex-right">
-        <div class="no-link-padding">
-          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_task_path(task), class: "text-warning"%>
-          <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, task_path(task), method: :delete, class: "text-danger",
-                  data: {confirm: "Are you sure you want to do this?"} %>
-
+<% if logged_in? %>
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-sm-2 custom-flex-center">
+        <h6 class="no-margin" style="width: 100%"><%= link_to task.name, task %></h6>
       </div>
-    <% end %>
-  <% end %>
-  </div>
-</li>
+      <div class="col-sm-9"></div>
+      <% if current_user.can_do :admin %>
+      <div class="col-sm-1 custom-flex-center custom-flex-right">
+        <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_task_path(task), class: "text-warning"%>
+        <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, task_path(task), method: :delete, class: "text-danger",
+                data: {confirm: "Are you sure you want to do this?"} %>
+      </div>
+      <% end %>
+    </div>
+  </li>
+<% end %>
