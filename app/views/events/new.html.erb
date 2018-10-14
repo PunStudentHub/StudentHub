@@ -1,7 +1,21 @@
 <% provide(:title, "New Event") %>
-<h2>New Event</h2>
-<% if current_user.can_do :moderate %>
-  <%= render 'eventsparams', url: events_url, submit_text: "Submit" %>
-<% else %>
-  <%= render 'eventsparams', url: events_url, submit_text: "Send to purgatory" %>
-<% end %>
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h4 class="card-title" style="text-align: center;">
+          New Event
+        </h4>
+      </div>
+      <div class="card-body">
+        <% if current_user.can_do :moderate %>
+          <%= render 'layouts/eventsparams', url: events_url, submit_text: "Post",
+          clubs: current_user.leaderships %>
+        <% else %>
+          <%= render 'layouts/eventsparams', url: events_url, submit_text: "Send to purgatory",
+          clubs: current_user.leaderships %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,7 +16,7 @@
           <i class="fas fa-calendar float-right"></i></h3>
       </div>
       <% if logged_in? %>
-        <div class="card m-0">
+        <div class="card m-0" style="padding: 0px;">
           <div class="card-group">
             <div class="card border-left-0 border-top-0 border-bottom-0">
               <div class="card-header white">
@@ -60,7 +60,6 @@
           <i class="fas fa-book float-right"></i></h3>
 
       </div>
-    
         <div class="card-body skinny-top">
           <!--p class="lead" style="margin-bottom: 1px">Need help with school? No stress!</p-->
           <p class="no-margin">Come get help with...</p>
@@ -124,5 +123,25 @@
         <%= link_to "See more...", blog_index_path %>
 
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h4 class="card-title">
+          <%= link_to "Clubs", clubs_path, class: "text-white" %>
+          <i class="fas fa-users float-right"></i>
+        </h4>
+      </div>
+      <div class="card-body skinny-top">
+        <p class="no-margin lead">
+          Check out some of our amazing clubs!
+        </p>
+        <ul>
+          <% @clubs.each do |club| %>
+            <li><%= link_to club.name, club %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
