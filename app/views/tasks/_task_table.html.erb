@@ -1,0 +1,12 @@
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 300px">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render current_user.tasks.all %>
+  </tbody>
+</table>

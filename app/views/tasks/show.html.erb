@@ -1,0 +1,41 @@
+<% provide(:title, @task.name) %>
+<div class="card">
+  <div class="card-header blue darken-3 white-text">
+    <div class="float-left">
+      <h2 class="card-title"><%= @task.name %></h2>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card card-body">
+          <h5 class="card-title">Assignment Details</h5>
+          <ul class= "list-group list-group-flush">
+            <% if @task.duedate %>
+              <li class="list-group-item">Duedate: <%= @task.duedate %></li>
+            <% end %>
+            <% if current_user.taskees.find_by(task_id: @task.id).time_estimate %>
+              <li class="list-group-item">Time estimate: <%= current_user.taskees.find_by(task_id: @task.id).time_estimate / 60 %> minutes</li>
+            <% end %>
+            <li class="list-group-item">Status: <%= current_user.taskees.find_by(task_id: @task.id).completed %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card card-body">
+          <% unless @task.description.blank? %>
+            <%= content_tag :p, markdown(@task.description) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <div class="card card-body">
+          <h5 class="card-title">Somethingsomethingscheduling</h5>
+          aAaAaAaAAaAaAAaaAAaAAaaaAaaaaAAAaAAAaaaAAAaaaaAAaaaAAAAaaaAAAAaaAAAaaaaAAaaaAAAAAaAAAAAaAAAAAAAaaAaaaAaa
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

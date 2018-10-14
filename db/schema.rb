@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_192050) do
+ActiveRecord::Schema.define(version: 2018_10_14_184921) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -143,15 +143,8 @@ ActiveRecord::Schema.define(version: 2018_10_07_192050) do
     t.integer "timeslot_id", null: false
   end
 
-  create_table "taskees", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "task_id"
-    t.boolean "completed", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_taskees_on_task_id"
-    t.index ["user_id"], name: "index_taskees_on_user_id"
-  end
+# Could not dump table "taskees" because of following StandardError
+#   Unknown type '' for column 'time_estimate'
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
@@ -159,6 +152,7 @@ ActiveRecord::Schema.define(version: 2018_10_07_192050) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hash_id"
   end
 
   create_table "timeslots", force: :cascade do |t|

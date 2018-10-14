@@ -1,0 +1,5 @@
+<% provide(:title, "New task") %>
+<h2>New task</h2>
+<% if current_user.can_do :teach %>
+  <%= render 'tasksparams', url: tasks_url, submit_text: "Create" %>
+<% end %>
