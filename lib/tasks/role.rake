@@ -17,7 +17,8 @@ namespace :role do
         name: "Moderator",
         id: 2,
         color: "32ba3d",
-        approve: true
+        approve: true,
+        moderate: true
       },
       {
         name: "Dean",
@@ -36,16 +37,23 @@ namespace :role do
       {
         name: "Faculty",
         id: 5,
+<<<<<<< HEAD
         color: "ffae00",
         teach: true
 
+=======
+        color: "ffae00"
+>>>>>>> master
       },
       {
         name: "Banned",
         id: 6,
         color: "333333",
         banned: true
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
       }
     ].each do |r|
       Role.create!(r)

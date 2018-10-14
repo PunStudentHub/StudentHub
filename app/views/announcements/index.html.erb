@@ -1,13 +1,25 @@
 <% provide(:title, "Announcements") %>
-<%= will_paginate @announcements %>
+<div class="row navigation-tools">
+  <div class="col-lg-6">
+    <%= will_paginate @announcements %>
+  </div>
+  <div class="col-lg-6">
+    
+  </div>
+</div>
 <div class="card">
   <div class="card-header blue darken-3 white-text">
-    <h3 class="card-title">
-      Announcements
-      <% if logged_in? && current_user.can_do(:moderate)%>
-        <%= link_to ("<i class='fas fa-plus fa-lg' style='color: dodgerblue;'></i>").html_safe, new_announcement_path, class: "btn btn-sm btn-white float-right card-header-button"%>
+    <div class="float-left">
+      <h4 class="card-title">
+        Announcements
+      </h4>
+    </div>
+    <div class="float-right">
+      <% if logged_in? %>
+        <%= link_to ("New Announcement").html_safe, new_announcement_path, 
+          class: "btn btn-sm btn-primary grey float-right"%>
       <% end %>
-    </h3>
+    </div>
   </div>
   <div class="card-body" style="padding: 0px;">
     <ul class="list-group list-group-flush">

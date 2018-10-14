@@ -11,16 +11,14 @@ The Punahou Student Hub is a way for students to get informed about what's happe
 We are always looking for new ideas. If you have one, don't hesitate to contact one of our [admins](https://punahoustudenthub.herokuapp.com/staff)
 
 #### Long-term features
-- Club info and contact information, linked with events
 - Time management system with scheduler
 - Marketplace for people to sell textbooks and other stuff
 - Lunch menus
-
+- To-Do List
 
 #### Small stuff we want to add and fix
 - Better filtering for announcements
 - Better date/time input in events
-- Put the cycle day / time on the front page
 
 We also have a [blog](https://punahoustudenthub.herokuapp.com/blog) where talk about a variety of things. Please check it out!
 

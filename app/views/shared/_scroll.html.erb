@@ -1,0 +1,11 @@
+<div class="float-right btn-group" role="group">
+  <% disabled = ((object.class.where(approved: true).first == object)? "disabled":"") %>
+  <%= link_to object.next(current_user) do %>
+    <%= button_tag ("<i class='fas fa-chevron-left'></i>").html_safe, type: "button",
+      class: "btn btn-sm btn-outline-blue-grey darken-3 btn-child " + disabled %>
+  <% end %>
+  <%= link_to object.prev(current_user) do %>
+    <%= button_tag ("<i class='fas fa-chevron-right'></i>").html_safe, type: "button",
+      class: "btn btn-sm btn-outline-blue-grey darken-3 btn-child" %>
+  <% end %>
+</div>

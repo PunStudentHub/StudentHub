@@ -96,6 +96,10 @@ body {
   margin-bottom: 0px;
 }
 
+.no-link-padding {
+  height: 100px;
+}
+
 .see-more-section {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -109,6 +113,11 @@ body {
 .card-title {
   margin-bottom: 0px;
   font-family: "Roboto Condensed";
+}
+
+.lato-title {
+  margin-bottom: 0px;
+  font-family: "Lato";
 }
 
 .btn {
@@ -168,10 +177,7 @@ i {
 }
 
 @media only screen and (max-width: 767px) {
-  .custom-flex-right{
-    justify-content: flex-start;
-    margin-top: 8px;
-  }
+
 }
 
 .event-card-title {
@@ -181,4 +187,47 @@ i {
 
 .rsvp {
   min-width: 150px
+}
+
+.card {
+  -webkit-border-radius: 0.125rem !important;
+     -moz-border-radius: 0.125rem !important;
+          border-radius: 0.125rem !important;
+}
+
+.options {
+  display:flex;
+  align-items:flex-end;
+  margin-left: 4px;
+}
+.options i {
+  margin-left: 4px;
+}
+.approve-wrapper {
+  overflow:hidden;
+  height:23px;
+  width:18px;
+  margin-right: 4px;
+}
+
+hr {
+  margin: 10px 0px 10px 0px !important;
+}
+
+.row ul {
+  margin-bottom: 0px;
+}
+
+.navigation-tools {
+  margin-bottom: 15px !important;
+}
+
+.navigation-tools-back {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+
+}
+
+.btn-group > .btn, .btn-child {
+  margin-left: -2px !important;
 }

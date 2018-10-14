@@ -1,13 +1,34 @@
 class AnnouncementsController < ApplicationController
 
-  before_action -> {has_permission(:moderate)}, except: [:index, :show]
+  before_action -> {has_permission(:moderate)}, only: [:edit, :update, :destroy]
+  before_action :not_banned, only: [:create, :new]
+
+  include Approvable
+
+  def linked_model 
+    Announcement
+  end
 
   def show
     @announcement = Announcement.find_by_hash_id(params[:id])
   end
 
   def index
-    @announcements = helpers.filter_class_years(Announcement).paginate(page: params[:page], per_page: 25)
+    if logged_in?
+      if current_user.can_do (:approve)
+        @announcements =  Announcement.filter_class_years(current_user)
+                                      .paginate(page: params[:page], per_page: 25)
+        return
+      else
+        @announcements =  Announcement.filter_class_years(current_user)
+                                      .approved_announcements
+                                      .paginate(page: params[:page], per_page: 25)
+        return
+      end
+    end
+
+    @announcements =  Announcement.approved_announcements
+                                  .paginate(page: params[:page], per_page: 25)
   end
 
   def destroy
@@ -32,16 +53,22 @@ class AnnouncementsController < ApplicationController
 
   def create
     @announcement = current_user.announcements.build(announcement_params)
+    @announcement.approved = !!(current_user.can_do(:approve))
     if (@announcement.save)
       flash[:success] = "Announcement created!"
       redirect_to @announcement
+      if (!@announcement.approved)
+        flash[:success] += " It will be shown after a moderator approves it!"
+      end
     else
       render 'new'
     end
+
+    
   end
 
   def new
-    @announcement = current_user.announcements.build if current_user.can_do :moderate
+    @announcement = current_user.announcements.build
   end
 
   private

@@ -30,7 +30,7 @@ class BlogController < ApplicationController
       flash[:success] = "Blogpost updated"
       redirect_to blog_index_url + '#' + @blogpost.hash_id
     else
-      #render 'edit'
+      render 'edit'
     end
   end
 

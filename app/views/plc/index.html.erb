@@ -1,15 +1,16 @@
 <% provide :title, "PLC" %>
 <% letters = %w{A B C D E F} %>
+
 <div class="row">
   <div class="col-sm-8">
     <div class="card">
       <div class="card-header blue darken-3 white-text">
-        <h3 class="card-title">
+        <h4 class="card-title">
           Peer Learning Center
-          
+
           <small id="subject-name"></small>
-          
-        </h3>
+
+        </h4>
       </div>
       <div class="card-body" style="padding: 0px">
         <table class="plc-table">
@@ -35,9 +36,9 @@
   <div class="col-sm-4">
     <div class="card">
       <div class="card-header blue darken-3 white-text" style="padding-left: 12px;" id="test">
-        <h3 class="card-title">
+        <h4 class="card-title">
           Select Subject
-        </h3>
+        </h4>
       </div>
       <div class="card-body" style="padding: 0px;">
         <div class="plc-list" id="list">
@@ -48,41 +49,38 @@
 </div>
 
 <script>
+  arr = <%= @array.to_json.html_safe %>;
+
   $('#list').html("");
   <% @subjects.each do |sub| %>
-      $('#list').append($('<a></a>')
-          .append($('<div></div>')
-              .attr('class', 'plc-list-item list-group-item-action plc-subject')
-              .html("<%= sub.name %>")
-              .attr('id', '<%= sub.hash_id %>'))
-          .click(function() {
-            $('.timeslot').attr('class', 'plc-cell timeslot')
-            $('.plc-subject').attr('class', 'plc-list-item list-group-item-action plc-subject')
-            $('#' + "<%= sub.hash_id %>" ).addClass('selected')
-            $('#subject-name').html("<%=sub.name%>")
-            $.ajax({
-              type: 'GET',
-              url: '/plc/subject',
-              data: { subject: "<%= sub.hash_id %>" }, 
-              success: function(data, textStatus, jqXHR) {
-                slots = data.timeslots
-
-                for (var i = 0; i < slots.length; i++) {
-                  highlight(slots[i][0], slots[i][1])
-                }
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                console.log("banans")
-                console.log(errorThrown)
-              }
-            })
-          }))
+    $('#list').append($('<a></a>')
+        .append($('<div></div>')
+            .attr('class', 'plc-list-item list-group-item-action plc-subject')
+            .html("<%= sub.name %>")
+            .attr('id', '<%= sub.hash_id %>'))
+        .click(function() {
+          $('.timeslot').attr('class', 'plc-cell timeslot')
+          $('.plc-subject').attr('class', 'plc-list-item list-group-item-action plc-subject')
+          $('#' + "<%= sub.hash_id %>" ).addClass('selected')
+          $('#subject-name').html("<%=sub.name%>");
+          for (var i = 0; i < arr[arrNum("<%= sub.hash_id %>")].timeslots.length; i++) {
+            highlight(arr[arrNum("<%= sub.hash_id %>")].timeslots[i][0], arr[arrNum("<%= sub.hash_id %>")].timeslots[i][1])
+          }
+          //console.log(arr)
+        }))
   <% end %>
 
   function highlight(col, row) {
     $('#cell-' + col + "-" + row).addClass('highlighted')
   }
 
+  function arrNum(id) {
+    for(var i = 0; i < arr.length; i++) {
+      if(arr[i].hash_id == id) {
+        return i;
+      }
+    }
+  }
 /*
   document.getElementById("list").onscroll = function() {
     if(document.getElementById("list").scrollTop != 0) {

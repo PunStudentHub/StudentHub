@@ -1,6 +1,6 @@
 <%= form_for(@event, url: url) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  
+
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: "form-control" %>
@@ -26,6 +26,23 @@
     <%= f.datetime_select :end_time, :order => [:month, :day, :year, :hour, :minute] %>
   </div>
 
+  <% unless url.nil? %>
+    <% if current_user.leaderships.any? %>
+      <div class="form-group">
+        <label style="margin-bottom: 0px">Club</label>
+        <%= f.collection_radio_buttons(:club, clubs, :id, :name) do |club| %>
+          <div class="custom-control custom-radio">
+            <%= club.radio_button(class: "custom-control-input") %>
+            <%= club.label(class: "custom-control-label") %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 
-  <%= f.submit submit_text, class: "btn btn-primary" %>
+  <% if submit_text == "Post" || submit_text == "Send to purgatory"%>
+    <%= f.submit submit_text, class: "btn blue darken-3" %>
+  <% elsif submit_text == "Save Edits"%>
+    <%= f.submit submit_text, class: "btn btn-outline-warning" %>
+  <% end %>
 <% end %>

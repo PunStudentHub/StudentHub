@@ -1,9 +1,8 @@
-<% if logged_in? && (event.approved  || current_user.can_do(:approve)) && event.start_time > Time.zone.now %>
+<% if logged_in? && (event.approved  || current_user.can_do(:approve)) %>
 <% approved = (current_user.can_do(:approve) && !event.approved) ? "grey lighten-3" : "" %>
 <% rsvp = event.users.exists?(current_user.id) %>
 <% id = event.id %>
-
-  <li class="list-group-item <%= approved %>" id="id" >
+  <%= content_tag :li, class: "list-group-item " + approved, id: event.hash_id do %>
     <div class="row">
       <div class="col-md-2 custom-flex-center">
         <span>
@@ -32,23 +31,25 @@
       <% end %>
       <% if event.approved %>
         <% unless rsvp %>
-          <%= link_to "Not Attending", rsvp_event_path(:id => event.id), method: :rsvp, class: "btn btn-sm btn-outline-blue-grey float-right rsvp" %>
+          <%= content_tag :a, "Not Attending", class: "btn btn-sm btn-outline-blue-grey float-right rsvp",
+          onclick: "rsvp(\"#{event.hash_id}\", true)" %>
         <% else %>
-          <%= link_to "Attending", unrsvp_event_path(:id => event.id), method: :unrsvp, class: "btn btn-sm btn-outline-success float-right rsvp" %>
+          <%= content_tag :a, "Attending", class: "btn btn-sm btn-outline-success float-right rsvp",
+          onclick: "rsvp(\"#{event.hash_id}\", false)" %>
         <% end %>
       <% end %>
       <% if current_user.can_do(:approve) %>
-        <div class="no-link-padding">
-          <% unless event.approved %>
-            <%= link_to ("<i class='far fa-check-square' style='margin-left: 9px; margin-right: -4px;'></i>").html_safe, approve_event_path(id: event.id), method: :approve, class: "text-success" %>
-          <% end %>
-          <%= link_to ("<i class='far fa-edit' style='margin-left: 9px;'></i>").html_safe, edit_event_path(id: event.id), class: "text-warning" %>
+        <div class="options">
+
+          <%= render 'shared/approve_button', model_name: 'event', object: event %>
+
+          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_event_path(id: event.id), class: "text-warning" %>
           <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, event_path(event), method: :delete, class: "text-danger", data: {confirm: "Are you sure you want to do this?"} %>
         </div>
       <% end %>
     </div>
   </div>
-</li>
+<% end %>
 <% elsif !logged_in? %>
   <% flash.now[:danger] = "Log in to view events!" %>
 <% end %>

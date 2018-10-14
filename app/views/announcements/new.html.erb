@@ -1,3 +1,15 @@
 <% provide(:title, "New Announcement") %>
-<h2>New Announcement</h2>
-<%= render 'announcements/announcementparams', url: announcements_url, submit_text: "Post" %>
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card">
+      <div class="card-header blue darken-3 white-text">
+        <h4 class="card-title" style="text-align: center;">
+          New Announcement
+        </h4>
+      </div>
+      <div class="card-body">
+        <%= render 'announcements/announcementparams', url: announcements_url, submit_text: "Post" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_195237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "hash_id"
+    t.boolean "approved"
     t.index ["hash_id"], name: "index_announcements_on_hash_id", unique: true
     t.index ["user_id", "created_at"], name: "index_announcements_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_announcements_on_user_id"
@@ -52,6 +53,25 @@ ActiveRecord::Schema.define(version: 2018_10_14_195237) do
     t.integer "user_id", null: false
   end
 
+  create_table "club_members", force: :cascade do |t|
+    t.integer "club_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "accepted", default: false
+  end
+
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "president_id"
+    t.string "hash_id"
+    t.boolean "approved", default: false
+    t.index ["president_id"], name: "index_clubs_on_president_id"
+  end
+
   create_table "cycle_days", force: :cascade do |t|
     t.string "letter"
     t.datetime "created_at", null: false
@@ -70,6 +90,8 @@ ActiveRecord::Schema.define(version: 2018_10_14_195237) do
     t.datetime "end_time"
     t.string "hash_id"
     t.boolean "approved", default: false
+    t.integer "club_id"
+    t.index ["club_id"], name: "index_events_on_club_id"
     t.index ["start_time", "user_id", "created_at"], name: "index_events_on_start_time_and_user_id_and_created_at"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -94,6 +116,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_195237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "teach", default: false
+    t.boolean "banned", default: false
   end
 
   create_table "roles_users", id: false, force: :cascade do |t|

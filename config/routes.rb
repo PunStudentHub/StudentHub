@@ -19,14 +19,26 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
+
   post '/event/approve', to: 'events#approve', as: 'approve_event'
+  get '/event/get_partial', to: 'events#get_partial', as: 'event_get_partial'
   post '/event/rsvp', to: 'events#rsvp', as: 'rsvp_event'
   post '/event/unrsvp', to: 'events#unrsvp', as: 'unrsvp_event'
+
+  post '/announcement/approve', to: 'announcements#approve', as: 'approve_announcement'
+  get '/announcement/get_partial', to: 'announcements#get_partial', as: 'announcement_get_partial'
+
+  post '/club/approve', to: 'clubs#approve', as: 'approve_club'
+  get '/club/get_partial', to: 'clubs#get_partial', as: 'club_get_partial'
 
   resources :users, only: [:show, :index, :destroy, :edit, :update] do
     patch :update_perms, on: :member
   end
-  resources :blog, only: [:new, :create, :edit, :update, :destroy, :index]
+  resources :blog, except: [:show]
+  resources :clubs do
+    post :apply, on: :member
+    post :accept_user, on: :member
+  end
   resources :events
   resources :tasks
   resources :sections

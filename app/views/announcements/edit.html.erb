@@ -1,3 +1,16 @@
 <% provide(:title, "Editing Announcement") %>
-<h2>Editing Announcement: <%= @announcement.title %></h2>
-<%= render 'announcements/announcementparams', url: nil, submit_text: "Save Edits" %>
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card">
+      <div class="card-header warning-color-dark white-text">
+        <h4 class="card-title" style="text-align: center;">
+          Edit Announcement
+        </h4>
+      </div>
+      <div class="card-body">
+        <h2><%= @announcement.title %></h2>
+        <%= render 'announcements/announcementparams', url: nil, submit_text: "Save Edits" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,17 @@
 class EventsController < ApplicationController
 
+  include Approvable
+
+
+  def linked_model 
+    Event
+  end
+
   before_action -> {has_permission :moderate}, only: [:destroy]
-  before_action -> {has_permission :approve}, only: [:approve]
+
+  before_action :not_banned, only: [:new, :create, :update, :edit]
+  before_action :logged_in_user
+
 
   def show
     @event = Event.friendly.find(params[:id])
@@ -11,9 +21,9 @@ class EventsController < ApplicationController
     #eventually should display as a calender, troopwebhostesque
     if logged_in?
       if current_user.can_do(:approve)
-        @events = Event.all
+        @events = Event.future_events
       else
-        @events = Event.all.approved_events
+        @events = Event.future_events.approved_events
       end
     end
   end
@@ -42,18 +52,16 @@ class EventsController < ApplicationController
     @event = current_user.events.build
   end
 
-  def approve
-    @event = Event.friendly.find(params[:id])
-    @event.update_attributes(approved: true)
-    redirect_to request.referrer
-  end
+
 
   def rsvp
     @event = Event.friendly.find(params[:id])
     unless @event.users.exists?(current_user.id)
       @event.users << current_user
     end
-    redirect_to request.referrer
+    if (params[:redirect])
+      redirect_to request.referrer
+    end
   end
 
   def unrsvp
@@ -61,7 +69,9 @@ class EventsController < ApplicationController
     if @event.users.exists?(current_user.id)
       @event.users.destroy(current_user)
     end
-    redirect_to request.referrer
+    if (params[:redirect])
+      redirect_to request.referrer
+    end
   end
 
   def create
@@ -81,11 +91,20 @@ class EventsController < ApplicationController
     end
   end
 
+
+
   private
 
   def event_params
-    params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time)
-
+    new_params = params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time, :club)
+    unless new_params[:club].nil?
+      unless new_params[:club].empty?
+        new_params[:club] = Club.find(new_params[:club]) 
+      else
+        new_params[:club] = nil
+      end
+    end
+    new_params
   end
 
 end
