@@ -11,13 +11,31 @@
         <div class="card card-body">
           <h5 class="card-title">Assignment Details</h5>
           <ul class= "list-group list-group-flush">
-            <% if @task.duedate %>
-              <li class="list-group-item">Duedate: <%= @task.duedate %></li>
-            <% end %>
-            <% if current_user.taskees.find_by(task_id: @task.id).time_estimate %>
-              <li class="list-group-item">Time estimate: <%= current_user.taskees.find_by(task_id: @task.id).time_estimate / 60 %> minutes</li>
-            <% end %>
-            <li class="list-group-item">Status: <%= current_user.taskees.find_by(task_id: @task.id).completed %></li>
+              <li class="list-group-item">
+                Duedate:
+                <% if @task.duedate %>
+                  <%= @task.duedate %>
+                <% else %>
+                  input here
+                <% end %>
+              </li>
+              <li class="list-group-item">
+                Time estimate:
+                <% if current_user.taskees.find_by(task_id: @task.id).time_estimate %>
+                  <%= current_user.taskees.find_by(task_id: @task.id).time_estimate / 60 %>
+                <% else %>
+                  input here
+                <% end %>
+                minutes
+            </li>
+            <li class="list-group-item">
+              Status:
+              <% if current_user.taskees.find_by(task_id: @task.id).completed %>
+                Complete!
+              <% else %>
+                In progress
+              <% end %>
+            </li>
           </ul>
         </div>
       </div>
