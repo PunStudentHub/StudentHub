@@ -39,10 +39,9 @@
       </div>
     <% end %>
   <% end %>
-
-  <% if submit_text == "Post" || submit_text == "Send to purgatory"%>
-    <%= f.submit submit_text, class: "btn blue darken-3" %>
+  <% if submit_text == "Post" || submit_text == "Send to purgatory" %>
+    <%= link_to submit_text, "", :onclick => "$('#new_event').submit()", class: "btn btn-info btn-block waves-effect" %>
   <% elsif submit_text == "Save Edits"%>
-    <%= f.submit submit_text, class: "btn btn-outline-warning" %>
+    <%= link_to submit_text, "", :onclick => "$('.edit_event')[0].submit()", class: "btn btn-warning btn-block waves-effect" %>
   <% end %>
 <% end %>
