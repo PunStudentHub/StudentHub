@@ -40,8 +40,8 @@
     <% end %>
   <% end %>
   <% if submit_text == "Post" || submit_text == "Send to purgatory" %>
-    <%= link_to submit_text, "", :onclick => "$('#new_event').submit()", class: "btn btn-info btn-block waves-effect" %>
+    <%= link_to submit_text, "", :onclick => "$('#new_event').submit()", class: "btn btn-info btn-block" %>
   <% elsif submit_text == "Save Edits"%>
-    <%= link_to submit_text, "", :onclick => "$('.edit_event')[0].submit()", class: "btn btn-warning btn-block waves-effect" %>
+    <%= link_to submit_text, "", :onclick => "$('.edit_event')[0].submit()", class: "btn btn-warning btn-block" %>
   <% end %>
 <% end %>
