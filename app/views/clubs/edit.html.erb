@@ -1,3 +1,16 @@
-<% provide :title, "Editing #{@club.name}" %>
-<%= content_tag :h2, "Editing #{@club.name}" %>
-<%= render 'clubs/clubparams', url: nil, submit_text: "Save Edits" %>
+<% provide(:title, "Editing Club") %>
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card">
+      <div class="card-header warning-color-dark white-text">
+        <h4 class="card-title" style="text-align: center;">
+          Edit Club
+        </h4>
+      </div>
+      <div class="card-body">
+        <h2 class="lato-title"><%= @club.name %></h2>
+        <%= render 'clubs/clubparams', url: nil, submit_text: "Save Edits" %>
+      </div>
+    </div>
+  </div>
+</div>

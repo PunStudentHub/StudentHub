@@ -4,12 +4,13 @@
   <div class="card-header blue darken-3 white-text">
     <h4 class="card-title float-left">
       Clubs
-      
+
     </h4>
     <% if logged_in? %>
-        <%= link_to ("New Club").html_safe, new_club_path, 
-          class: "btn btn-sm btn-primary grey float-right"%>
-      <% end %>
+      <div class="float-right">
+        <%= link_to ("New Club").html_safe, new_club_path, class: "btn btn-sm btn-info"%>
+      </div>
+    <% end %>
   </div>
   <div class="card-body" style="padding: 0px;">
     <ul class="list-group list-group-flush">
