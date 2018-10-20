@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action -> { correct_user(:admin) }, only: [:edit, :update]
   before_action -> { has_permission(:admin) }, only: [:destroy, :update_perms]
-  before_action -> { has_permission(:approve) }, only: [:index] 
+  before_action -> { has_permission(:approve) }, only: [:index]
   before_action :not_logged_in, only: [:new, :create]
 
 
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by_hash_id(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "Settings updated"
       redirect_to @user
     else
       render 'edit'
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find_by_hash_id(params[:id]).destroy
-    flash[:success] = "User Deleted"
+    flash[:success] = "User deleted"
     redirect_to users_url
   end
 

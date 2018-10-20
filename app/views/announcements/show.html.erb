@@ -17,26 +17,32 @@
         </div>
         <div>
           <h2 class="lato-title"><%= @announcement.title %></h2>
-            <small>
-            Created by
-              <%= render 'users/colored_name_link', user: User.find(@announcement.user_id) %>
-            </small>
-            <%= render 'users/badges', user: User.find(@announcement.user_id) %>
-            <small>
-              <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago<% if @announcement.updated_at != @announcement.created_at %>,
-                Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago
+          <div class="row">
+            <div class="col-lg-11">
+              <small>
+              Created by
+                <%= render 'users/colored_name_link', user: User.find(@announcement.user_id) %>
+              </small>
+              <%= render 'users/badges', user: User.find(@announcement.user_id) %>
+              <small>
+                <%= distance_of_time_in_words(@announcement.created_at.to_time, Time.now) %> ago<% if @announcement.updated_at != @announcement.created_at %>,
+                  Last updated <%= distance_of_time_in_words(@announcement.updated_at.to_time, Time.now) %> ago
+                <% end %>
+              </small>
+              <%= render 'shared/class_year_tags', object: @announcement %>
+            </div>
+            <div class="col-lg-1 custom-flex-bottom custom-flex-right">
+              <% if logged_in? %>
+                <% if (current_user.can_do :moderate ) %>
+                  <div class="float-right">
+                    <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_announcement_path(@announcement), class: "text-warning"%>
+                    <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, announcement_path(@announcement), method: :delete, class: "text-danger",
+                            data: {confirm: "Are you sure you want to do this?"} %>
+                  </div>
+                <% end %>
               <% end %>
-            </small>
-            <%= render 'shared/class_year_tags', object: @announcement %>
-            <% if logged_in? %>
-              <% if (current_user.can_do :moderate ) %>
-                <div class="float-right">
-                  <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_announcement_path(@announcement), class: "text-warning"%>
-                  <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, announcement_path(@announcement), method: :delete, class: "text-danger",
-                          data: {confirm: "Are you sure you want to do this?"} %>
-                </div>
-              <% end %>
-            <% end %>
+            </div>
+          </div>
         </div>
         <hr />
         <div>
