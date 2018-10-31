@@ -15,6 +15,7 @@ We are always looking for new ideas. If you have one, don't hesitate to contact 
 - Marketplace for people to sell textbooks and other stuff
 - Lunch menus
 - To-Do List
+- Search Bar ?
 
 #### Small stuff we want to add and fix
 - Better filtering for announcements

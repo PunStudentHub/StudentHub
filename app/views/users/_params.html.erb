@@ -4,13 +4,12 @@
   <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
     <label>See posts for these classes:</label>
-    <%= f.collection_check_boxes(:class_year_ids, ClassYear.all, :id, :id) do |c| %> 
+    <%= f.collection_check_boxes(:class_year_ids, ClassYear.all, :id, :id) do |c| %>
       <div class="custom-control custom-checkbox">
         <%= c.check_box(class: "custom-control-input")%>
-        <%= c.label(class: "custom-control-label") %> 
+        <%= c.label(class: "custom-control-label") %>
       </div>
     <% end %>
   </div>
-  <br>
   <%= f.submit submit_text, class: "btn btn-primary" %>
 <%end%>

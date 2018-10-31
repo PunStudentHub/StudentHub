@@ -5,7 +5,7 @@ class AnnouncementsController < ApplicationController
 
   include Approvable
 
-  def linked_model 
+  def linked_model
     Announcement
   end
 
@@ -34,7 +34,7 @@ class AnnouncementsController < ApplicationController
   def destroy
     Announcement.find_by_hash_id(params[:id]).delete
     flash[:success] = "Announcement deleted!"
-    redirect_to announcements_url
+    redirect_back(fallback_location: root_path)
   end
 
   def edit
@@ -64,7 +64,7 @@ class AnnouncementsController < ApplicationController
       render 'new'
     end
 
-    
+
   end
 
   def new

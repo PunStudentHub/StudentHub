@@ -1,3 +1,15 @@
-<% provide :title, "New Club" %>
-<h2>New Club</h2>
-<%= render 'clubs/clubparams', url: clubs_url, submit_text: "Create Club" %>
+<% provide(:title, "Club") %>
+<div class="row">
+  <div class="col-lg-10">
+    <div class="card">
+      <div class="card-header info-color white-text">
+        <h4 class="card-title" style="text-align: center;">
+          New Club
+        </h4>
+      </div>
+      <div class="card-body">
+        <%= render 'clubs/clubparams', url: clubs_url, submit_text: "Create Club" %>
+      </div>
+    </div>
+  </div>
+</div>

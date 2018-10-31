@@ -11,5 +11,9 @@
     <%= f.text_area :description, class: "form-control" %>
   </div>
 
-  <%= f.submit submit_text, class: "btn btn-primary" %>
+  <% if submit_text == "Create Club" %>
+    <%= link_to submit_text, "", :onclick => "$('#new_club').submit()", class: "btn btn-info btn-block" %>
+  <% elsif submit_text == "Save Edits"%>
+    <%= link_to submit_text, "", :onclick => "$('.edit_announcement')[0].submit()", class: "btn btn-warning btn-block" %>
+  <% end %>
 <% end %>

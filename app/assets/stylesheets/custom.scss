@@ -172,6 +172,12 @@ i {
   align-items: center;
 }
 
+.custom-flex-bottom {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: flex-end;
+}
+
 .custom-flex-right {
   justify-content: flex-end;
 }
