@@ -1,1 +1,1 @@
-<%= link_to (render "users/colored_name", user: user), user %> 
+<% if logged_in? %> <%= link_to (render "users/colored_name", user: user), user %> <% end %> 

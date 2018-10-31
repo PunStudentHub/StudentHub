@@ -6,7 +6,7 @@ class ClubsController < ApplicationController
     Club
   end
 
-  before_action :logged_in_user, except: [:index, :show]
+  before_action :logged_in_user
   before_action :club_president, only: [:accept_user, :edit, :update]
   before_action :not_banned, except: [:index, :show]
   before_action -> {has_permission :admin}, only: [:destroy]

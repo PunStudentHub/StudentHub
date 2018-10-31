@@ -15,9 +15,11 @@
       <div class="col-sm-10 custom-flex-center">
         <h6 class="no-margin" style="width: 100%"><%= link_to announcement.title, announcement %></h6>
         <small style="width: 100%">
-          Posted by
-          <%= render 'users/colored_name_link', user: User.find(announcement.user_id) %>
+          Posted <% if logged_in? %>by<% end %>
+    
+          <%= render 'users/colored_name_link', user: User.find(announcement.user_id) %> 
           <%= distance_of_time_in_words(announcement.created_at.to_time, Time.now) + " ago" %>
+          
 
         </small>
       </div>

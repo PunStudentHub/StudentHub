@@ -18,7 +18,7 @@
         <div>
           <h2 class="lato-title"><%= @announcement.title %></h2>
             <small>
-            Created by
+            Created <% if logged_in? %>by<% end %>
               <%= render 'users/colored_name_link', user: User.find(@announcement.user_id) %>
             </small>
             <%= render 'users/badges', user: User.find(@announcement.user_id) %>

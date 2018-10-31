@@ -27,6 +27,9 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
+      if (@user.class_years.empty?)
+        @user.class_years = ClassYear.all
+      end
     else
       render 'edit'
     end
