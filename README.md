@@ -2,26 +2,17 @@
 
 ---
 
-The Punahou Student Hub is a way for students to get informed about what's happening on campus, regarding announcements, campus events, clubs, the peer learning center, and much much more. The site is live [here.](https://punahoustudenthub.herokuapp.com)
+The Punahou Student Hub is a way for students to get informed about what's happening on campus, regarding announcements, campus events, clubs, the peer learning center, and much much more. The site is live [here.](https://punahoustudenthub.com)
 
 ---
 
-### To-Do List
+### Issue Tracking
 
-We are always looking for new ideas. If you have one, don't hesitate to contact one of our [admins](https://punahoustudenthub.herokuapp.com/staff)
+We are always looking for new ideas. If you have one, don't hesitate to contact one of our [admins](https://punahoustudenthub.com/staff)
 
-#### Long-term features
-- Time management system with scheduler
-- Marketplace for people to sell textbooks and other stuff
-- Lunch menus
-- To-Do List
-- Search Bar ?
+If you have a GitHub account, feel free to create a new issue on [our issue tracker](https://github.com/PunStudentHub/StudentHub/issues). Our development priorities can be found on our [GitHub project boards](https://github.com/PunStudentHub/StudentHub/projects).
 
-#### Small stuff we want to add and fix
-- Better filtering for announcements
-- Better date/time input in events
-
-We also have a [blog](https://punahoustudenthub.herokuapp.com/blog) where talk about a variety of things. Please check it out!
+We also have a [blog](https://punahoustudenthub.com/blog) where talk about a variety of things. Please check it out!
 
 ---
 
