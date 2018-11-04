@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
     if User.find_by(email: @user.email)
       session[:user_id] = @user.id
       log_in @user
-      redirect_to user_path(@user)
+      flash[:success] = "Logged in"
+      redirect_to root_url
     else
       if @user.valid?
         @user.save

@@ -1,5 +1,7 @@
-<% user.roles.each do |r| %>
-  <span class="badge" style="color: white; background-color: #<%= r.color %>"><%= r.name %></span>
+<% if logged_in? %>
+  <% user.roles.each do |r| %>
+    <span class="badge" style="color: white; background-color: #<%= r.color %>"><%= r.name %></span>
+  <% end %>
 <% end %>
 
 <!--%= render 'users/badges', user: user %-->
