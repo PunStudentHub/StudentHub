@@ -1,0 +1,10 @@
+<% unless object.rejected || object.approved %>
+  <%= content_tag :a,
+    class: "text-danger approve_icon",
+    onclick: "reject('#{model_name}', '#{object.hash_id}')",
+    id: "reject-" + object.hash_id do %>
+      
+    <i class="fas fa-ban"></i>
+  <% end %>
+
+<% end %>

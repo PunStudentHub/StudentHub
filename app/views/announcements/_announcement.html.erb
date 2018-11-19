@@ -30,6 +30,7 @@
 
           <% if current_user.can_do :approve %>
             <%= render "shared/approve_button", model_name: "announcement", object: announcement %>
+            <%= render "shared/reject_button", model_name: "announcement", object: announcement %>
           <% end %>
 
 
