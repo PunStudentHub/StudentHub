@@ -1,5 +1,6 @@
 class Club < ApplicationRecord
   include Friendlyable
+  include ApprovableModel
 
   has_many :events
   has_many :club_members

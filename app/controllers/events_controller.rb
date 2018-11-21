@@ -2,7 +2,6 @@ class EventsController < ApplicationController
 
   include Approvable
 
-
   def linked_model 
     Event
   end
@@ -18,13 +17,24 @@ class EventsController < ApplicationController
   end
 
   def index
-    #eventually should display as a calender, troopwebhostesque
     if logged_in?
-      if current_user.can_do(:approve)
+      if current_user.can_do (:approve)
         @events = Event.future_events
+        @filter = params[:filter]
+        if params[:filter] == 'Rejected'
+          @events = @events.rejected
+        elsif params[:filter] == 'Approved'
+          @events = @events.approved
+        elsif params[:filter] == 'Pending'
+          @events = @events.awaiting_approval
+        elsif params[:filter] == 'Past'
+          @events = Event.past_events
+        end
       else
-        @events = Event.future_events.approved_events
+        @events = Event.future_events       
       end
+    else
+      @events = Event.future_events.approved
     end
   end
 

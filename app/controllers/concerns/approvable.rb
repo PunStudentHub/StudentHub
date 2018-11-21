@@ -8,7 +8,7 @@ module Approvable
 
   included do
 
-    before_action -> {has_permission :approve}, only: [:approve]
+    before_action -> {has_permission :approve}, only: [:approve, :reject]
 
     def approve
       @object = linked_model.find_by_hash_id(params[:id])

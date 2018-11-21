@@ -2,10 +2,11 @@
 
 <div class="card">
   <div class="card-header blue darken-3 white-text">
-    <h4 class="card-title float-left">
-      Clubs
-
-    </h4>
+    <div class="float-left">
+      <h4 class="card-title">Clubs</h4>
+      <%= render 'shared/filter_dropdown.html.erb', path: clubs_path, timed: false %>
+    </div>
+    
     <% if logged_in? %>
       <div class="float-right">
         <%= link_to ("New Club").html_safe, new_club_path, class: "btn btn-sm btn-info"%>

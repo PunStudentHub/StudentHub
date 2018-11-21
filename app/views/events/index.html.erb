@@ -2,10 +2,12 @@
 <% if logged_in? %>
   <div class="card">
     <div class="card-header blue darken-3 white-text">
-      <h4 class="card-title float-left">
-        Events
-      </h4>
-
+      <div class="float-left">
+        <h4 class="card-title">
+          Events
+        </h4>
+        <%= render 'shared/filter_dropdown.html.erb', path: events_path, timed: true %>
+      </div>
       <div class="float-right">
         <% if logged_in? %>
           <%= link_to ("New Event").html_safe, new_event_path,
@@ -15,11 +17,7 @@
     </div>
     <div class="card-body" style="padding: 0px;">
       <ul class="list-group list-group-flush">
-        <% if current_user.can_do(:approve) %>
-          <%= render @events %>
-        <% else %>
-          <%= render @events.approved_events %>
-        <% end %>
+        <%= render @events %>
       </ul>
     </div>
   </div>

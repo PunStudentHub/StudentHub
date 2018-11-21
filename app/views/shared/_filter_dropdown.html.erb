@@ -1,0 +1,15 @@
+<% if logged_in? %>
+  <% if current_user.can_do(:approve) %>
+    <%= form_tag(path, method: 'GET', enforce_utf8: false) do %>
+      <% if timed %>
+        <%= select_tag "filter", options_for_select(Event::FILTER_OPTIONS + ['Past'], 
+          selected: params[:filter]), 
+          onchange: 'this.form.submit();' %>
+      <% else %>
+        <%= select_tag "filter", options_for_select(Event::FILTER_OPTIONS, 
+          selected: params[:filter]), 
+          onchange: 'this.form.submit();' %>
+      <% end %> 
+    <% end %>
+  <% end %>
+<% end %>

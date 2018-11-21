@@ -2,7 +2,7 @@ class Announcement < ApplicationRecord
 
   include Friendlyable
   include Filterable
-  include Approvable
+  include ApprovableModel
 
   belongs_to :user
   has_and_belongs_to_many :class_years, dependent: :destroy

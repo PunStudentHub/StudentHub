@@ -1,48 +1,46 @@
-<% if logged_in? %>
-  <% if (club.approved? || current_user.can_do(:approve)) %>
-    <% approved = (current_user.can_do(:approve) && !club.approved) ? "grey lighten-3" : "" %>
-    <% show = true %>
-  <% end %>
-<% else %>
-  <% approved = "" %>
-  <% show = true %>
+<% color = "" %>
+<% if !club.approved && !club.rejected %> 
+  <% color = "grey lighten-3" %>
+<% elsif club.rejected %>
+  <% color = "red lighten-4" %>
 <% end %>
 
-<% if show %>
-  <%= content_tag :li,  class: "list-group-item " + approved,
-                        id: club.hash_id,
-                        style: "height: 50px" do %>
-    <div class="row">
-      <div class="col-sm-10 custom-flex-center">
-        <div class="col-sm-7" style="padding: 0px">
-          <h6 class="no-margin" style="width: 100%"><%= link_to club.name, club %></h6>
-        </div>
-        <div class="col-sm-3">
-          <h6 class="text-muted no-margin"><%= pluralize(club.users.count, "member")%></h6>
-        </div>
-
+<% if logged_in? %>
+<%= content_tag :li,  class: "list-group-item " + color,
+                      id: club.hash_id,
+                      style: "height: 50px" do %>
+  <div class="row">
+    <div class="col-sm-10 custom-flex-center">
+      <div class="col-sm-7" style="padding: 0px">
+        <h6 class="no-margin" style="width: 100%"><%= link_to club.name, club %></h6>
       </div>
-      <% if logged_in? %>
-      <div class="col-sm-2 custom-flex-center custom-flex-right">
-        <div class="options" >
-
-          <% if current_user.can_do :approve %>
-            <%= render "shared/approve_button", model_name: "club", object: club %>
-          <% end %> 
-
-
-          <% if (current_user.can_do(:admin)) %>
-
-            <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_club_path(club), class: "text-warning"%>
-            <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, club_path(club), method: :delete, class: "text-danger",
-                    data: {confirm: "Are you sure you want to do this?"} %>
-
-          <% end %> 
-      
-        </div>
+      <div class="col-sm-3">
+        <h6 class="text-muted no-margin"><%= pluralize(club.club_members.accepted_members.count, "member")%></h6>
       </div>
-      
-      <% end %>
-  <% end %>
+
+    </div>
+    <% if logged_in? %>
+    <div class="col-sm-2 custom-flex-center custom-flex-right">
+      <div class="options" >
+
+        <% if current_user.can_do :approve %>
+          <%= render "shared/approve_button", model_name: "club", object: club %>
+          <%= render "shared/reject_button", model_name: "club", object: club %>
+        <% end %> 
+
+
+        <% if (current_user.can_do(:admin)) %>
+
+          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_club_path(club), class: "text-warning"%>
+          <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, club_path(club), method: :delete, class: "text-danger",
+                  data: {confirm: "Are you sure you want to do this?"} %>
+
+        <% end %> 
+    
+      </div>
+    </div>
+    
+    <% end %>
+<% end %>
 
 <% end %>

@@ -53,7 +53,23 @@ class ClubsController < ApplicationController
   end
 
   def index
-    @clubs = Club.all
+    if logged_in?
+      if current_user.can_do (:approve)
+        @clubs = Club.all
+        @filter = params[:filter]
+        if params[:filter] == 'Rejected'
+          @clubs = @clubs.rejected
+        elsif params[:filter] == 'Approved'
+          @clubs = @clubs.approved
+        elsif params[:filter] == 'Pending'
+          @clubs = @clubs.awaiting_approval
+        end
+      else
+        @clubs = Club.approved             
+      end
+    else
+      @clubs = []
+    end
   end
 
 
