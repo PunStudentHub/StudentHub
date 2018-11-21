@@ -1,6 +1,6 @@
 class AnnouncementsController < ApplicationController
 
-  before_action -> {has_permission(:moderate)}, only: [:edit, :update, :destroy]
+  before_action -> {has_permission(:moderate)}, only: [:edit, :update, :destroy, :reject]
   before_action :not_banned, only: [:create, :new]
 
   include Approvable
@@ -16,19 +16,27 @@ class AnnouncementsController < ApplicationController
   def index
     if logged_in?
       if current_user.can_do (:approve)
-        @announcements =  Announcement.filter_class_years(current_user)
-                                      .paginate(page: params[:page], per_page: 25)
-        return
+        @announcements = Announcement.all
+        @filter = params[:filter]
+        if params[:filter] == 'Rejected'
+          @announcements = @announcements.rejected
+        elsif params[:filter] == 'Approved'
+          @announcements = @announcements.approved
+        elsif params[:filter] == 'Pending'
+          @announcements = @announcements.awaiting_approval
+        elsif params[:filter] == 'My Class'
+          @announcements = @announcements.filter_class_years(current_user).approved
+        end
+        @announcements = @announcements.paginate(page: params[:page], per_page: 25)
       else
-        @announcements =  Announcement.filter_class_years(current_user)
-                                      .approved_announcements
-                                      .paginate(page: params[:page], per_page: 25)
-        return
+        @announcements = Announcement.filter_class_years(current_user)
+                                     .approved
+                                     .paginate(page: params[:page], per_page: 25)
       end
+    else
+      @announcements = Announcement.approved
+                                   .paginate(page: params[:page], per_page: 25)
     end
-
-    @announcements =  Announcement.approved_announcements
-                                  .paginate(page: params[:page], per_page: 25)
   end
 
   def destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_011441) do
+ActiveRecord::Schema.define(version: 2018_11_11_144221) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_011441) do
     t.datetime "updated_at", null: false
     t.string "hash_id"
     t.boolean "approved"
+    t.boolean "rejected", default: false
     t.index ["hash_id"], name: "index_announcements_on_hash_id", unique: true
     t.index ["user_id", "created_at"], name: "index_announcements_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_announcements_on_user_id"
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_011441) do
     t.integer "president_id"
     t.string "hash_id"
     t.boolean "approved", default: false
+    t.boolean "rejected", default: false
     t.index ["president_id"], name: "index_clubs_on_president_id"
   end
 
@@ -89,6 +91,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_011441) do
     t.string "hash_id"
     t.boolean "approved", default: false
     t.integer "club_id"
+    t.boolean "rejected", default: false
     t.index ["club_id"], name: "index_events_on_club_id"
     t.index ["start_time", "user_id", "created_at"], name: "index_events_on_start_time_and_user_id_and_created_at"
     t.index ["user_id"], name: "index_events_on_user_id"
@@ -113,6 +116,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_011441) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "teach", default: false
     t.boolean "banned", default: false
   end
 
@@ -130,6 +134,11 @@ ActiveRecord::Schema.define(version: 2018_10_08_011441) do
     t.index ["date"], name: "index_school_days_on_date", unique: true
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -141,6 +150,21 @@ ActiveRecord::Schema.define(version: 2018_10_08_011441) do
   create_table "subjects_timeslots", id: false, force: :cascade do |t|
     t.integer "subject_id", null: false
     t.integer "timeslot_id", null: false
+  end
+
+  create_table "taskees", force: :cascade do |t|
+    t.integer "doer_id"
+    t.string "doer_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "content"
+    t.string "taskee"
+    t.datetime "duedate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "timeslots", force: :cascade do |t|
