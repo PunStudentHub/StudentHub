@@ -12,13 +12,15 @@ module Approvable
 
     def approve
       @object = linked_model.find_by_hash_id(params[:id])
-      @object.update_attributes(approved: true, rejected: false)
+      @object.update_attribute(:approved, true)
+      @object.update_column(:rejected, false)
       #redirect_to request.referrer
     end
 
     def reject
       @object = linked_model.find_by_hash_id(params[:id])
-      @object.update_attributes(rejected: true, approved: false)
+      @object.update_attribute(:approved, false)
+      @object.update_column(:rejected, true)
     end
 
     def get_partial
