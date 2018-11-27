@@ -50,8 +50,26 @@
 }
 
 .plc-list {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: 487px;
+}
+
+.plc-list::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+.plc-list::-webkit-scrollbar-thumb {
+  background-color: #33b5e5;
+	background-image: -webkit-linear-gradient(45deg,
+	                                          rgba(255, 255, 255, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(255, 255, 255, .2) 50%,
+											  rgba(255, 255, 255, .2) 75%,
+											  transparent 75%,
+											  transparent);
 }
 
 
