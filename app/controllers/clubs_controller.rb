@@ -34,7 +34,7 @@ class ClubsController < ApplicationController
   def update
     @club = Club.find_by_hash_id(params[:id])
     if (@club.update_attributes(club_params))
-      flash.now[:success] = "Club updated"
+      flash[:success] = "Club updated"
       redirect_to @club
     else
       render 'edit'
