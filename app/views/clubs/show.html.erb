@@ -8,8 +8,11 @@
       <% if logged_in? %>
         <% if current_user == @club.president %>
           <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
-        <% end %> 
+        <% end %>
       <% end %>
+      <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
+                                           edit_url: edit_club_path(@club),
+                                           destroy_url: club_path(@club) %>
     </div>
   </div>
 </div>
