@@ -54,7 +54,7 @@ class ClubsController < ApplicationController
 
   def index
     if logged_in?
-      if current_user.can_do (:approve)
+      if (current_user.can_do(:approve) || current_user.can_do(:faculty_mod))
         @clubs = Club.all
         @filter = params[:filter]
         if params[:filter] == 'Rejected'

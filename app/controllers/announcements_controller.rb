@@ -15,7 +15,7 @@ class AnnouncementsController < ApplicationController
 
   def index
     if logged_in?
-      if current_user.can_do (:approve)
+      if (current_user.can_do(:approve) || current_user.can_do(:faculty_mod))
         @announcements = Announcement.all
         @filter = params[:filter]
         if params[:filter] == 'Rejected'

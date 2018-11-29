@@ -52,6 +52,22 @@ function reject(model, id) {
   });
 }
 
+function finalize(model, id) {
+  console.log(model + " " + id)
+  $.ajax({
+    type: 'POST',
+    url: '/' + model + '/finalize',
+    data: { id: id }, 
+    success: function(data, textStatus, jqXHR) {
+      update(model, id)
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("banans")
+      console.log(errorThrown)
+    }
+  });
+}
+
 function rsvp(id, status) {
   console.log(id)
   console.log('/event/' + (status? 'rsvp':'unrsvp'))

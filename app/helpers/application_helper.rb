@@ -9,6 +9,18 @@ module ApplicationHelper
     mdcarpet.render(text).html_safe
   end
 
+  def get_background_color_for_partial object
+    if object.approved && object.final
+      ""
+    elsif object.approved
+      "yellow lighten-3"
+    elsif object.rejected
+      "red lighten-4"
+    else
+      "grey lighten-3"
+    end
+  end
+
   def get_title page_name
     default_title = "Punahou Student Hub"
     if page_name.empty?

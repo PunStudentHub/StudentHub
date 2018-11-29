@@ -10,7 +10,8 @@ namespace :role do
         approve: true,
         moderate: true,
         admin: true, 
-        blog: true
+        blog: true,
+        faculty_mod: true
       },
       { 
         name: "Moderator",
@@ -25,7 +26,8 @@ namespace :role do
         color: "800008",
         approve: true,
         moderate: true,
-        admin: true
+        admin: true,
+        faculty_mod: true
       },
       {
         name: "PLC",
@@ -42,10 +44,19 @@ namespace :role do
         id: 6,
         color: "333333",
         banned: true
+      },
+      {
+        name: "Faculty Moderator",
+        id: 7,
+        color: "301d70",
+        faculty_mod: true
       }
     ].each do |r|
       Role.create!(r)
     end
+
+    Role.find(7).update_attribute(:faculty_mod, true)
+    Role.find(3).update_attribute(:faculty_mod, true)
   end
 
 end

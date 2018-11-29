@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   get '/staff', to: 'pages#staff'
   get '/feedback', to: 'pages#feedback'
+
   get '/plc', to: 'plc#index'
   get '/plc/subject', to: 'plc#subject_slots'
+
   delete '/logout', to: 'sessions#destroy'
   get '/filter/get', to: 'filters#get', as: 'get_filter'
   post '/filter/update', to: 'filters#update', as: 'update_filter'
@@ -22,16 +24,19 @@ Rails.application.routes.draw do
 
   post '/event/approve', to: 'events#approve', as: 'approve_event'
   post '/event/reject', to: 'events#reject', as: 'reject_event'
+  post '/event/finalize', to: 'events#finalize', as: 'finalize_event'
   get '/event/get_partial', to: 'events#get_partial', as: 'event_get_partial'
   post '/event/rsvp', to: 'events#rsvp', as: 'rsvp_event'
   post '/event/unrsvp', to: 'events#unrsvp', as: 'unrsvp_event'
 
   post '/announcement/approve', to: 'announcements#approve', as: 'approve_announcement'
   post '/announcement/reject', to: 'announcements#reject', as: 'reject_announcement'
+  post '/announcement/finalize', to: 'announcements#finalize', as: 'finalize_announcement'
   get '/announcement/get_partial', to: 'announcements#get_partial', as: 'announcement_get_partial'
 
   post '/club/approve', to: 'clubs#approve', as: 'approve_club'
   post '/club/reject', to: 'clubs#reject', as: 'reject_club'
+  post '/club/finalize', to: 'clubs#finalize', as: 'finalize_club'
   get '/club/get_partial', to: 'clubs#get_partial', as: 'club_get_partial'
 
   resources :users, only: [:show, :index, :destroy, :edit, :update] do

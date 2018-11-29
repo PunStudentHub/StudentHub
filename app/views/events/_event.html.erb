@@ -1,14 +1,10 @@
 <% color = "" %>
 <% if logged_in? && (event.approved  || current_user.can_do(:approve)) %>
 
-<% if !event.approved && !event.rejected %> 
-  <% color = "grey lighten-3" %>
-<% elsif event.rejected %>
-  <% color = "red lighten-4" %>
-<% end %>
+
 <% rsvp = event.users.exists?(current_user.id) %>
 <% id = event.id %>
-  <%= content_tag :li, class: "list-group-item " + color, id: event.hash_id do %>
+  <%= content_tag :li, class: "list-group-item " + get_background_color_for_partial(event), id: event.hash_id do %>
     <div class="row">
       <div class="col-md-2 custom-flex-center">
         <span>
@@ -35,7 +31,7 @@
       <% else %>
         <div class="col-md-3 custom-flex-center custom-flex-right">
       <% end %>
-      <% if event.approved %>
+      <% if event.approved && event.final %>
         <% unless rsvp %>
           <%= content_tag :a, "Not Attending", class: "btn btn-sm btn-outline-blue-grey float-right rsvp",
           onclick: "rsvp(\"#{event.hash_id}\", true)" %>
@@ -44,17 +40,13 @@
           onclick: "rsvp(\"#{event.hash_id}\", false)" %>
         <% end %>
       <% end %>
-      <% if current_user.can_do(:approve) %>
-        <div class="options">
-
-          <%= render 'shared/approve_button', model_name: 'event', object: event %>
-          <%= render "shared/reject_button", model_name: "event", object: event %>
-
-
-          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_event_path(id: event.id), class: "text-warning" %>
-          <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, event_path(event), method: :delete, class: "text-danger", data: {confirm: "Are you sure you want to do this?"} %>
-        </div>
-      <% end %>
+      
+      <div class="options">
+        <%= render 'shared/admin_buttons', model_name: 'event', object: event,
+                                           edit_url: edit_event_path(event),
+                                           destroy_url: event_path(event) %>
+      </div>
+      
     </div>
   </div>
 <% end %>

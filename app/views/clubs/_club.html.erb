@@ -19,28 +19,18 @@
       </div>
 
     </div>
-    <% if logged_in? %>
+    
     <div class="col-sm-2 custom-flex-center custom-flex-right">
       <div class="options" >
 
-        <% if current_user.can_do :approve %>
-          <%= render "shared/approve_button", model_name: "club", object: club %>
-          <%= render "shared/reject_button", model_name: "club", object: club %>
-        <% end %> 
-
-
-        <% if (current_user.can_do(:admin)) %>
-
-          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_club_path(club), class: "text-warning"%>
-          <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, club_path(club), method: :delete, class: "text-danger",
-                  data: {confirm: "Are you sure you want to do this?"} %>
-
-        <% end %> 
+        <%= render 'shared/admin_buttons', model_name: 'club', object: club,
+                                           edit_url: edit_club_path(club),
+                                           destroy_url: club_path(club) %>
     
       </div>
     </div>
     
-    <% end %>
+    
 <% end %>
 
 <% end %>

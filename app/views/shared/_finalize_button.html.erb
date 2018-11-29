@@ -1,16 +1,11 @@
-<!--
 
-Parameters:
-- object
-- model_name
--->
 <% if logged_in? %>
-  <% if current_user.can_do(:moderate) %>
-    <% unless object.approved %>
+  <% if current_user.can_do(:faculty_mod) %>
+    <% unless object.final %>
       <%= content_tag :a,
-        class: "text-success approve_icon",
-        onclick: "approve('#{model_name}', '#{object.hash_id}')",
-        id: "approve-" + object.hash_id do %>
+        class: "text-info approve_icon",
+        onclick: "finalize('#{model_name}', '#{object.hash_id}')",
+        id: "finalize-" + object.hash_id do %>
         <%= content_tag :div,
           class: "approve-wrapper" do %>
           <%= content_tag :i,

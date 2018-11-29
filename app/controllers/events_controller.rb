@@ -18,7 +18,7 @@ class EventsController < ApplicationController
 
   def index
     if logged_in?
-      if current_user.can_do (:approve)
+      if (current_user.can_do(:approve) || current_user.can_do(:faculty_mod))
         @events = Event.future_events
         @filter = params[:filter]
         if params[:filter] == 'Rejected'
@@ -31,7 +31,7 @@ class EventsController < ApplicationController
           @events = Event.past_events
         end
       else
-        @events = Event.future_events       
+        @events = Event.future_events.approved
       end
     else
       @events = Event.future_events.approved

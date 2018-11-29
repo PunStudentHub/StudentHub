@@ -1,11 +1,4 @@
-<% color = "" %>
-<% if !announcement.approved && !announcement.rejected %> 
-  <% color = "grey lighten-3" %>
-<% elsif announcement.rejected %>
-  <% color = "red lighten-4" %>
-<% end %>
-
-<%= content_tag :li,  class: "list-group-item " + color,
+<%= content_tag :li,  class: "list-group-item " + get_background_color_for_partial(announcement),
                       id: announcement.hash_id do %>
   <div class="row">
     <div class="col-sm-10 custom-flex-center">
@@ -24,19 +17,10 @@
     <div class="col-sm-2 custom-flex-center custom-flex-right">
       <div class="options">
 
-        <% if current_user.can_do :approve %>
-          <%= render "shared/approve_button", model_name: "announcement", object: announcement %>
-          <%= render "shared/reject_button", model_name: "announcement", object: announcement %>
-        <% end %>
 
-
-        <% if (current_user.can_do(:moderate)) %>
-
-          <%= link_to ("<i class='far fa-edit'></i>").html_safe, edit_announcement_path(announcement), class: "text-warning"%>
-          <%= link_to ("<i class='far fa-trash-alt'></i>").html_safe, announcement_path(announcement), method: :delete, class: "text-danger",
-                  data: {confirm: "Are you sure you want to do this?"} %>
-
-        <% end %>
+        <%= render "shared/admin_buttons", model_name: "announcement", object: announcement,
+                                          edit_url: edit_announcement_path(announcement), 
+                                          destroy_url: announcement_path(announcement) %>
 
       </div>
     </div>

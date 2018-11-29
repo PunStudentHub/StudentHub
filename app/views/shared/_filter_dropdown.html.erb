@@ -1,5 +1,5 @@
 <% if logged_in? %>
-  <% if current_user.can_do(:approve) %>
+  <% if current_user.can_do(:approve) || current_user.can_do(:faculty_mod) %>
     <%= form_tag(path, method: 'GET', enforce_utf8: false) do %>
       <% if timed %>
         <%= select_tag "filter", options_for_select(Event::FILTER_OPTIONS + ['Past'], 

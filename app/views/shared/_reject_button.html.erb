@@ -1,10 +1,14 @@
-<% unless object.rejected %>
-  <%= content_tag :a,
-    class: "text-danger approve_icon",
-    onclick: "reject('#{model_name}', '#{object.hash_id}')",
-    id: "reject-" + object.hash_id do %>
-      
-    <i class="fas fa-ban"></i>
-  <% end %>
+<% if logged_in? %>
+  <% if current_user.can_do(:approve) || current_user.can_do(:faculty_mod) %>
+    <% unless object.rejected %>
+      <%= content_tag :a,
+        class: "text-danger approve_icon",
+        onclick: "reject('#{model_name}', '#{object.hash_id}')",
+        id: "reject-" + object.hash_id do %>
+          
+        <i class="fas fa-ban"></i>
+      <% end %>
 
+    <% end %>
+  <% end %>
 <% end %>
