@@ -9,7 +9,7 @@
       </div>
       <div class="card-body">
         <h2 class="lato-title"><%= @club.name %></h2>
-        <%= render 'clubs/clubparams', url: nil, submit_text: "Save Edits" %>
+        <%= render 'clubs/clubparams', url: club_path(@club), submit_text: "Save Edits" %>
       </div>
     </div>
   </div>
