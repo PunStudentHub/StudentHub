@@ -1,12 +1,7 @@
-<% color = "" %>
-<% if !club.approved && !club.rejected %> 
-  <% color = "grey lighten-3" %>
-<% elsif club.rejected %>
-  <% color = "red lighten-4" %>
-<% end %>
+
 
 <% if logged_in? %>
-<%= content_tag :li,  class: "list-group-item " + color,
+<%= content_tag :li,  class: "list-group-item " + get_background_color_for_partial(club),
                       id: club.hash_id,
                       style: "height: 50px" do %>
   <div class="row">
