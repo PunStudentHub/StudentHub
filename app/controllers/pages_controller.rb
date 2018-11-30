@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
   before_action :logged_in_user, only: [:staff]
+  before_action -> {has_permission(:admin)}, only: [:modlog]
 
   def home
     if logged_in?
@@ -28,6 +29,10 @@ class PagesController < ApplicationController
   def staff
     @admins = Role.find_by(name: "Admin").users
     @mods = Role.find_by(name: "Moderator").users
+  end
+
+  def modlog
+    @actions = ModAction.all.paginate(page: params[:page], per_page: 50)
   end
 
   def feedback

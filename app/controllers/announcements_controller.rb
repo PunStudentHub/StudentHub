@@ -54,9 +54,12 @@ class AnnouncementsController < ApplicationController
     if (@announcement.update_attributes(announcement_params))
       flash.now[:success] = "Announcement updated"
       redirect_to @announcement
+      current_user.mod_actions.create(description: "Edited Announcement " + @announcement.hash_id, 
+      link: 'annnouncements/' + @announcement.hash_id)
     else
       render 'edit'
     end
+
   end
 
   def create

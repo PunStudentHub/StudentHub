@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_064751) do
+ActiveRecord::Schema.define(version: 2018_11_30_063010) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "content"
@@ -108,6 +108,15 @@ ActiveRecord::Schema.define(version: 2018_11_29_064751) do
   create_table "events_users", id: false, force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "user_id", null: false
+  end
+
+  create_table "mod_actions", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "description"
+    t.text "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_mod_actions_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|

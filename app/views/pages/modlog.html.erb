@@ -1,0 +1,32 @@
+<% provide :title, "Moderation Log" %>
+<h2>Moderation Log</h2>
+<%= will_paginate @actions %>
+
+<table class="table-sm table">
+  <thead>
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">Description</th>
+      <th scope="col">Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @actions.each do |action| %>
+      <tr>
+        <%= content_tag :td do %>
+          <%= render 'users/colored_name_link', user: action.user %>
+        <% end %>
+        <td>
+          <% unless action.link.nil? %>
+            <%= link_to action.description, action.link %>
+          <% else %> 
+            <%= action.description %>
+          <% end %>
+        </td>
+        <%= content_tag :td, action.created_at.in_time_zone("Hawaii").strftime('%b %e, %l:%M %p') %> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @actions %>
