@@ -36,6 +36,8 @@ class ClubsController < ApplicationController
     if (@club.update_attributes(club_params))
       flash[:success] = "Club updated"
       redirect_to @club
+      current_user.mod_actions.create(description: "Edited Club " + @club.hash_id, 
+      link: 'clubs/' + @club.hash_id)
     else
       render 'edit'
     end

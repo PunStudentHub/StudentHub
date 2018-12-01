@@ -53,6 +53,8 @@ class EventsController < ApplicationController
     if (@event.update_attributes(event_params))
       flash.now[:success] = "Event updated"
       redirect_to event_path(@event)
+      current_user.mod_actions.create(description: "Edited Event " + @event.hash_id, 
+      link: 'events/' + @event.hash_id)
     else
       render 'edit'
     end

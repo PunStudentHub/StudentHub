@@ -30,12 +30,17 @@
     <% if current_user.leaderships.any? %>
       <div class="form-group">
         <label style="margin-bottom: 0px">Club</label>
-        <%= f.collection_radio_buttons(:club, clubs, :id, :name) do |club| %>
+        <%= f.collection_check_boxes(:club, clubs, :id, :name) do |club| %>
           <div class="custom-control custom-radio">
-            <%= club.radio_button(class: "custom-control-input") %>
+            <%= club.check_box(class: "custom-control-input checkbox") %>
             <%= club.label(class: "custom-control-label") %>
           </div>
         <% end %>
+        <script>
+          $('.checkbox').on('change', function() {
+            $('.checkbox').not(this).prop('checked', false);  
+        });
+        </script>
       </div>
     <% end %>
   <% end %>

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :leaderships, foreign_key: "president_id", class_name: "Club", dependent: :destroy
   has_many :club_members, dependent: :destroy
   has_many :clubs, through: :club_members
+  has_many :mod_actions
 
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :events

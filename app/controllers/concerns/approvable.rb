@@ -15,6 +15,7 @@ module Approvable
       @object = linked_model.find_by_hash_id(params[:id])
       @object.update_attribute(:approved, true)
       @object.update_column(:rejected, false)
+      current_user.mod_actions.create(description: "Approved #{linked_model} #{@object.hash_id}", link: linked_model.to_s.downcase + 's/' + @object.hash_id)
     end
 
     def reject
@@ -22,6 +23,8 @@ module Approvable
       @object.update_attribute(:approved, false)
       @object.update_column(:rejected, true)
       @object.update_column(:final, false)
+      current_user.mod_actions.create(description: "Rejected #{linked_model} #{@object.hash_id}", link: linked_model.to_s.downcase + 's/' + @object.hash_id)
+
     end
 
     def finalize
@@ -29,6 +32,7 @@ module Approvable
       @object.update_attribute(:approved, true)
       @object.update_column(:final, true)
       @object.update_column(:rejected, false)
+      current_user.mod_actions.create(description: "Finalized #{linked_model} #{@object.hash_id}", link: linked_model.to_s.downcase + 's/' + @object.hash_id)
     end
 
     def get_partial
