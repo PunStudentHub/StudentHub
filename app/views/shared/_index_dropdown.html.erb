@@ -1,0 +1,84 @@
+<!-- Params: name, filter_options -->
+
+<% if logged_in? %>
+  <% if current_user.can_do(:approve) || current_user.can_do(:faculty_mod) %> 
+    <div id="dd" class="wrapper-dropdown-1" tabindex="1">
+      <h4 id="dropdown-title" style="cursor: pointer;" class="card-title noselect ">
+        <%= name %> - <span id="filter"><%= params[:filter].nil? ? "All" : params[:filter] %></span>
+        <i id="sort-icon" class="fas fa-caret-down fa-sm"></i>
+      </h4>
+      <div class="dropdown card card-body" id="dropdown-list">
+        <li class="<%= params[:filter] == "All" || params[:filter].nil? ? "dropdown-item-active" : ""  %>">All</a></li>
+        <% filter_options.each do |option| %>
+          <%= content_tag :li,
+              option,
+              class: params[:filter] == option ? "dropdown-item-active" : "" %>
+
+        <% end %>
+      </div>
+    </div>
+
+    <script>
+      var dropdown = document.getElementById("dd").getElementsByClassName("dropdown")[0];
+      var icon = document.getElementById("sort-icon");
+      var filters = dropdown.getElementsByTagName("li");
+
+      pageLoad();
+
+      for(var i = 0; i < filters.length; i++) {
+        filters[i].onclick = function() {
+          var url = window.location.href;
+          if(url.indexOf("?") == -1) {
+            window.location.href = url + "?filter=" + this.innerText;
+          } else {
+            window.location.href = url.slice(0, url.indexOf("?")) + "?filter=" + this.innerText;
+          }
+          //document.getElementById("filter").innerHTML = this.innerText;
+          $("#dropdown-list").fadeOut(150);
+          icon.className = "fas fa-caret-down fa-sm";
+          pageLoad();
+        }
+      }
+
+      function pageLoad() {
+
+        document.onmouseup = function(e) {
+          var dropdown_rect = dropdown.getBoundingClientRect();
+          var title_rect = document.getElementById("dropdown-title").getBoundingClientRect();
+          var mouseX = e.clientX;
+          var mouseY = e.clientY;
+          if(mouseY > title_rect.top && mouseY < title_rect.bottom && mouseX > title_rect.left && mouseX < title_rect.right) {
+            if(window.getComputedStyle(dropdown).getPropertyValue("display") == "none") {
+              dropdown.style.display = "block";
+              icon.className = "fas fa-caret-up fa-sm"
+            } else if(window.getComputedStyle(dropdown).getPropertyValue("display") == "block"){
+              dropdown.style.display = "none";
+              icon.className = "fas fa-caret-down fa-sm"
+            }
+          } else if(mouseY < dropdown_rect.top || mouseY > dropdown_rect.bottom || mouseX < dropdown_rect.left || mouseX > dropdown_rect.right) {
+            if(window.getComputedStyle(dropdown).getPropertyValue("display") == "block") {
+              dropdown.style.display = "none";
+              icon.className = "fas fa-caret-down fa-sm"
+            }
+          }
+        }
+        document.getElementById("dd").getElementsByClassName("dropdown")[0].style.width = document.getElementById("dd").offsetWidth + 20 + "px";
+      }
+
+  </script>
+
+  <% else %>
+  <h4 class="card-title">
+    <%= name %>
+  </h4>
+  <% end %>  
+<% else %>
+
+  <h4 class="card-title">
+    <%= name %>
+  </h4>
+
+<% end %>
+
+
+

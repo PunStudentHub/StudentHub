@@ -3,19 +3,9 @@
   <div class="card">
     <div class="card-header blue darken-3 white-text">
       <div class="float-left">
-        <div id="dd" class="wrapper-dropdown-1" tabindex="1">
-          <h4 id="dropdown-title" style="cursor: pointer;" class="card-title noselect ">
-            Events - <span id="filter"><%= params[:filter].nil? ? "All" : params[:filter] %></span>
-            <i id="sort-icon" class="fas fa-caret-down fa-sm"></i>
-          </h4>
-          <div class="dropdown card card-body" id="dropdown-list">
-              <li class="<%= params[:filter] == "All" || params[:filter].nil? ? "dropdown-item-active" : ""  %>">All</a></li>
-              <li class="<%= params[:filter] == "Pending" ? "dropdown-item-active" : ""  %>">Pending</a></li>
-              <li class="<%= params[:filter] == "Approved" ? "dropdown-item-active" : ""  %>">Approved</a></li>
-              <li class="<%= params[:filter] == "Rejected" ? "dropdown-item-active" : ""  %>">Rejected</a></li>
-              <li class="<%= params[:filter] == "My Class" ? "dropdown-item-active" : ""  %>">My Class</a></li>
-              <li class="<%= params[:filter] == "Past" ? "dropdown-item-active" : ""  %>">Past</a></li>
-          </div>
+        <div class="float-left">
+          <%= render 'shared/index_dropdown', name: "Events", 
+          filter_options: %w{Approved Pending Rejected Past} + ["My Class"] %>
         </div>
       </div>
       <div class="float-right">
