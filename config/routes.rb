@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   get '/staff', to: 'pages#staff'
   get '/feedback', to: 'pages#feedback'
-  get '/modlog', to: 'pages#modlog' 
+  get '/modlog', to: 'pages#modlog'
 
   get '/plc', to: 'plc#index'
   get '/plc/subject', to: 'plc#subject_slots'
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   resources :blog, except: [:show]
   resources :clubs do
     post :apply, on: :member
-    post :accept_user, on: :member
+    post :unapply, on: :member
   end
   resources :events
   resources :announcements

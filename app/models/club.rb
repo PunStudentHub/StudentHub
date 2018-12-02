@@ -12,5 +12,6 @@ class Club < ApplicationRecord
                     length: {maximum: 140}
   validates :description, presence: true,
                           length: {maximum: 1500}
+  validates :motto, presence: true, length: {maximum: 60}
 
 end

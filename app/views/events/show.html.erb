@@ -41,12 +41,9 @@
           <br>
           <br>
           <% unless @event.start_time.to_date == @event.end_time.to_date %>
-            <ul>
-              <li><b>Start: </b><%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %></li>
-              <li><b>End: </b><%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %></li>
-            </ul>
+            <%=  @event.start_time.strftime("%A %B %d, %I:%M %p") %> — <%=  @event.end_time.strftime("%A %B %d, %I:%M %p") %><br>
           <% else %>
-            <b><%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%></b><br>
+            <%= @event.start_time.strftime("%A %B %d, %I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p")%><br>
           <% end %>
 
           <br>

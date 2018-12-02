@@ -6,26 +6,26 @@
                       style: "height: 50px" do %>
   <div class="row">
     <div class="col-sm-10 custom-flex-center">
-      <div class="col-sm-7" style="padding: 0px">
+      <div class="col-sm-4" style="padding: 0px">
         <h6 class="no-margin" style="width: 100%"><%= link_to club.name, club %></h6>
       </div>
-      <div class="col-sm-3">
-        <h6 class="text-muted no-margin"><%= pluralize(club.club_members.accepted_members.count, "member")%></h6>
+      <div class="col-sm-6">
+        <h6 class="text-muted no-margin float-right" style="width: 100%"><%= club.motto %></h6>
       </div>
 
     </div>
-    
+
     <div class="col-sm-2 custom-flex-center custom-flex-right">
       <div class="options" >
 
         <%= render 'shared/admin_buttons', model_name: 'club', object: club,
                                            edit_url: edit_club_path(club),
                                            destroy_url: club_path(club) %>
-    
+
       </div>
     </div>
-    
-    
+
+
 <% end %>
 
 <% end %>
