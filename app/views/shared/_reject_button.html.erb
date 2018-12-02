@@ -5,9 +5,10 @@
         class: "text-danger approve_icon",
         onclick: "reject('#{model_name}', '#{object.hash_id}')",
         title: "Reject",
+        style: "position: relative; top: -1px;",
         id: "reject-" + object.hash_id do %>
 
-        <i title="Reject" class="far fa-minus-square"></i>
+        <i title="Reject" class="far fa-trash-alt"></i>
       <% end %>
 
     <% end %>

@@ -2,11 +2,11 @@
 <%= render "shared/finalize_button", model_name: model_name, object: object %>
 <%= render "shared/approve_button", model_name: model_name, object: object %>
 <% if (current_user.can_do(:moderate) || current_user.can_do(:faculty_mod)) %>
-  <%= link_to ("<i title='Edit Post' class='far fa-edit' style='position: relative; top: -1px;'></i>").html_safe, edit_url, class: "text-warning"%>
+  <%= link_to ("<i data-toggle='tooltip' title='Edit Post' class='far fa-edit' style='position: relative; top: -1px;'></i>").html_safe, edit_url, class: "text-warning"%>
 <% end %>
 <%= render "shared/reject_button", model_name: model_name, object: object %>
 
 <% if (current_user.can_do(:admin)) %>
-  <%= link_to ("<i title='Delete' class='far fa-trash-alt' style='position: relative; top: -1px; margin-left: 20px;'></i>").html_safe, destroy_url, method: :delete, class: "text-danger",
+  <%= link_to ("<i title='Delete' class='far fa-minus-square' style='position: relative; top: -1px; margin-left: 20px;'></i>").html_safe, destroy_url, method: :delete, class: "text-danger",
           data: {confirm: "Are you sure you want to do this?"} %>
 <% end %>
