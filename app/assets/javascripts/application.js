@@ -25,7 +25,7 @@ function approve(model, id) {
   $.ajax({
     type: 'POST',
     url: '/' + model + '/approve',
-    data: { id: id }, 
+    data: { id: id },
     success: function(data, textStatus, jqXHR) {
       update(model, id)
     },
@@ -41,7 +41,7 @@ function reject(model, id) {
   $.ajax({
     type: 'POST',
     url: '/' + model + '/reject',
-    data: { id: id }, 
+    data: { id: id },
     success: function(data, textStatus, jqXHR) {
       update(model, id)
     },
@@ -57,7 +57,7 @@ function finalize(model, id) {
   $.ajax({
     type: 'POST',
     url: '/' + model + '/finalize',
-    data: { id: id }, 
+    data: { id: id },
     success: function(data, textStatus, jqXHR) {
       update(model, id)
     },
@@ -74,7 +74,7 @@ function rsvp(id, status) {
   $.ajax({
     type: 'POST',
     url: '/event/' + (status? 'rsvp':'unrsvp'),
-    data: { id: id }, 
+    data: { id: id },
     success: function(data, textStatus, jqXHR) {
       update("event", id)
     },
@@ -89,7 +89,7 @@ function update(model, id) {
   $.ajax({
     type: 'GET',
     url: '/' + model + '/get_partial',
-    data: { id: id }, 
+    data: { id: id },
     success: function(data, textStatus, jqXHR) {
       $('#' + id).after(data)
       $('#' + id).remove()
@@ -101,5 +101,3 @@ function update(model, id) {
     }
   })
 }
-
-
