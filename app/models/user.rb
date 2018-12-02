@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :club_members, dependent: :destroy
   has_many :clubs, through: :club_members
   has_many :mod_actions
+  has_many :reports
+  has_many :responses, foreign_key: "responder_id", class_name: "Report", dependent: :destroy
 
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :events

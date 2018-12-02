@@ -48,6 +48,10 @@ Rails.application.routes.draw do
     post :apply, on: :member
     post :accept_user, on: :member
   end
+
+  resources :reports do 
+    post :respond, on: :member
+  end
   resources :events
   resources :announcements
   resources :account_activations, only: [:edit]
