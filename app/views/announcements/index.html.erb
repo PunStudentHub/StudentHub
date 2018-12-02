@@ -33,11 +33,9 @@ Not really needed because if a student is looking for a specific announcement, t
             <li class="<%= params[:filter] == "My Class" ? "dropdown-item-active" : ""  %>">My Class</a></li>
         </div>
       </div>
-
-      <!-- <%= render 'shared/filter_dropdown.html.erb', path: announcements_path, timed: false %> -->
     </div>
     <div class="float-right">
-      <%= link_to ("New Announcement").html_safe, new_announcement_path, class: "btn btn-sm btn-info"%>
+      <%= link_to ("New Announcement").html_safe, new_announcement_path, class: "btn btn-sm btn-white black-text"%>
     </div>
   </div>
   <div class="card-body" style="padding: 0px;">

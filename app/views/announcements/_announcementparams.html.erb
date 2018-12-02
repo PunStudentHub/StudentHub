@@ -21,7 +21,7 @@
     <%= f.text_area :content, class: "form-control" %>
   </div>
   <% if submit_text == "Post" %>
-    <%= link_to submit_text, "", :onclick => "$('#new_announcement').submit()", class: "btn btn-info btn-block" %>
+    <%= link_to submit_text, "", :onclick => "$('#new_announcement').submit()", class: "btn blue darken-3 btn-block white-text" %>
   <% elsif submit_text == "Save Edits"%>
     <%= link_to submit_text, "", :onclick => "$('.edit_announcement')[0].submit()", class: "btn btn-warning btn-block" %>
   <% end %>

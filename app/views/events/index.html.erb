@@ -3,15 +3,24 @@
   <div class="card">
     <div class="card-header blue darken-3 white-text">
       <div class="float-left">
-        <h4 class="card-title">
-          Events
-        </h4>
-        <%= render 'shared/filter_dropdown.html.erb', path: events_path, timed: true %>
+        <div id="dd" class="wrapper-dropdown-1" tabindex="1">
+          <h4 id="dropdown-title" style="cursor: pointer;" class="card-title noselect ">
+            Events - <span id="filter"><%= params[:filter].nil? ? "All" : params[:filter] %></span>
+            <i id="sort-icon" class="fas fa-caret-down fa-sm"></i>
+          </h4>
+          <div class="dropdown card card-body" id="dropdown-list">
+              <li class="<%= params[:filter] == "All" || params[:filter].nil? ? "dropdown-item-active" : ""  %>">All</a></li>
+              <li class="<%= params[:filter] == "Pending" ? "dropdown-item-active" : ""  %>">Pending</a></li>
+              <li class="<%= params[:filter] == "Approved" ? "dropdown-item-active" : ""  %>">Approved</a></li>
+              <li class="<%= params[:filter] == "Rejected" ? "dropdown-item-active" : ""  %>">Rejected</a></li>
+              <li class="<%= params[:filter] == "My Class" ? "dropdown-item-active" : ""  %>">My Class</a></li>
+          </div>
+        </div>
       </div>
       <div class="float-right">
         <% if logged_in? %>
           <%= link_to ("New Event").html_safe, new_event_path,
-            class: "btn btn-sm btn-info"%>
+            class: "btn btn-sm btn-white black-text"%>
         <% end %>
       </div>
     </div>
@@ -24,3 +33,52 @@
 <% else %>
   <% flash.now[:warning] = "Log in to view events" %>
 <% end %>
+
+<script>
+var dropdown = document.getElementById("dd").getElementsByClassName("dropdown")[0];
+var icon = document.getElementById("sort-icon");
+var filters = dropdown.getElementsByTagName("li");
+
+pageLoad();
+
+for(var i = 0; i < filters.length; i++) {
+  filters[i].onclick = function() {
+    var url = window.location.href;
+    if(url.indexOf("?") == -1) {
+      window.location.href = url + "?filter=" + this.innerText;
+    } else {
+      window.location.href = url.slice(0, url.indexOf("?")) + "?filter=" + this.innerText;
+    }
+    //document.getElementById("filter").innerHTML = this.innerText;
+    $("#dropdown-list").fadeOut(150);
+    icon.className = "fas fa-caret-down fa-sm";
+    pageLoad();
+  }
+}
+
+function pageLoad() {
+
+  document.onmouseup = function(e) {
+    var dropdown_rect = dropdown.getBoundingClientRect();
+    var title_rect = document.getElementById("dropdown-title").getBoundingClientRect();
+    var mouseX = e.clientX;
+    var mouseY = e.clientY;
+    if(mouseY > title_rect.top && mouseY < title_rect.bottom && mouseX > title_rect.left && mouseX < title_rect.right) {
+      if(window.getComputedStyle(dropdown).getPropertyValue("display") == "none") {
+        dropdown.style.display = "block";
+        icon.className = "fas fa-caret-up fa-sm"
+      } else if(window.getComputedStyle(dropdown).getPropertyValue("display") == "block"){
+        dropdown.style.display = "none";
+        icon.className = "fas fa-caret-down fa-sm"
+      }
+    } else if(mouseY < dropdown_rect.top || mouseY > dropdown_rect.bottom || mouseX < dropdown_rect.left || mouseX > dropdown_rect.right) {
+      if(window.getComputedStyle(dropdown).getPropertyValue("display") == "block") {
+        dropdown.style.display = "none";
+        icon.className = "fas fa-caret-down fa-sm"
+      }
+    }
+  }
+  document.getElementById("dd").getElementsByClassName("dropdown")[0].style.width = document.getElementById("dd").offsetWidth + 20 + "px";
+}
+
+</script>
