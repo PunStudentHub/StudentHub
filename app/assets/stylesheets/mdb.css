@@ -1186,7 +1186,7 @@
   background-color: #00695c !important; }
 
 .info-color {
-  background-color: var(--test-color) !important; }
+  background-color: #33b5e5 !important; }
 
 .info-color-dark {
   background-color: #0099cc !important; }
@@ -4764,7 +4764,7 @@ a.waves-effect, a.waves-light {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 
 .btn-info {
-  background-color: var(--test-color) !important;
+  background-color: #33b5e5 !important;
   color: #fff !important; }
   .btn-info:hover {
     background-color: #4abde8; }
