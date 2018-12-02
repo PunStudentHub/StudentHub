@@ -20,31 +20,17 @@ Not really needed because if a student is looking for a specific announcement, t
 <div class="card">
   <div class="card-header blue darken-3 white-text">
     <div class="float-left">
-      <!--
-      <h4 style="margin-bottom: 0px; cursor: pointer;">
-        <select id="lmao" style="cursor: pointer; outline: none;">
-            <option value="hide">All Announcements</option>
-            <option value="2010">2010</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2013">2013</option>
-            <option value="2014">2014</option>
-            <option value="2015">2015</option>
-        </select>
-        <i class="fas fa-sort-down" style="position: relative; top: -4px;"></i>
-      </h4>
-      -->
       <div id="dd" class="wrapper-dropdown-1" tabindex="1">
         <h4 id="dropdown-title" style="cursor: pointer;" class="card-title noselect ">
-          Announcements - <span id="filter">All</span>
+          Announcements - <span id="filter"><%= params[:filter].nil? ? "All" : params[:filter] %></span>
           <i id="sort-icon" class="fas fa-caret-down fa-sm"></i>
         </h4>
-        <div class="dropdown card card-body">
-            <li>All</a></li>
-            <li>Pending</a></li>
-            <li>Approved</a></li>
-            <li>Rejected</a></li>
-            <li>My Class</a></li>
+        <div class="dropdown card card-body" id="dropdown-list">
+            <li class="<%= params[:filter] == "All" || params[:filter].nil? ? "dropdown-item-active" : ""  %>">All</a></li>
+            <li class="<%= params[:filter] == "Pending" ? "dropdown-item-active" : ""  %>">Pending</a></li>
+            <li class="<%= params[:filter] == "Approved" ? "dropdown-item-active" : ""  %>">Approved</a></li>
+            <li class="<%= params[:filter] == "Rejected" ? "dropdown-item-active" : ""  %>">Rejected</a></li>
+            <li class="<%= params[:filter] == "My Class" ? "dropdown-item-active" : ""  %>">My Class</a></li>
         </div>
       </div>
 
@@ -69,14 +55,22 @@ pageLoad();
 
 for(var i = 0; i < filters.length; i++) {
   filters[i].onclick = function() {
-    document.getElementById("filter").innerHTML = this.innerText;
-    dropdown.style.display = "none";
-    icon.className = "fas fa-caret-down fa-sm"
+    var url = window.location.href;
+    if(url.indexOf("?") == -1) {
+      window.location.href = url + "?filter=" + this.innerText;
+    } else {
+      window.location.href = url.slice(0, url.indexOf("?")) + "?filter=" + this.innerText;
+    }
+    //document.getElementById("filter").innerHTML = this.innerText;
+    $("#dropdown-list").fadeOut(150);
+    icon.className = "fas fa-caret-down fa-sm";
     pageLoad();
   }
 }
 
 function pageLoad() {
+  $("i").tooltip();
+
   document.onmouseup = function(e) {
     var dropdown_rect = dropdown.getBoundingClientRect();
     var title_rect = document.getElementById("dropdown-title").getBoundingClientRect();

@@ -4,9 +4,10 @@
       <%= content_tag :a,
         class: "text-danger approve_icon",
         onclick: "reject('#{model_name}', '#{object.hash_id}')",
+        title: "Reject",
         id: "reject-" + object.hash_id do %>
-          
-        <i class="fas fa-ban"></i>
+
+        <i title="Reject" class="far fa-minus-square"></i>
       <% end %>
 
     <% end %>

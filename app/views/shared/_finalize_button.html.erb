@@ -5,10 +5,12 @@
       <%= content_tag :a,
         class: "text-info approve_icon",
         onclick: "finalize('#{model_name}', '#{object.hash_id}')",
+        style: "margin-right: 1px",
         id: "finalize-" + object.hash_id do %>
         <%= content_tag :div,
           class: "approve-wrapper" do %>
           <%= content_tag :i,
+            title: "Finalize",
             class: 'far fa-check-square ' do %>
           <% end %>
         <% end %>
