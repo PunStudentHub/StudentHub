@@ -1,6 +1,6 @@
 <% if logged_in? %>
 <button type="button" class="btn btn-sm btn-danger" data-toggle="popover" id="report-popover"
-        style="padding: 5px 10px 5px 10px" data-placement="bottom" >Report
+        style="padding: 5px 10px 5px 10px" data-placement="bottom" trigger="focus">Report
 </button>
 <div id="popover-head" style="display: none">
   Report This Post
@@ -19,11 +19,11 @@
   <% end %>
 </div>
 <script>
-
+/*
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 });
-
+*/
 $('#report-popover').popover({
     html : true,
     title: function() {
@@ -33,7 +33,34 @@ $('#report-popover').popover({
       return $("#popover-content").html();
     }
 });
-
 $('#location').attr('value', window.location.href)
+
+var popover_on = false;
+document.onmouseup = function(e) {
+  var button_rect = document.getElementById("report-popover").getBoundingClientRect()
+  var mouseX = e.clientX;
+  var mouseY = e.clientY;
+  if(mouseY > button_rect.top && mouseY < button_rect.bottom && mouseX > button_rect.left && mouseX < button_rect.right) {
+    $('[data-toggle="popover"]').popover('show');
+    popover_on = true;
+  } else if(popover_on) {
+    var popover_rect = document.getElementsByClassName("popover")[0].getBoundingClientRect();
+    if(mouseY > popover_rect.top && mouseY < popover_rect.bottom && mouseX > popover_rect.left && mouseX < popover_rect.right) {
+
+    } else {
+      $('[data-toggle="popover"]').popover('hide');
+      popover_on = false;
+    }
+  }
+  /*
+  if(mouseY > popover_rect.top && mouseY < popover_rect.bottom && mouseX > popover_rect.left && mouseX < popover_rect.right) {
+
+  } else if(mouseY > button_rect.top && mouseY < button_rect.bottom && mouseX > button_rect.left && mouseX < button_rect.right) {
+    $('[data-toggle="popover"]').popover('show');
+  } else {
+    $('[data-toggle="popover"]').popover('hide');
+  }
+  */
+}
 </script>
 <% end %>
