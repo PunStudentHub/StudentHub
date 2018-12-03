@@ -19,7 +19,6 @@ class ClubsController < ApplicationController
     @club = current_user.leaderships.build(club_params)
     if (@club.save)
       @club.users << current_user
-      @club.club_members.update_all(accepted: true)
       flash[:success] = "Club created!"
       redirect_to clubs_path
     else
@@ -36,7 +35,7 @@ class ClubsController < ApplicationController
     if (@club.update_attributes(club_params))
       flash[:success] = "Club updated"
       redirect_to @club
-      current_user.mod_actions.create(description: "Edited Club " + @club.hash_id, 
+      current_user.mod_actions.create(description: "Edited Club " + @club.hash_id,
       link: 'clubs/' + @club.hash_id)
     else
       render 'edit'
@@ -67,7 +66,7 @@ class ClubsController < ApplicationController
           @clubs = @clubs.awaiting_approval
         end
       else
-        @clubs = Club.approved             
+        @clubs = Club.approved
       end
     else
       @clubs = []
@@ -77,27 +76,38 @@ class ClubsController < ApplicationController
 
   def apply
     club = Club.find_by_hash_id(params[:id])
-    unless club.president == current_user
-      club.users << current_user
-      flash[:info] = "You have applied to join this club. You need to be approved by 
-                            the club president to show up on this page."
+    if !club.club_members.find_by(user_id: current_user.id).nil?
+      flash[:secondary] = "You are already on this club's email list."
+      redirect_to club
+    elsif club.president == current_user
+      flash[:secondary] = "You are the president of this club. What are you doing?"
       redirect_to club
     else
-      flash[:info] = "You are the president of this club. What are you doing?"
+      club.users << current_user
+      flash[:secondary] = "You have joined this club's email list. You should now recieve club emails. Nice."
       redirect_to club
     end
   end
 
-  def accept_user
+  def unapply
     club = Club.find_by_hash_id(params[:id])
-    member = club.club_members.find_by_user_id(params[:user_id])
-    member.update_attribute(:accepted, true)
-    redirect_to club
+    if !club.club_members.find_by(user_id: current_user.id).nil?
+      club.club_members.find_by(user_id: current_user.id).delete
+      flash[:secondary] = "You have been removed from this club's email list."
+      redirect_to club
+    elsif club.president == current_user
+      flash[:secondary] = "You are the president of this club. What are you doing?"
+      redirect_to club
+    else
+      flash[:secondary] = "You are not on this club's mailing list and are thus unable to remove yourself from it."
+      redirect_to club
+    end
   end
+
 
   private
     def club_params
-      params.require(:club).permit(:description, :name)
+      params.require(:club).permit(:description, :name, :motto)
     end
 
     def club_president

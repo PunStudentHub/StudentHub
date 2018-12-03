@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    
+
 
   </div>
 
@@ -137,13 +137,13 @@
         <p class="no-margin lead">
           Check out some of our amazing clubs!
         </p>
-        <ul> 
+        <ul>
           <% @clubs.each do |club| %>
             <li><%= link_to club.name, club %></li>
           <% end %>
+          <li>and <%= link_to "many more!", clubs_path %></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-

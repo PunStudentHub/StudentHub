@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   include Approvable
 
-  def linked_model 
+  def linked_model
     Event
   end
 
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
     if (@event.update_attributes(event_params))
       flash.now[:success] = "Event updated"
       redirect_to event_path(@event)
-      current_user.mod_actions.create(description: "Edited Event " + @event.hash_id, 
+      current_user.mod_actions.create(description: "Edited Event " + @event.hash_id,
       link: 'events/' + @event.hash_id)
     else
       render 'edit'
@@ -105,17 +105,25 @@ class EventsController < ApplicationController
 
 
 
-  private
+  #private
 
   def event_params
-    new_params = params.require(:event).permit(:title, :location, :description, :approved, :start_time, :end_time, :club)
+    new_params = params.require(:event).permit(:title, :location, :description, :approved, :club)
+
+    #unless new_params[:start_time].nil?
+    new_params[:start_time] = DateTime.strptime(params[:start], '%b-%d-%y %H:%M') + 10.hours
+    #end
+    #unless  new_params[:end_time].nil?
+    new_params[:end_time] = DateTime.strptime(params[:end], '%b-%d-%y %H:%M') + 10.hours
+    #end
     unless new_params[:club].nil?
       unless new_params[:club].empty?
-        new_params[:club] = Club.find(new_params[:club]) 
+        new_params[:club] = Club.find(new_params[:club])
       else
         new_params[:club] = nil
       end
     end
+
     new_params
   end
 

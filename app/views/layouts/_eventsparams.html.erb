@@ -19,29 +19,54 @@
   <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <%= f.label :start %>
-          <input id="start-time" placeholder="Date & Time.." class="form-control" />
+          <%= f.label :start_time %>
+          <input id="start_time" placeholder="Date & Time.." class="form-control" >
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <%= f.label :end %>
-          <input id="end-time" placeholder="Date & Time.." class="form-control" />
+          <%= f.label :end_time %>
+          <input id="end_time" placeholder="Date & Time.." class="form-control" />
         </div>
       </div>
+
+
       <script type="text/javascript">
-          $("#start-time").flatpickr({
+          $("#start_time").flatpickr({
             altInput: true,
             altFormat: "F j, Y H:i",
             enableTime: true,
             dateFormat: "M-d-y H:i",
           });
-          $("#end-time").flatpickr({
+          $("#end_time").flatpickr({
             altInput: true,
             altFormat: "F j, Y H:i",
             enableTime: true,
             dateFormat: "M-d-y H:i",
           });
+
+
+
+          $("#new_event").submit(function() {
+            var params = [
+              {
+                name: "start",
+                value: $("#start_time").val()
+              },
+              {
+                name: "end",
+                value: $("#end_time").val()
+              }
+            ]
+
+            $.each(params, function(i, param) {
+              $('<input />').attr('type', 'hidden')
+                .attr('name', param.name)
+                .attr('value', param.value)
+                .appendTo("#new_event");
+            })
+            return true;
+          })
       </script>
   </div>
 

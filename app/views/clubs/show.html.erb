@@ -1,18 +1,25 @@
-<% provide :title, @club.name %> 
+<% provide :title, @club.name %>
 <div class="card card-body">
-  <div class="float-left">
-    <h2 class="lato-title" style="display: inline">
-      <%= @club.name %>
-    </h2>
-    <div class="float-right">
-      <% if logged_in? %>
-        <% if current_user == @club.president %>
-          <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
+  <div class="row">
+    <div class="col-sm-4">
+      <h2 class="lato-title">
+        <%= @club.name %>
+      </h2>
+    </div>
+    <div class="col-sm-5">
+      <h6 class="text-muted no-margin" style="margin-top: 7px"><%= @club.motto %></h6>
+    </div>
+    <div class="col-sm-3">
+      <div class="float-right">
+        <% if logged_in? %>
+          <% if current_user == @club.president %>
+            <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
+          <% end %>
         <% end %>
-      <% end %>
-      <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
-                                           edit_url: edit_club_path(@club),
-                                           destroy_url: club_path(@club) %>
+        <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
+                                             edit_url: edit_club_path(@club),
+                                             destroy_url: club_path(@club) %>
+      </div>
     </div>
   </div>
 </div>
@@ -22,17 +29,19 @@
     <div class="card card-body">
       <h5 class="card-title">Description</h5>
       <hr>
-      <%= markdown(@club.description).html_safe %> 
+      <%= markdown(@club.description).html_safe %>
     </div>
-    <div class="card card-body">
-      <h5 class="card-title">Upcoming Events</h5>
-      <hr>
-      <ul>
-        <% @club.events.each do |event| %>
-          <li><%= link_to event.title, event %></li>
-        <% end %> 
-      </ul>
-    </div>
+    <% if !@club.events.empty? %>
+      <div class="card card-body">
+        <h5 class="card-title">Upcoming Events</h5>
+        <hr>
+        <ul>
+          <% @club.events.each do |event| %>
+            <li><%= link_to event.title, event %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-5">
     <%= render 'clubs/user_list' %>
