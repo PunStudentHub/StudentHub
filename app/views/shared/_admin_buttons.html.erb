@@ -7,6 +7,6 @@
 <%= render "shared/reject_button", model_name: model_name, object: object %>
 
 <% if (current_user.can_do(:admin)) %>
-  <%= link_to ("<i title='Delete' class='far fa-minus-square' style='position: relative; top: -1px; margin-left: 20px;'></i>").html_safe, destroy_url, method: :delete, class: "text-danger",
-          data: {confirm: "Are you sure you want to do this?"} %>
+  <%= link_to ("<i title='Delete' class='far fa-minus-square' style='position: relative; top: -1px;'></i>").html_safe, destroy_url, method: :delete, class: "text-danger",
+          data: {confirm: "Are you sure you want to do this?"}, style: "margin-left: 15px;" %>
 <% end %>

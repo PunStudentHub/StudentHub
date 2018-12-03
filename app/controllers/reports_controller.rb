@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   before_action -> { has_permission(:moderate)}, only: [:index, :respond]
 
   def index
-    if (params[:see_responded]) 
+    if (params[:see_responded])
       @reports = Report.all.paginate(page: params[:page], per_page: 30)
     else
       @reports= Report.completed.paginate(page: params[:page], per_page: 30)
@@ -18,8 +18,8 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.build(report_params)
     @report.link = params[:link]
-    if (@report.save) 
-      flash[:secondary] = "Report created. A staff member will respond shortly."
+    if (@report.save)
+      flash[:info] = "Report created. A staff member will respond shortly."
       redirect_to report_path(@report)
     end
 
@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
     redirect_to request.referrer
   end
 
-  private 
+  private
 
   def report_params
     params.require(:report).permit(:report, :link, :user_id)
