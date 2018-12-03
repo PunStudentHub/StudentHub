@@ -4,7 +4,8 @@
 
   <div class="col-lg-12">
     <div class="card">
-      <div class="card-body">
+      <%= content_tag :div, class: "card-body " + get_background_color_for_partial(@announcement) do %>
+      
         <!--
         <div class="row navigation-tools">
           <div class="col-lg-12">
@@ -48,9 +49,18 @@
         </div>
         <hr />
         <div>
-            <%= markdown(@announcement.content).html_safe %>
+          <%= markdown(@announcement.content).html_safe %>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  $(".model-action").on('click', function() {
+    console.log('click')
+    setTimeout(function() {
+      location.reload(true) 
+    }, 200)
+  })
+</script>

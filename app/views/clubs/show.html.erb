@@ -1,15 +1,15 @@
 <% provide :title, @club.name %>
-<div class="card card-body">
+<%= content_tag :div, class: "card card-body " + get_background_color_for_partial(@club) do %>
   <div class="row">
     <div class="col-sm-4">
       <h2 class="lato-title">
         <%= @club.name %>
       </h2>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
       <h6 class="text-muted no-margin" style="margin-top: 7px"><%= @club.motto %></h6>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <div class="float-right">
         <% if logged_in? %>
           <% if current_user == @club.president %>
@@ -17,13 +17,16 @@
           <% end %>
         <% end %>
         <%= render 'reports/new_report_popover' %>
-        <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
+        <div class="options">
+          <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
                                              edit_url: edit_club_path(@club),
                                              destroy_url: club_path(@club) %>
+        </div>
+        
       </div>
     </div>
   </div>
-</div>
+<% end %>
 
 <div class="row">
   <div class="col-md-7">
@@ -48,3 +51,12 @@
     <%= render 'clubs/user_list' %>
   </div>
 </div>
+
+<script>
+  $(".model-action").on('click', function() {
+    console.log('click')
+    setTimeout(function() {
+      location.reload(true) 
+    }, 200)
+  })
+</script>

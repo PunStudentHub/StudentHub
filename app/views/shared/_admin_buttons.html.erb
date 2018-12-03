@@ -1,4 +1,4 @@
-<!-- params: model_name, object, edit_url, destroy_url -->
+<!-- params: model_name, object, edit_url, destroy_url-->
 <%= render "shared/finalize_button", model_name: model_name, object: object %>
 <%= render "shared/approve_button", model_name: model_name, object: object %>
 <% if (current_user.can_do(:moderate) || current_user.can_do(:faculty_mod)) %>

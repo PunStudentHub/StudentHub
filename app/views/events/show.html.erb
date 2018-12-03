@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
-      <div class="card-body">
+      <%= content_tag :div, class: "card-body " + get_background_color_for_partial(@event) do %>
         <div>
           <!--
           <div class="row navigation-tools">
@@ -74,8 +74,17 @@
               <% end %>
             </ul>
           <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $(".model-action").on('click', function() {
+    console.log('click')
+    setTimeout(function() {
+      location.reload(true) 
+    }, 200)
+  })
+</script>

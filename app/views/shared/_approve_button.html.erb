@@ -8,7 +8,7 @@ Parameters:
   <% if current_user.can_do(:moderate) %>
     <% unless object.approved %>
       <%= content_tag :a,
-        class: "text-success approve_icon",
+        class: "text-success approve_icon model-action",
         onclick: "approve('#{model_name}', '#{object.hash_id}')",
         id: "approve-" + object.hash_id do %>
         <%= content_tag :div,
