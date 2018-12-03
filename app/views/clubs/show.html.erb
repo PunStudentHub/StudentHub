@@ -11,18 +11,13 @@
     </div>
     <div class="col-sm-4">
       <div class="float-right">
-        <% if logged_in? %>
-          <% if current_user == @club.president %>
-            <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
-          <% end %>
-        <% end %>
         <%= render 'reports/new_report_popover' %>
         <div class="options">
           <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
                                              edit_url: edit_club_path(@club),
                                              destroy_url: club_path(@club) %>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -56,7 +51,7 @@
   $(".model-action").on('click', function() {
     console.log('click')
     setTimeout(function() {
-      location.reload(true) 
+      location.reload(true)
     }, 200)
   })
 </script>

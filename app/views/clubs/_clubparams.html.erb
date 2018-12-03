@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <%= f.label :motto %>
-    <%= f.label "A short (<60 character) description of your club." %>
+    <small style="color: gray">A short (<60 character) description of your club.</small>
     <%= f.text_field :motto, class: "form-control", maxlength: 60, size: 40 %>
   </div>
 
@@ -18,7 +18,7 @@
   </div>
 
   <% if submit_text == "Create Club" %>
-    <%= link_to submit_text, "", :onclick => "$('#new_club').submit()", class: "btn blue darken-3 btn-block" %>
+    <%= link_to submit_text, "", :onclick => "$('#new_club').submit()", class: "btn blue darken-3 btn-block white-text" %>
   <% elsif submit_text == "Save Edits"%>
     <%= link_to submit_text, "", :onclick => "$('.edit_club')[0].submit()", class: "btn btn-warning btn-block" %>
   <% end %>

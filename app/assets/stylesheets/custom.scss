@@ -113,7 +113,7 @@ body {
 .card-title {
   margin-bottom: 0px;
   margin-top: 1px;
-  font-family: "Roboto Condensed";
+  font-family: "Lato";
 }
 
 .lato-title {
@@ -125,13 +125,16 @@ body {
   margin: 0px !important;
 }
 
+.btn-sm {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 700;
+}
+
 .navbar-brand {
   font-family: "Roboto Condensed";
   font-weight: 400;
-}
-
-.cool-font {
-  font-family: "Roboto Condensed";
 }
 
 #sign_in {
