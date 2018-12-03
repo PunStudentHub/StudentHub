@@ -1,0 +1,30 @@
+<h2>Reports</h2>
+<%= form_tag(reports_path, method: 'GET', id: "form", enforce_utf8: false) do %>
+  <div class="form-group">
+    <% checked = !params[:see_responded].nil? %>
+    <%= check_box_tag :see_responded, true, checked %>
+    <%= label_tag "See Completed Reports" %>
+  </div>
+<% end %>
+<%= will_paginate @reports %>
+<table class="table-sm table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">User</th>
+      <th scope="col">Report</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @reports %>
+  </tbody>
+</table>
+
+<%= will_paginate @reports %>
+
+<script>
+  $('#see_responded').on('click', function() {
+    $('#form').submit()
+  })
+</script>

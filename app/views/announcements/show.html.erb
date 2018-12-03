@@ -32,7 +32,10 @@
                 <% end %>
 
               </small>
+              
               <span class="float-right options">
+                  <%= render 'reports/new_report_popover' %>
+
                   <%= render "shared/admin_buttons", model_name: "announcement", object: @announcement,
                                         edit_url: edit_announcement_path(@announcement),
                                         destroy_url: announcement_path(@announcement) %>

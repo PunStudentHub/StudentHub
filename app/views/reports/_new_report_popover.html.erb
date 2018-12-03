@@ -1,0 +1,39 @@
+<% if logged_in? %> 
+<button type="button" class="btn btn-sm btn-danger" data-toggle="popover" id="report-popover" 
+        style="padding: 5px 10px 5px 10px" data-placement="bottom" >Report...</a>
+</button>
+<div id="popover-head" style="display: none">
+  Report This Post
+</div>
+<div id="popover-content" style="display: none">
+  <%= form_for :report, url: reports_path, html: {id: 'report-form'} do |f| %>
+    <input name="link" type="hidden" id="location" >
+    <div class="form-group" style="margin-bottom: 5px">
+      <%= f.label :report, "What is wrong with this post?" %>
+      <%= f.text_area :report, class: "form-control", style: "font-size: 9pt" %>
+    </div>
+
+    <%= f.submit "Submit", class: "btn btn-sm btn-primary float-right", style: "padding: 5px 10px 5px 10px; margin-bottom: 5px" %>
+    <br>
+    
+  <% end %>
+</div>
+<script>
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+
+$('#report-popover').popover({ 
+    html : true,
+    title: function() {
+      return $("#popover-head").html();
+    },
+    content: function() {
+      return $("#popover-content").html();
+    }
+});
+
+$('#location').attr('value', window.location.href)
+</script>
+<% end %>

@@ -1,0 +1,39 @@
+<div class="card card-body">
+  <div>
+    <h2 class="card-title">
+      <%= link_to "Report", @report.link %> #<%= @report.id %>
+    </h2>
+    <div class="mr-auto">
+      <b>Submitted by <%= render 'users/colored_name_link', user: @report.user %></b>
+    </div>
+    
+  </div>
+  
+  <hr>
+  <%= @report.report %>
+
+  <hr>
+
+  <% if current_user.can_do(:moderate) && @report.response.nil? %> 
+    <%= form_for :response, url: respond_report_path do |f| %>
+      <input name="user" type="hidden" id="user-id" >
+      <div class="form-group">
+        <%= f.text_area :response, class: 'form-control' %>
+      </div>
+      
+      <%= f.submit "Respond", class: 'btn btn-sm btn-primary float-right' %>
+
+    <% end %>
+  <% elsif !@report.response.nil? %>
+    <b>Reponse from <%= render 'users/colored_name_link', user: @report.responder %>: </b>
+    <p><%= @report.response %></p>
+  <% end %>
+
+  <% if current_user.can_do(:moderate ) %>
+    <%= link_to "All Reports", reports_path %>
+  <% end %>
+</div>
+
+<script>
+$('#user-id').attr('value', <%= current_user.id %>)
+</script>

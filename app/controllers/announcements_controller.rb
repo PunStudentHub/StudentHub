@@ -75,7 +75,6 @@ class AnnouncementsController < ApplicationController
       render 'new'
     end
 
-
   end
 
   def new
