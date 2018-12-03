@@ -1,6 +1,6 @@
-<% if logged_in? %> 
-<button type="button" class="btn btn-sm btn-danger" data-toggle="popover" id="report-popover" 
-        style="padding: 5px 10px 5px 10px" data-placement="bottom" >Report</a>
+<% if logged_in? %>
+<button type="button" class="btn btn-sm btn-danger" data-toggle="popover" id="report-popover"
+        style="padding: 5px 10px 5px 10px" data-placement="bottom" >Report
 </button>
 <div id="popover-head" style="display: none">
   Report This Post
@@ -15,16 +15,16 @@
 
     <%= f.submit "Submit", class: "btn btn-sm btn-primary float-right", style: "padding: 5px 10px 5px 10px; margin-bottom: 5px" %>
     <br>
-    
+
   <% end %>
 </div>
 <script>
 
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover(); 
+    $('[data-toggle="popover"]').popover();
 });
 
-$('#report-popover').popover({ 
+$('#report-popover').popover({
     html : true,
     title: function() {
       return $("#popover-head").html();
