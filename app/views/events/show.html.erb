@@ -30,6 +30,7 @@
           </small>
 
           <div class="options float-right">
+            <%= render 'reports/new_report_popover' %>
             <%= render 'shared/admin_buttons', model_name: 'event', object: @event,
                                                edit_url: edit_event_path(@event),
                                                destroy_url: event_path(@event) %>

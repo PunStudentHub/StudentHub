@@ -16,6 +16,7 @@
             <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
           <% end %>
         <% end %>
+        <%= render 'reports/new_report_popover' %>
         <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
                                              edit_url: edit_club_path(@club),
                                              destroy_url: club_path(@club) %>
