@@ -5,6 +5,9 @@ class UsersController < ApplicationController
   before_action -> { has_permission(:approve) }, only: [:index]
   before_action :not_logged_in, only: [:new, :create]
 
+  def banned?
+    return true if !@user.roles.find_by(role_id: 6).nil?
+  end
 
   def show
     @user = User.find_by_hash_id(params[:id])

@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2018_12_02_221433) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "teach", default: false
     t.boolean "banned", default: false
     t.boolean "faculty_mod", default: false
   end
@@ -158,6 +159,28 @@ ActiveRecord::Schema.define(version: 2018_12_02_221433) do
     t.index ["date"], name: "index_school_days_on_date", unique: true
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "location"
+    t.string "hash_id"
+    t.string "user_id"
+  end
+
+  create_table "sections_tasks", id: false, force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.integer "task_id", null: false
+  end
+
+  create_table "sections_users", id: false, force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.integer "user_id", null: false
+    t.index ["section_id", "user_id"], name: "index_sections_users_on_section_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_sections_users_on_user_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -169,6 +192,26 @@ ActiveRecord::Schema.define(version: 2018_12_02_221433) do
   create_table "subjects_timeslots", id: false, force: :cascade do |t|
     t.integer "subject_id", null: false
     t.integer "timeslot_id", null: false
+  end
+
+  create_table "taskees", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "task_id"
+    t.boolean "completed", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "time_estimate"
+    t.index ["task_id"], name: "index_taskees_on_task_id"
+    t.index ["user_id"], name: "index_taskees_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "duedate"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "hash_id"
   end
 
   create_table "timeslots", force: :cascade do |t|

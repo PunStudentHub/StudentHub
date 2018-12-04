@@ -1,0 +1,61 @@
+<% provide :title, @club.name %>
+<div class="row">
+  <div class="col-sm-4">
+    <h2 class="lato-title">
+      <%= @club.name %>
+    </h2>
+  </div>
+  <div class="col-sm-4">
+    <h6 class="text-muted no-margin" style="margin-top: 7px"><%= @club.motto %></h6>
+  </div>
+  <div class="col-sm-4">
+    <div class="float-right">
+      <% if logged_in? %>
+        <% if current_user == @club.president %>
+          <%= link_to "Edit Club", edit_club_url(@club), class: 'text-warning' %>
+        <% end %>
+      <% end %>
+      <%= render 'reports/new_report_popover' %>
+      <div class="options">
+        <%= render 'shared/admin_buttons', model_name: 'club', object: @club,
+                                           edit_url: edit_club_path(@club),
+                                           destroy_url: club_path(@club) %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-7">
+    <div class="card card-body">
+      <h5 class="card-title">Description</h5>
+      <hr>
+      <%= markdown(@club.description).html_safe %>
+    </div>
+    <% if !@club.events.empty? %>
+      <div class="card card-body">
+        <h5 class="card-title">Upcoming Events</h5>
+        <hr>
+        <ul>
+          <% @club.events.each do |event| %>
+            <li><%= link_to event.title, event %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+    <%= render 'clubs/user_list' %>
+  </div>
+</div>
+
+<script>
+  $(".model-action").on('click', function() {
+    console.log('click')
+    setTimeout(function() {
+      location.reload(true)
+    }, 200)
+  })
+</script>
