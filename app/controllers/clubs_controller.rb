@@ -77,14 +77,14 @@ class ClubsController < ApplicationController
   def apply
     club = Club.find_by_hash_id(params[:id])
     if !club.club_members.find_by(user_id: current_user.id).nil?
-      flash[:secondary] = "You are already on this club's email list."
+      flash[:info] = "You are already on this club's email list."
       redirect_to club
     elsif club.president == current_user
-      flash[:secondary] = "You are the president of this club."
+      flash[:info] = "You are the president of this club."
       redirect_to club
     else
       club.users << current_user
-      flash[:secondary] = "You have joined this club's email list. You should now recieve club emails. Nice."
+      flash[:info] = "You have joined this club's email list. You should now recieve club emails."
       redirect_to club
     end
   end
@@ -93,13 +93,13 @@ class ClubsController < ApplicationController
     club = Club.find_by_hash_id(params[:id])
     if !club.club_members.find_by(user_id: current_user.id).nil?
       club.club_members.find_by(user_id: current_user.id).delete
-      flash[:secondary] = "You have been removed from this club's email list."
+      flash[:info] = "You have been removed from this club's email list."
       redirect_to club
     elsif club.president == current_user
-      flash[:secondary] = "You are the president of this club."
+      flash[:info] = "You are the president of this club."
       redirect_to club
     else
-      flash[:secondary] = "You are not on this club's mailing list and are thus unable to remove yourself from it."
+      flash[:info] = "You are not on this club's mailing list and are thus unable to remove yourself from it."
       redirect_to club
     end
   end
