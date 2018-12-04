@@ -80,7 +80,7 @@ class ClubsController < ApplicationController
       flash[:secondary] = "You are already on this club's email list."
       redirect_to club
     elsif club.president == current_user
-      flash[:secondary] = "You are the president of this club. What are you doing?"
+      flash[:secondary] = "You are the president of this club."
       redirect_to club
     else
       club.users << current_user
@@ -96,7 +96,7 @@ class ClubsController < ApplicationController
       flash[:secondary] = "You have been removed from this club's email list."
       redirect_to club
     elsif club.president == current_user
-      flash[:secondary] = "You are the president of this club. What are you doing?"
+      flash[:secondary] = "You are the president of this club."
       redirect_to club
     else
       flash[:secondary] = "You are not on this club's mailing list and are thus unable to remove yourself from it."
