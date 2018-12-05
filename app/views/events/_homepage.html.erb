@@ -32,7 +32,7 @@
                 <li class="list-group-item">
                   <%= link_to event.title, event_path(event) %>
                 </li>
-                <% if Event.all.finalized.set_day_events(first_nonempty_day).count < 3 %>
+                <% if !second_nonempty_day.nil? && Event.all.finalized.set_day_events(first_nonempty_day).count < 3 %>
                   <% if Event.all.finalized.set_day_events(second_nonempty_day).count > 1 %>
                     <li class="list-group-item"><%= link_to "See your events here!", new_event_path %></li>
                   <% end %>
