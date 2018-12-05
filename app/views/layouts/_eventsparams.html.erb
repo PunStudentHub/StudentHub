@@ -89,7 +89,7 @@
     <% end %>
   <% end %>
   <% if submit_text == "Post" || submit_text == "Submit for Approval" %>
-    <%= link_to submit_text, "", :onclick => "$('#new_event').submit()", class: "btn blue darken-3 btn-block white-text" %>
+    <%= link_to submit_text, "", :onclick => "$('#new_event').submit()", class: "btn success-color btn-block white-text" %>
   <% elsif submit_text == "Save Edits"%>
     <%= link_to submit_text, "", :onclick => "$('.edit_event')[0].submit()", class: "btn btn-warning btn-block" %>
   <% end %>
