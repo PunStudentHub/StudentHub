@@ -110,12 +110,12 @@ class EventsController < ApplicationController
   def event_params
     new_params = params.require(:event).permit(:title, :location, :description, :approved, :club)
 
-    #unless new_params[:start_time].nil?
-    new_params[:start_time] = DateTime.strptime(params[:start], '%b-%d-%y %H:%M') + 10.hours
-    #end
-    #unless  new_params[:end_time].nil?
-    new_params[:end_time] = DateTime.strptime(params[:end], '%b-%d-%y %H:%M') + 10.hours
-    #end
+    unless params[:start].nil?
+      new_params[:start_time] = DateTime.strptime(params[:start], '%b-%d-%y %H:%M') + 10.hours
+    end
+    unless  params[:end].nil?
+      new_params[:end_time] = DateTime.strptime(params[:end], '%b-%d-%y %H:%M') + 10.hours
+    end
     unless new_params[:club].nil?
       unless new_params[:club].empty?
         new_params[:club] = Club.find(new_params[:club])
