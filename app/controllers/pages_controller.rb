@@ -14,17 +14,17 @@ class PagesController < ApplicationController
 
     @all_events = Event.approved
     @event_dates = []
-    
-    Event.all.finalized.future_day_events.each do |e| 
-      @event_dates << (e.start_time.strftime("%j").to_s + "-" + e.start_time.strftime("%y").to_s ) 
+
+    Event.all.finalized.future_day_events.each do |e|
+      @event_dates << (e.start_time.strftime("%j").to_s + "-" + e.start_time.strftime("%y").to_s )
     end
     @event_dates = @event_dates.uniq
     unless @event_dates.first.nil?
-      @first_nonempty_day = DateTime.strptime(@event_dates.first, "%j-%y") 
+      @first_nonempty_day = DateTime.strptime(@event_dates.first, "%j-%y")
       @first_day_events = Event.all.finalized.set_day_events(@first_nonempty_day.to_date).sample(3)
     end
-    unless @event_dates.second.nil? 
-      @second_nonempty_day = DateTime.strptime(@event_dates.second, "%j-%y") 
+    unless @event_dates.second.nil?
+      @second_nonempty_day = DateTime.strptime(@event_dates.second, "%j-%y")
       @second_day_events = Event.all.finalized.set_day_events(@second_nonempty_day.to_date).sample(3)
     end
 
@@ -32,7 +32,7 @@ class PagesController < ApplicationController
     @tomorrow = Event.all.approved.tomorrow.sample(3)
     @day_after_tomorrow = Event.all.approved.day_after_tomorrow.sample(3)
 
-    @clubs = Club.all.sample(3) 
+    @clubs = Club.finalized.all.sample(3) 
   end
 
   def help
