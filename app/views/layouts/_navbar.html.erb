@@ -1,4 +1,4 @@
-<!-- (^._.^)~ --> 
+<!-- (^._.^)~ -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
   <%= link_to "Punahou Student Hub", "/", class: 'navbar-brand', style: "color: #1565c0;font-size: 25px;" %>
@@ -8,6 +8,9 @@
   <div class="collapse navbar-collapse" id="navbarNav">
 
     <% pages =  %w{Home Announcements PLC Events Clubs Contact} %>
+    <% if logged_in? %>
+      <% pages << 'My Stuff' %>
+    <% end %>
     <ul class="navbar-nav">
       <% pages.each do |name| %>
         <% unless name == "Home" %>
