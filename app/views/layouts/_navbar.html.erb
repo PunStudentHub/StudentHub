@@ -7,16 +7,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
 
-    <% pages =  %w{Home Announcements PLC Events Clubs Contact} %>
+    <% pages =  %w{Home Announcements PLC Events Clubs} %>
     <% if logged_in? %>
-      <% pages << 'My Stuff' %>
+      <% pages.insert(1, 'My Stuff') %>
     <% end %>
     <ul class="navbar-nav">
       <% pages.each do |name| %>
-        <% unless name == "Home" %>
-          <%= link_to name, href="/" + name.downcase, class: navbar_current?(name, yield(:title)) %>
-        <% else %>
+        <% if name == "Home" %>
           <%= link_to name, href="/", class: navbar_current?(name, yield(:title)) %>
+        <% elsif name == "My Stuff" %>
+          <%= link_to name, href="/mystuff", class: navbar_current?(name, yield(:title)) %>
+        <% else %>
+          <%= link_to name, href="/" + name.downcase, class: navbar_current?(name, yield(:title)) %>
         <% end %>
       <% end %>
 

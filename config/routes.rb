@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/feedback', to: 'pages#feedback'
   get '/modlog', to: 'pages#modlog'
   get '/mystuff', to: 'pages#mystuff'
+  get '/my%20stuff', to: 'pages#mystuff'
 
   get '/plc', to: 'plc#index'
   get '/plc/subject', to: 'plc#subject_slots'
