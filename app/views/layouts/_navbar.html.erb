@@ -29,14 +29,12 @@
         <li class="nav-item dropdown">
           <a href="#" class="nav-link nav-item dropdown-toggle" id="admin-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
           <div class="dropdown-menu" aria-labelledby="admin-dropdown">
-          <%= link_to "Reports", reports_path, class: 'dropdown-item' %>
-          <%= link_to "User List", users_path, class: 'dropdown-item' %>
-          <% if current_user.can_do(:admin) %>
-            <%= link_to "Moderation Log", modlog_path, class: 'dropdown-item' %>
-          <% end %>
-
-        </div>
-          </a>
+            <%= link_to "Reports", reports_path, class: 'dropdown-item' %>
+            <%= link_to "User List", users_path, class: 'dropdown-item' %>
+            <% if current_user.can_do(:admin) %>
+              <%= link_to "Moderation Log", modlog_path, class: 'dropdown-item' %>
+            <% end %>
+          </div>
         </li>
       <% end %>
       <li class="nav-item dropdown">
