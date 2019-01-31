@@ -4,19 +4,20 @@
   <% color = 'green lighten-5' %>
 <% end %>
 
-<%= content_tag :tr, class: color do %> 
-  <%= content_tag :td, report.id %>
-  <%= content_tag :td do %>
-    <%= render 'users/colored_name', user: report.user %>
-  <% end %>
-  
-  <%= content_tag :td do %>
-    <% unless report.report.empty? %>
-      <%= link_to report.report.split("")[0..100].join, report, style: "color: #007bff" %>
-    <% else %>
-      <%= link_to "No description provided", report, style: "color: #007bff" %>
+<%= content_tag :li,  class: "list-group-item ", style: "height: 50px" do %>
+  <%= content_tag :tr, class: color do %>
+    <%= content_tag :td, report.id %>
+    <%= content_tag :td do %>
+      <%= render 'users/colored_name', user: report.user %>
     <% end %>
-  <% end %>
-  <%= content_tag :td, report.created_at.in_time_zone("Hawaii").strftime('%b %e, %l:%M %p') %> 
 
+    <%= content_tag :td do %>
+      <% unless report.report.empty? %>
+        <%= link_to report.report.split("")[0..100].join, report, style: "color: #007bff" %>
+      <% else %>
+        <%= link_to "No description provided", report, style: "color: #007bff" %>
+      <% end %>
+    <% end %>
+    <%= content_tag :td, report.created_at.in_time_zone("Hawaii").strftime('%b %e, %l:%M %p') %>
+  <% end %>
 <% end %>
