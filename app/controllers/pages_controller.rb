@@ -32,9 +32,17 @@ class PagesController < ApplicationController
     @tomorrow = Event.all.approved.tomorrow.sample(3)
     @day_after_tomorrow = Event.all.approved.day_after_tomorrow.sample(3)
 
-    @clubs = Club.finalized.all.sample(3) 
-  end
+    @clubs = Club.finalized.all.sample(3)
 
+  end
+  def mystuff
+    if logged_in?
+      @user_clubs = current_user.clubs
+      @user_events = current_user.events
+      @user_announcements = current_user.announcements
+      @user_reports = current_user.reports
+    end
+  end
   def help
   end
 

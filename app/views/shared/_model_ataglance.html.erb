@@ -4,6 +4,7 @@
   - path
   - count
   - variable
+  - nomore
  -->
 <div class="card">
   <div class="card-header blue darken-3 white-text">
@@ -21,7 +22,9 @@
       <%= render variable.take(5) %>
     <% end %>
   </ul>
-  <div class="card-body see-more-section">
-    <%= link_to 'See more...', path, class: 'text-primary' %>
-  </div>
+  <% unless defined?(nomore) %>
+    <div class="card-body see-more-section">
+      <%= link_to 'See more...', path, class: 'text-primary' %>
+    </div>
+  <% end %>
 </div>

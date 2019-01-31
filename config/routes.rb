@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/staff', to: 'pages#staff'
   get '/feedback', to: 'pages#feedback'
   get '/modlog', to: 'pages#modlog'
+  get '/mystuff', to: 'pages#mystuff'
+  get '/my%20stuff', to: 'pages#mystuff'
 
   get '/plc', to: 'plc#index'
   get '/plc/subject', to: 'plc#subject_slots'
@@ -49,7 +51,7 @@ Rails.application.routes.draw do
     post :unapply, on: :member
   end
 
-  resources :reports do 
+  resources :reports do
     post :respond, on: :member
   end
   resources :events

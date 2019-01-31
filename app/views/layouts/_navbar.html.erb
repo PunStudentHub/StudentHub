@@ -1,4 +1,4 @@
-<!-- (^._.^)~ --> 
+<!-- (^._.^)~ -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
   <%= link_to "Punahou Student Hub", "/", class: 'navbar-brand', style: "color: #1565c0;font-size: 25px;" %>
@@ -7,13 +7,18 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
 
-    <% pages =  %w{Home Announcements PLC Events Clubs Contact} %>
+    <% pages =  %w{Home Announcements PLC Events Clubs} %>
+    <% if logged_in? %>
+      <% pages.insert(1, 'My Stuff') %>
+    <% end %>
     <ul class="navbar-nav">
       <% pages.each do |name| %>
-        <% unless name == "Home" %>
-          <%= link_to name, href="/" + name.downcase, class: navbar_current?(name, yield(:title)) %>
-        <% else %>
+        <% if name == "Home" %>
           <%= link_to name, href="/", class: navbar_current?(name, yield(:title)) %>
+        <% elsif name == "My Stuff" %>
+          <%= link_to name, href="/mystuff", class: navbar_current?(name, yield(:title)) %>
+        <% else %>
+          <%= link_to name, href="/" + name.downcase, class: navbar_current?(name, yield(:title)) %>
         <% end %>
       <% end %>
 
@@ -24,14 +29,12 @@
         <li class="nav-item dropdown">
           <a href="#" class="nav-link nav-item dropdown-toggle" id="admin-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
           <div class="dropdown-menu" aria-labelledby="admin-dropdown">
-          <%= link_to "Reports", reports_path, class: 'dropdown-item' %>
-          <%= link_to "User List", users_path, class: 'dropdown-item' %>
-          <% if current_user.can_do(:admin) %>
-            <%= link_to "Moderation Log", modlog_path, class: 'dropdown-item' %>
-          <% end %>
-
-        </div>
-          </a>
+            <%= link_to "Reports", reports_path, class: 'dropdown-item' %>
+            <%= link_to "User List", users_path, class: 'dropdown-item' %>
+            <% if current_user.can_do(:admin) %>
+              <%= link_to "Moderation Log", modlog_path, class: 'dropdown-item' %>
+            <% end %>
+          </div>
         </li>
       <% end %>
       <li class="nav-item dropdown">
