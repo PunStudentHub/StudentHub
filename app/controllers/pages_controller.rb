@@ -38,7 +38,7 @@ class PagesController < ApplicationController
   def mystuff
     if logged_in?
       @user_clubs = current_user.clubs
-      @user_events = current_user.events
+      @user_events = current_user.events.future_events
       @user_announcements = current_user.announcements
       @user_reports = current_user.reports
     end

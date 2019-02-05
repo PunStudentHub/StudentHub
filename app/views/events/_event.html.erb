@@ -1,5 +1,5 @@
 <% color = "" %>
-<% if logged_in? && (event.approved  || current_user.can_do(:approve)) %>
+<% if logged_in? %>
 
 
 <% rsvp = event.users.exists?(current_user.id) %>
@@ -18,7 +18,10 @@
       <% else %>
         <div class="col-md-7 custom-flex-center">
       <% end %>
-        <h6 class="no-margin" style="width: 100%"> <%= link_to event.title, event %></h6>
+        <%= content_tag :h6, class: 'no-margin', style: 'width: 100%' do %>
+          <%= link_to event.title, event, class: 'font-italic' if event.past? %>
+        <% end %>
+
         <small style="width: 100%;">
           Posted by
           <%= render 'users/colored_name_link', user: User.find(event.user_id) %>

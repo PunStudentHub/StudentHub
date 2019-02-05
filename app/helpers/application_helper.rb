@@ -10,6 +10,7 @@ module ApplicationHelper
   end
 
   def get_background_color_for_partial object
+
     if object.approved && object.final
       ""
     elsif object.approved

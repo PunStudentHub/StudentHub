@@ -42,7 +42,7 @@ class AnnouncementsController < ApplicationController
   def destroy
     Announcement.find_by_hash_id(params[:id]).delete
     flash[:success] = "Announcement deleted!"
-    redirect_back(announcements_path)
+    redirect_to announcements_path
   end
 
   def edit

@@ -49,6 +49,10 @@ class Event < ApplicationRecord
         .first
   end
 
+  def past?
+    start_time < Time.zone.now
+  end
+
   def date_in_future
     if (start_time < Time.zone.now)
       errors.add(:start_time, "must be in the future #{start_time}, #{Time.zone.now}")
