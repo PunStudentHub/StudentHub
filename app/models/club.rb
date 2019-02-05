@@ -14,4 +14,9 @@ class Club < ApplicationRecord
                           length: {maximum: 1500}
   validates :motto, presence: true, length: {maximum: 60}
 
+  scope :finalized, -> { where(final: true) }
+
+  scope :by_user, -> (user) {
+    joins(:users).where(users: {id: user})
+  }
 end

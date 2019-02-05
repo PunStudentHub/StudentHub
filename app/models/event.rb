@@ -23,7 +23,9 @@ class Event < ApplicationRecord
   scope :past_events, -> { where("start_time < ?", DateTime.now.getlocal('-10:00')) }
   scope :future_day_events, -> { where("start_time > ?", DateTime.now.getlocal('-10:00').beginning_of_day) }
   scope :set_day_events, -> (day) { where(start_time: day.beginning_of_day..day.end_of_day)}
-
+  scope :by_user, -> (user) {
+    joins(:users).where(users: {id: user})
+  }
 
   def ends_after_start
     if (end_time < start_time)

@@ -26,7 +26,7 @@ Steps to install:
 1. Fork the repository
 2. Clone it to your local system
 3. Run the following:
- * `$ bundle install`
+ * `$ bundle install --without production`
  * `$ rails db:migrate`
 4. Import the sample data
  * `$ rake classyear:load`
